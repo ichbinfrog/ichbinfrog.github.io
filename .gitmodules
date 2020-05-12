@@ -2,3 +2,7 @@
 	path = public/ichbinfrog.github.io
 	url = git@github.com:ichbinfrog/ichbinfrog.github.io.git
 	branch = master
+[submodule "ichbinfrog.github.io"]
+	path = ichbinfrog.github.io
+	url = git@github.com:ichbinfrog/ichbinfrog.github.io.git
+	branch = master
