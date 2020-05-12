@@ -1,7 +1,7 @@
 ---
 title: "Eclipse/steady — Cloud integration"
 date: 2019-10-30T11:55:00+00:00
-draft: true
+draft: false
 toc: true
 images:
 tags:

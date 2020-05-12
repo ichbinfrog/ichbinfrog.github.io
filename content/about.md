@@ -1,7 +1,7 @@
 ---
 title: "About"
 date: 2020-05-12T08:17:41+02:00
-draft: true
+draft: false
 ---
 
 Fourth year Computer Science student at the Université de Technologie de Compiègne (UTC), looking for a six month internship starting from February 2021 relating to DevOps, Cloud or Site Reliability Engineering.

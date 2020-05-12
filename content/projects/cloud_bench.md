@@ -1,7 +1,7 @@
 ---
 title: "Cloud Provider benchmark"
 date: 2019-12-15T12:50:00+00:00
-draft: true
+draft: fasle
 toc: true
 images:
 tags:

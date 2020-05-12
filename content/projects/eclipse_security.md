@@ -1,7 +1,7 @@
 ---
 title: "Eclipse/steady — Security and delivery considerations"
 date: 2019-10-30T11:30:00+00:00
-draft: true
+draft: false
 toc: true
 images:
 tags:

@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes — in depth"
 date: 2019-08-11T11:00:00+00:00
-draft: true
+draft: false
 toc: true
 images:
 tags:
