@@ -1,0 +1,69 @@
+baseURL         = "https://ichbinfrog.github.io/"
+languageCode    = "en-us"
+title           = "ichbinfrog"
+theme           = "hello-friend-ng"
+enableEmoji     = true
+
+[params]
+  dateform        = "Jan 2, 2006"
+  dateformShort   = "Jan 2"
+  dateformNum     = "2006-01-02"
+  dateformNumTime = "2006-01-02 15:04 -0700"
+
+  # Subtitle for home
+  homeSubtitle = "Computer science student (2016-2021)"
+
+  # Set disableReadOtherPosts to true in order to hide the links to other posts.
+  disableReadOtherPosts = true
+
+  # Metadata mostly used in document's head
+  description = "project page"
+  keywords = "project, page"
+  images = [""]
+  customCSS = ["/css/post.css"]
+
+  # Directory name of your blog content (default is `content/posts`)
+  contentTypeName = "content/projects"
+
+  # Default theme "light" or "dark"
+  defaultTheme = "light"
+
+  [[params.social]]
+    name = "github"
+    url  = "https://github.com/ichbinfrog"
+
+  [[params.social]]
+    name = "linkedin"
+    url  = "https://www.linkedin.com/in/ichbinfrog/"
+
+[taxonomies]
+    category = "projects"
+    tag      = "tags"
+    series   = "series"
+
+[languages]
+  [languages.en]
+    title = "Hoang Quoc Trung"
+    subtitle = ""
+    keywords = ""
+    copyright = '<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
+    readOtherPosts = "Read other posts"
+
+    [languages.en.params.logo]
+      logoText = "ichbinfrog"
+      logoHomeLink = "/"
+    # or
+    #
+    # path = "/img/your-example-logo.svg"
+    # alt = "Your example logo alt text"
+
+  # And you can even create generic menu
+  [[menu.main]]
+    identifier = "blog"
+    name       = "Projects"
+    url        = "/projects"
+
+  [[menu.main]]
+    identifier = "about"
+    name       = "About"
+    url        = "/about"

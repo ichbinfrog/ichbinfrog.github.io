@@ -1,0 +1,37 @@
+<style>
+.toc {
+    position: fixed;
+    top: 50%;
+    right: 5%;
+    width: 20%;
+    transform: translateY(-50%);
+    border-radius: 5px;
+    padding-bottom: 1rem;
+}
+
+.toc a {
+    text-decoration: none;
+    color: gray;
+}
+
+.toc a:hover {
+    opacity: 0.5;
+}
+
+.toc ul {
+    list-style: ">  ";
+}
+
+.toc-title {
+    text-decoration: underline;
+}
+</style>
+
+<div class="toc">
+    <div class="toc-title">{{ i18n "tableOfContents" }}</div>
+    {{ .TableOfContents }}
+    <ul>
+    <li><a href="#top">Top</a></li>
+    <li><a href="#end">End</a></li>
+    </ul>
+</div>

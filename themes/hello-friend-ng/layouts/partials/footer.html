@@ -1,0 +1,16 @@
+<footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; {{ now.Format "2006" }}</span>
+            {{ if .Site.Author.name }}
+                <span><a href="{{ .Site.BaseURL }}">{{ .Site.Author.name }}</a></span>
+            {{ end }}
+            <span>{{ .Site.Copyright| safeHTML }}</span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span><a href="https://themes.gohugo.io/hugo-theme-hello-friend-ng/">hello-friend-ng</a> Theme for <a href="http://gohugo.io">Hugo</a> by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+        </div>
+    </div>
+</footer>

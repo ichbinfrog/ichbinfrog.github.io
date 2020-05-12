@@ -1,0 +1,4 @@
+[submodule "public/ichbinfrog.github.io"]
+	path = public/ichbinfrog.github.io
+	url = git@github.com:ichbinfrog/ichbinfrog.github.io.git
+	branch = master
