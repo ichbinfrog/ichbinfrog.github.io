@@ -23,7 +23,7 @@ The vulnerability database is at the heart of the tool, storing construct change
 
 In order to fully benefit from a cloud based deployment, it should also satisfy **High Availability** (maximize resilience against node failure achievable through data partitioning). However, as per the CAP theorem, these goals cannot be reached as a database cannot simultaneously be **Consistent**, **Available** and **Partitioned**.
 
-{{< image src="/img/vulas_CAP.png" alt="Hello Friend" position="center" >}}
+{{< image src="/img/vulas_CAP.png"  position="center" >}}
 
 Therefore, some trade-offs are to be expected in the final product and one can only maximize two of the previously mentioned attributes at the expense of the third. The CAP theorem is however a point of contention because distributed systems more often than not attempt to maximize each property whilst not fully satisfying any. 
 
@@ -53,7 +53,7 @@ Due to the advantages described above, the k8s deployment will implement a postg
 In order to persist volumes on the same node and preserve a meaningful cache, database pods should, once created, stay on the same nodes. A stateful set is therefore the most appropriate controller for this case. As this is a master-slave architecture, the master pods and slave pods are heterogeneous and should therefore be declared in two different stateful sets. In order to set up replication between the master and slaves, the following steps are performed:
 
 
-{{< image src="/img/vulas_postgres.png" alt="Hello Friend" position="center" >}}
+{{< image src="/img/vulas_postgres.png"  position="center" >}}
 
 - The init container in the postgres replica pod uses **pg_basebackup** pointed to the postgres master container. This command copies the data from the master node to make sure that the replica is up to date, then generates the replica.conf file which tells the replica node that it is the master's standby.  
 - Once the base backup succeeds, the postgres replica container can spin up whilst mounting the same PVC as the init container (thus sharing the data stored in `/var/lib/pgdata/data` as well as the config files)
@@ -103,7 +103,7 @@ The previous reproduction steps yield the truncated results seen in the above ta
 
 Similarly, from the pgpool test case, using the amount of replicas as the variable yields results presented in the Figure below. This confirms that having the amount of pgpool replicas being equal to the sum of the amount of master and slave replicas is the optimal setup to reduce both latency and increase tps. Going overboard with the amount of replicas is also visibly detrimental to the overall system's health.
 
-{{< image src="/img/vulas_pgpool_benchmark.png" alt="Hello Friend" position="center" >}}
+{{< image src="/img/vulas_pgpool_benchmark.png"  position="center" >}}
 
 ---
 ## Persistence and Resilience
@@ -134,7 +134,7 @@ In edge cases, this migration can fail and corrupt all production critical data 
 
 The k8s proposition attempts to address the rollback issue whilst minimising the downtime and maintaining a viable staging environment. An utility, implemented in Golang, has been developed to perform the following actions:
 
-{{< image src="/img/vulas_database_change.png" alt="Hello Friend" position="center" >}}
+{{< image src="/img/vulas_database_change.png"  position="center" >}}
 
 - Fetch the amount of replicas of the postgres slave stateful set in the given namespace and cluster (at least 2 replicas are required to have a no downtime upgrade).
 - Scale down one replica from the slave statefulset and store the name of PVC mounted by this replica (which will persist after the scale down operation). This effectively makes an instant k8s native snapshot of the master database whilst keeping the old deployment completely functional. 

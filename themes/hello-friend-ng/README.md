@@ -112,7 +112,7 @@ Properties:
 Example:
 
 ``` golang
-{{< image src="/img/hello.png" alt="Hello Friend" position="center" style="border-radius: 8px;" >}}
+{{< image src="/img/hello.png"  position="center" style="border-radius: 8px;" >}}
 ```
 
 ### Code highlighting

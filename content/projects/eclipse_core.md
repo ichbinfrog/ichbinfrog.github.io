@@ -47,7 +47,7 @@ A k8s native NFS provisioner would require an nfs-server deployment (with a sing
 
 The cloud provider based deployment is similar, although the NFS service is an ExternalName pointing to the hosted NFS server. However, in most providers, the cluster network is not within the same subnet as the NFS one, therefore a VPC bridge (with the appropriate networking rules) is required for this setup to properly function.
 
-{{< image src="/img/vulas_nfs.png" alt="Hello Friend" position="center" >}}
+{{< image src="/img/vulas_nfs.png"  position="center" >}}
 
 ### CIFS (Common Internet File System)
 

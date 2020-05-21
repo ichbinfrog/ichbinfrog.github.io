@@ -13,6 +13,6 @@ It its also important to note that in a k8s context, the internal IPs of the mac
 
 The [NGINX Ingress Controller](https://github.com/kubernetes/ingress-nginx) has been chosen as the entrypoint to the system to tackle the aforementioned problems with caching and dynamic configuration (see Figure (\ref{fig:vulas_admin})). By utilizing NGINX's feature for caching content, the `X-Accel-Expires` Header can be changed in the application's AJAX query to control both whether to cache the content and its expiry date. For persisting the cache between different replicas of the ingress controller, each pod of the devised statefulset mounts the same NFS on the same cache path. Other solutions such as using a Redis or Memcached cluster as a cache storage are eliminated for its high overhead cost. 
 
-{{< image src="/img/vulas_admin.png" alt="Hello Friend" position="center" >}}
+{{< image src="/img/vulas_admin.png"  position="center" >}}
 
 In order to serve the contents through a secure connection, an SSL certificate should be added to the nginx-ingress-controller through a config map. This operation is manual and could be automated by using [cert-manager](https://github.com/jetstack/cert-manager) to manage and certificate cycling but can't be used due to high overhead costs.

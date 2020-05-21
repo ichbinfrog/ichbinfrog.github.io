@@ -26,15 +26,15 @@ It is important to note that all the aforementioned providers have support for L
 
 The instance performance (vCPUs, memory(GiB)) and family type are then computed in order to generate boxplots with the preferred grouping (by cloud provider, by family, etc...). 
 
-{{< image src="/img/bench_computing_provider.png" alt="Hello Friend" position="center" >}}
+{{< image src="/img/bench_computing_provider.png"  position="center" >}}
 {{< caption title="Boxplot of compute ratio per cloud provider" >}}
 
 A comparison of the computation/memory ratios between providers shows that GCP has the most diverse offers when it comes to vCpus/Memory despite having a lower amount of machine types than other providers. It is also noticeable (within the given dataset) that GCP and AWS EC2 tend to offer a higher Computation/Memory ratio than Azure whose spread is the lowest.
 
-{{< image src="/img/bench_computing_provider_class.png" alt="Hello Friend" position="center">}}
+{{< image src="/img/bench_computing_provider_class.png"  position="center">}}
 {{< caption title="(a) Boxplot of compute ratio per cloud provider class" >}}
 
-{{< image src="/img/bench_computing_provider_ratio.png" alt="Hello Friend" position="center">}}
+{{< image src="/img/bench_computing_provider_ratio.png"  position="center">}}
 {{< caption title="(b) Boxplot of compute ratio per cloud provider grouped by ratio" >}}
 
 Outliers excluded, GCP General Purpose seems to offer the most variety, however their Compute optimized and Memory optimized offers are quite lacking compared to their counterparts. This is more telling of a different nomenclature between the cloud providers and does not grant us much insight into the diversity of their offers.
@@ -58,9 +58,9 @@ From each of these deployment case, a range of resource list is calculated; from
 
 The price comparison is applied in two regions, eu-west-2 (one of the most expensive regions in GCE) and us-central-1 (one of the cheapest regions in GCE), to establish a possible evolution range of the difference in cost. In both cases, the hosted deployment becomes profitable over the self managed cluster when the data load surpasses 200GB. 
 
-{{< image src="/img/bench_vulas_price_eu_west2.png" alt="Hello Friend" position="center">}}
+{{< image src="/img/bench_vulas_price_eu_west2.png"  position="center">}}
 {{< caption title="(a) eu-west-2" >}}
-{{< image src="/img/bench_vulas_price_us_central1.png" alt="Hello Friend" position="center">}}
+{{< image src="/img/bench_vulas_price_us_central1.png"  position="center">}}
 {{< caption title="(a) us-central-1" >}}
 
 ### Services
@@ -176,7 +176,7 @@ Drystone is a synthetic benchmark application meant to mimic a real life applica
 
 This test (composed of two tests Pipe throughput and Pipe-based Context Switching) intends to evaluate pipe performances (A pipe being the simplest form of communication between processes) by measuring the amount of lines executed per seconds (lps).
 
-{{< image src="/img/bench_pipe_throughput.svg" alt="Hello Friend" position="center">}}
+{{< image src="/img/bench_pipe_throughput.svg"  position="center">}}
 
 | provider | pipe throughput(lps) | pipe based context-switching (lps) | relative performance ratio (%) | 
 |----------|----------------------|------------------------------------|--------------------------------|
@@ -193,7 +193,7 @@ The pipe-based context switching test is more like a real-world application. The
 
 The process creation test measures the number of times a process can fork and reap a child that immediately exits. Process creation refers to actually creating process control blocks and memory allocations for new processes, so this applies directly to memory bandwidth. Typically, this benchmark would be used to compare various implementations of operating system process creation calls. The shells scripts test measures the number of times per minute a process can start and reap a set of one and eight concurrent copies of shell script where the shell script applies a series of transformation to a data file. Due to shell scripts extra complexity, it is expected that the performance would be lower that the pure process creation. 
 
-{{< image src="/img/bench_shell.svg" alt="Hello Friend" position="center">}}
+{{< image src="/img/bench_shell.svg"  position="center">}}
 
 
 | | aws | azure | gcp | 
@@ -229,10 +229,10 @@ With the above job config, fio gathers two metrics **IOps** and **Latency per op
 
 |   |   |
 |:-:|:-:|
-| {{< image src="/img/bench_fio_random_read.svg" alt="Hello Friend" position="center">}}{{< caption title="(a) random read" >}}  | {{< image src="/img/bench_fio_sequential_read.svg" alt="Hello Friend" position="center">}}{{< caption title="(b) sequential read" >}}  |
-| {{< image src="/img/bench_fio_random_write.svg" alt="Hello Friend" position="center">}}{{< caption title="(c) random write" >}} | {{< image src="/img/bench_fio_sequential_write.svg" alt="Hello Friend" position="center">}}{{< caption title="(d) sequential write" >}} | 
+| {{< image src="/img/bench_fio_random_read.svg"  position="center">}}{{< caption title="(a) random read" >}}  | {{< image src="/img/bench_fio_sequential_read.svg"  position="center">}}{{< caption title="(b) sequential read" >}}  |
+| {{< image src="/img/bench_fio_random_write.svg"  position="center">}}{{< caption title="(c) random write" >}} | {{< image src="/img/bench_fio_sequential_write.svg"  position="center">}}{{< caption title="(d) sequential write" >}} | 
 
-{{< image src="/img/bench_fio_random_parallel_read.svg" alt="Hello Friend" position="center">}}{{< caption title="(e) random parallel read" >}}
+{{< image src="/img/bench_fio_random_parallel_read.svg"  position="center">}}{{< caption title="(e) random parallel read" >}}
 
 From this point onwards, two criterias are measured; **Performance** (characterized by the median latency ($p50$)) and **Stability** (characterized by the standard deviation of the sample).
 
@@ -259,7 +259,7 @@ The redis benchmark is based on creating equivalent computing instances (VMs in 
 
 We mainly base our comparison of redis performance on throughput and latency. As those two are closedly tied together, the data collected mainly focuses on the former which is the number of operations processed by the database within a given period of time. Graphing the throughput evolution per concurrent server (redis) threads and fitting it to a function would give an idea of the performance for redis that can be gained from vertical scaling. Fitting the distribution with a logarithmic function works perfectly with AWS and Azure with a low coefficient of determination ($R^2 \geq 0.97$) but not well with GCP.
 
-{{< image src="/img/bench_redis_throughput.svg" alt="Hello Friend" position="center">}}
+{{< image src="/img/bench_redis_throughput.svg"  position="center">}}
 {{< caption title="Redis throughput (req/s) per number of server threads" >}}
 - aws ($x : 7312 \times ln(x) + 1433 $ and $R^2 = 0.971$)
 - azure ($x : 6476 \times ln(x) - 2038 $ and $R^2 = 0.981$) 
@@ -275,9 +275,9 @@ Using the percentile distribution of the latency (in ms, scaled down to logarith
 
 |   |   |
 |:-:|:-:|
-| {{< image src="/img/bench_mongo_insert.svg" alt="Hello Friend" position="center">}}{{< caption title="(a) insert" >}}  | {{< image src="/img/bench_mongo_read.svg" alt="Hello Friend" position="center">}}{{< caption title="(b) read" >}}  |
+| {{< image src="/img/bench_mongo_insert.svg"  position="center">}}{{< caption title="(a) insert" >}}  | {{< image src="/img/bench_mongo_read.svg"  position="center">}}{{< caption title="(b) read" >}}  |
 
-{{< image src="/img/bench_mongo_update.svg" alt="Hello Friend" position="center">}}{{< caption title="(c) update" >}}
+{{< image src="/img/bench_mongo_update.svg"  position="center">}}{{< caption title="(c) update" >}}
 
 {{< caption title="Write latency (ms)" >}}
 
@@ -325,7 +325,7 @@ Due to relatively low standard deviations observed and the high amount of iterat
 
 ### Webserver latency
 
-{{< image src="/img/bench_nginx.svg" alt="Hello Friend" position="center">}}{{< caption title="Latency percentile (log ms) distribution for NGINX" >}}
+{{< image src="/img/bench_nginx.svg"  position="center">}}{{< caption title="Latency percentile (log ms) distribution for NGINX" >}}
 
 NGINX is a web server which can also be used as a reverse proxy, load balancer, mail proxy and HTTP cache. This benchmark runs an NGINX server instance on an equivalent machine with 1 cpu and 1 thread and another exactly similar machine running as a client within the same region. The client runs a wrk2 tool with a sampling interval of 100msec for a duration of 60s, the results from which a latency percentile distribution is extracted. This doubles as a proof of concept as to the theoretical performance of the nginx ingress controller (purely hypothetical as the nginx ingress controller uses a modified image of NGINX with more overhead) used in the vulnerability-assessment-tool-admin helm chart. 
 

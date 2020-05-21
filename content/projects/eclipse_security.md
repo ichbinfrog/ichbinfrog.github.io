@@ -23,7 +23,7 @@ For static analysis, **Spotbugs** is used in order to find bug patterns in the J
 - `MALICIOUS_CODE` and `SECURITY`: Code vulnerable to attacks and addressing these possible vulnerabilities should be of the highest priority.
 - `PERFORMANCE` and `MT_CORRECTNESS`: Inefficient code or flawed implementation of threads, locks and volatiles. 
 
-{{< image src="/img/vulas_spotbugs.png" alt="Hello Friend" position="center" >}}
+{{< image src="/img/vulas_spotbugs.png"  position="center" >}}
 
 In order to properly enforce the mitigation of issues found by Spotbugs, a step is added to the pre-existing Travis pipeline that runs the Spotbugs goal and fails if any bugs in the `MALICIOUS_CODE`, `SECURITY`, `MT_CORRECTNESS` categories are discovered. 
 
@@ -48,7 +48,7 @@ Distroless containers, unlike Alpine or other small footprint base images have f
 
 Jib builds itself on the foundations of the distroless base image to build Java applications. Unlike traditional build systems in which a Java application is built as a single image layer with the application JAR, Jib separates the Java application into multiple layers for more granular incremental builds. This increases the speed of image builds drastically, by only changing the layers that have changed to the registry. It also abstracts the packaging process itself as it runs as part of the Maven build without requiring a Dockerfile or a running Docker daemon. 
 
-{{< image src="/img/vulas_jib.png" alt="Hello Friend" position="center" >}}
+{{< image src="/img/vulas_jib.png"  position="center" >}}
 
 Thee simplification of the deployment process along with the added benefits of a secure container makes it a viable replacement to using docker images in our use case. 
 
@@ -59,7 +59,7 @@ Performance wise, the exploded tar springboot containers built by jib also creat
 
 The previous deployment process using Jib would only update the images published to the registry whilst not triggering any changes in any deployment. Combining the Jib build methods with the Skaffold tool will facilitate the continuous delivery of code changes to the k8s deployment itself. 
 
-{{< image src="/img/vulas_skaffold.png" alt="Hello Friend" position="center" >}}
+{{< image src="/img/vulas_skaffold.png"  position="center" >}}
 
 Integrating skaffold into the Travis pipeline would allow a hands free rolling update on all containers whose code is affected by the change. However, despite its integration testing functionality based on **container-structure-test**, this tool is not mature enough to be applied in a stable production environment and should be delegated to the development environment to provide a direct source code to deployment solution. 
 

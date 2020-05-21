@@ -16,13 +16,13 @@ Kubernetes, hereinafter referred to as k8s, is an open-source system for automat
 
 The massive adoption of k8s marks the entry into a new era of deployment. Initially, deployments were applied directly onto physical servers. However, the **traditional deployment** era suffered from performance issues stemming from the inability to define resource boundaries between different applications. The introduction of **virtualization** tackles this issue by allowing multiple Virtual Machines (VM) to run on a single physical server. These VMs provide a level of security through isolation of scalable component as well as reduce the strain on hardware. Nonetheless, each VM is a full machine running its own operating system on top of the virtualized hardware. 
 
-{{< image src="/img/docker_evolution.png" alt="Hello Friend" position="center" >}}
+{{< image src="/img/docker_evolution.png"  position="center" >}}
 
 ## Docker Containers — Infrastructure base building block
 
 At the forefront of this technology is Docker, a platform for developers and sysadmins to develop, deploy, and run applications with containers; a container being a standard unit of software that packages up code and all its dependencies so the application runs quickly and reliably from one computing environment to another.
 
-{{< image src="/img/docker_oci.png" alt="Hello Friend" position="center" >}}
+{{< image src="/img/docker_oci.png"  position="center" >}}
 
 In order to instantiate a container, an executable package that includes everything needed for the application (runtime, libraries, code, configuration files) also known as an **image** is required. For example, a client can ask the docker daemon to pull an Ubuntu image from a registry (public or private) which can then be instantiated as containers in the host machine. Nowadays, the docker daemon is broken up into three main components:
 
@@ -34,7 +34,7 @@ In order to instantiate a container, an executable package that includes everyth
 
 ## High Level Architecture
 
-{{< image src="/img/k8s_infrastructure.png" alt="Hello Friend" position="center" >}}
+{{< image src="/img/k8s_infrastructure.png"  position="center" >}}
 
 K8s uses these previous building blocks in order to create an orchestration tool for managing microservices or containainerized applications across a distributed cluster of nodes. These node follow by default a client-server architecture in which there is a **master node** acting as the entrypoint for all administrative task and control point for all **worker nodes** in the cluster. Is it important to node that this separation is not exclusive as a master node can also be a worker node. 
 

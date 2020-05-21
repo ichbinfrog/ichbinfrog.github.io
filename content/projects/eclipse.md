@@ -16,7 +16,7 @@ Project Vulas (recently adopted by the Eclipse foundation under the name Steady)
 
 Built upon the theoretical work further explained in Appendix (VIII), the assessment tool is written in Java JDK8 and with a fully dockerized architecture that comprises the following server side components:
 
-{{< image src="/img/vulas_docker_architecture.png" alt="Hello Friend" position="center" >}}
+{{< image src="/img/vulas_docker_architecture.png"  position="center" >}}
 
 - **frontend-apps**: OpenUI5 front-end built for users to view different test results (**app** to generate a bill of material report, **a2c** to build call graphs, etc...). On this interface, users will be able to display all vulnerabilities discovered in their package, the dependencies affected as well as the reachable call graphs.
 

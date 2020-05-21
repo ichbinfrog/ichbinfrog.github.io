@@ -26,7 +26,7 @@ Metrics, unlike logs, are a measurement at a point in time for the system collec
 
 It is important to note that the monitoring architecture (see Figure below) has not been altered from the docker-compose based deployment albeit with the addition of cluster metrics. 
 
-{{< image src="/img/vulas_monitoring.png" alt="Hello Friend" position="center" >}}
+{{< image src="/img/vulas_monitoring.png"  position="center" >}}
 
 ## Log pipeline implementation
 
@@ -36,7 +36,7 @@ Although this solution is conventional for docker-compose based architecture, it
 
 The **EFK** stack is chosen because it mitigates this issue, by replacing both Logstash and Filebeat by Fluentbit, a lightweight (20MB) log shipper written in C that doubles as a filter which creates a pipeline from the host machine directly into Elasticsearch. 
 
-{{< image src="/img/vulas_eflk.png" alt="Hello Friend" position="center" >}}
+{{< image src="/img/vulas_eflk.png"  position="center" >}}
 
 
 ---

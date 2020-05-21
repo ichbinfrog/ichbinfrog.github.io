@@ -21,7 +21,7 @@ A Pod is k8s's basic execution unit, a process running on the Cluster similar to
 
 One of the most important concept related to pods is that they follow an **ephemeral lifecycle**, they are not meant to survive if a failure of any kind were to occur (scheduling failure, node failure, lack of resource, etc...) and do not self heal in order to reach the desired state. Therefore, Pods are rarely individually created but provisioned by high level abstractions called **Controller**. A pod's lifecycle can be summarized as follows:
 
-{{< image src="/img/k8s_lifecycle.png" alt="Hello Friend" position="center" >}}
+{{< image src="/img/k8s_lifecycle.png"  position="center" >}}
 
 
 - **Scheduling**: A controller requires the creation of a pod to satisfy its desired state and communicates it to the k8s API. A pod with the corresponding specs is then scheduled for creation.
@@ -33,7 +33,7 @@ One of the most important concept related to pods is that they follow an **ephem
 
 As most components in k8s are not durable, keeping track of which IP to connect to in order to link up components over the network is impossible, thus making an abstraction like Services mandatory. Services in k8s define a logical set of Pods determined by a selector to connect to rather than a fixed set of IPs which allow for dynamic internal routing for deployments that do not care which instance handles the routed request. In practice, service selectors are used to match with labels meaning that only objects having said labels can communicate using the aforementioned service. Services can then be put into three main categories.
 
-{{< image src="/img/k8s_service_type.png" alt="Hello Friend" position="center" >}}
+{{< image src="/img/k8s_service_type.png"  position="center" >}}
 
 
 - **ClusterIP** : the default service type in k8s ensuring that a given set of destination ports on a set of machines that match the selector are reachable only from within the cluster. For example, if a ClusterIP service with the name *nginx-service* in the *default* namespace is defined and targeting an nginx deployment, all pods within that namespace can communicate with the nginx pods through the domain name *nginx-service.default.svc.cluster.local* at the ports declared. 
@@ -68,7 +68,7 @@ Persistent Volume Claims (PVC) is the most common volume type, providing an abst
 
 In order to provision a PVC, an actor states a claim to durable storage backed by a Persistent Volume (PV). Note that, a PV's lifecycle is managed by k8s independently of any object that mounts it, thus, making it non ephemeral. Furthermore, a storage class can be defined to enrich the volume's feature such as volume expansion and reclaim policies. Therefore, an object can consume storage resources in an agnostic manner, having no prior knowledge of the storage class nor the private volume satisfying the claim goes into detail how Openstack provisions PVs).
 
-{{< image src="/img/k8s_pv.png" alt="Hello Friend" position="center" >}}
+{{< image src="/img/k8s_pv.png"  position="center" >}}
 
 
 ### HostPath
@@ -86,7 +86,7 @@ Arguably the most commonly used controller, the Deployment controller encapsulat
 
 Since this API object is meant to be a low level object, *Deployments* are built upon ReplicaSets to offer a wider range of usages. One of those usage being *rollout* and *rollbacks* which help solve problems with updating and reverting Pod templates whilst maintaining all the service provided by the cluster. A Rolling Update, the default update strategy for k8s deployments represent in practice a blue-green deployment technique.
 
-{{< image src="/img/k8s_rollout.png" alt="Hello Friend" position="center" >}}
+{{< image src="/img/k8s_rollout.png"  position="center" >}}
 
 
 ### Statefulsets

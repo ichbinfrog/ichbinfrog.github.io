@@ -55,7 +55,7 @@ resource "google_compute_instance" "default" {
 
 As different cloud providers offer distinct APIs for their object creation, the Figure below illustrates the global steps in the creation of the cluster.
 
-{{< image src="/img/terraform_gcp.png" alt="Hello Friend" position="center" >}}
+{{< image src="/img/terraform_gcp.png"  position="center" >}}
 
 Since the order of execution of resource creation is computed by terraform, the following steps are performed. First a subnetwork is created within a given network and allocated a range of private IPs (this step, although unnecessary is preferred over using the default subnet for better isolation). Then the cluster object (control plane) is created and "nested" in the referred subnet. Finally, terraform creates the node pool without any nodes and declares it as a slave of the cluster object then spins up the amount of nodes and the appropriate resources that will be incorporated in the node pool. 
 
