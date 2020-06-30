@@ -7,6 +7,11 @@ images:
 tags:
   - ml
   - pokemon
+  - svm
+  - knn
+  - decision tree
+  - random forest
+  - adaboost
 ---
 
 > Ce travail a été fait avec Alix CANDUSSO et Chen GONG dans le cadre de l'UV SY09.
