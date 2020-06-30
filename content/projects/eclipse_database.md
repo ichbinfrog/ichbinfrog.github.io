@@ -114,7 +114,7 @@ With the replication scheme previously described, even if a node containing a da
 
 On the other hand, network outages can be mitigated using WAL archival in the master node. These incremental backups are vital to allow disconnected nodes to catch up to the replication lag. However, due to the storage limitations and WAL files keep getting generated, the space is bound to be recycled and a replica can no longer use that checkpoint to catch up. The maximum size of WAL logs is therefore of utmost importance and defined by two **constant** (unable to be changed live) parameters:
 
-$WALsize = maxWALsize \times WALkeepsegments$
+$$WALsize = maxWALsize \times WALkeepsegments$$
 
 
 The deployment can therefore handle all network outages during which the amount of transaction logs written do not surpass $WALsize$. If this time frame is exceeded, manual intervention is required to delete the PVC, PV and Pod and force the recreation of a new replica.

@@ -12,7 +12,7 @@ publishDir      = "ichbinfrog.github.io"
   dateformNumTime = "2006-01-02 15:04 -0700"
 
   # Subtitle for home
-  homeSubtitle = "Computer science student (2016-2021)"
+  homeSubtitle = "Computer science student (2016-2021) @ UTC (Université de Technologie de Compiègne, France)"
 
   # Set disableReadOtherPosts to true in order to hide the links to other posts.
   disableReadOtherPosts = true
