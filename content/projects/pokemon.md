@@ -1,5 +1,5 @@
 ---
-title: "[FR] Machine Learning — Pokemon Weedle's Cave"
+title: "[FR] — Pokemon victory prediction"
 date: 2020-06-30T11:55:00+00:00
 draft: false
 toc: true
