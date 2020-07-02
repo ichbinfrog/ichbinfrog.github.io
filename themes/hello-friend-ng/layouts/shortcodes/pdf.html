@@ -1,0 +1,13 @@
+{{ if .Get "src" }}
+<iframe 
+    src="{{ .Get "src" | safeURL }}" 
+    type="application/pdf" 
+    width="100%"
+    height="2000px"
+    frameborder="0"
+    marginwidth="0"
+    marginheight="0"
+    scrolling="no"
+    allowfullscreen="true">
+</iframe>    
+{{ end }}
