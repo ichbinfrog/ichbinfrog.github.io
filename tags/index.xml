@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Hoang Quoc Trung</title>
+    <link>https://ichbinfrog.github.io/tags/</link>
+    <description>Recent content in Tags on Hoang Quoc Trung</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Tue, 30 Jun 2020 11:55:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://ichbinfrog.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>adaboost</title>
+      <link>https://ichbinfrog.github.io/tags/adaboost/</link>
+      <pubDate>Tue, 30 Jun 2020 11:55:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/adaboost/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>decision tree</title>
+      <link>https://ichbinfrog.github.io/tags/decision-tree/</link>
+      <pubDate>Tue, 30 Jun 2020 11:55:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/decision-tree/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>knn</title>
+      <link>https://ichbinfrog.github.io/tags/knn/</link>
+      <pubDate>Tue, 30 Jun 2020 11:55:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/knn/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ml</title>
+      <link>https://ichbinfrog.github.io/tags/ml/</link>
+      <pubDate>Tue, 30 Jun 2020 11:55:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/ml/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pokemon</title>
+      <link>https://ichbinfrog.github.io/tags/pokemon/</link>
+      <pubDate>Tue, 30 Jun 2020 11:55:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/pokemon/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>random forest</title>
+      <link>https://ichbinfrog.github.io/tags/random-forest/</link>
+      <pubDate>Tue, 30 Jun 2020 11:55:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/random-forest/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>svm</title>
+      <link>https://ichbinfrog.github.io/tags/svm/</link>
+      <pubDate>Tue, 30 Jun 2020 11:55:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/svm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Automation</title>
+      <link>https://ichbinfrog.github.io/tags/automation/</link>
+      <pubDate>Sun, 15 Dec 2019 12:50:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/automation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>AWS</title>
+      <link>https://ichbinfrog.github.io/tags/aws/</link>
+      <pubDate>Sun, 15 Dec 2019 12:50:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/aws/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Azure</title>
+      <link>https://ichbinfrog.github.io/tags/azure/</link>
+      <pubDate>Sun, 15 Dec 2019 12:50:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/azure/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Database</title>
+      <link>https://ichbinfrog.github.io/tags/database/</link>
+      <pubDate>Sun, 15 Dec 2019 12:50:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/database/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>GCP</title>
+      <link>https://ichbinfrog.github.io/tags/gcp/</link>
+      <pubDate>Sun, 15 Dec 2019 12:50:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/gcp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Networking</title>
+      <link>https://ichbinfrog.github.io/tags/networking/</link>
+      <pubDate>Sun, 15 Dec 2019 12:50:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/networking/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PerfKitBenchmarker</title>
+      <link>https://ichbinfrog.github.io/tags/perfkitbenchmarker/</link>
+      <pubDate>Sun, 15 Dec 2019 12:50:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/perfkitbenchmarker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>overview</title>
+      <link>https://ichbinfrog.github.io/tags/overview/</link>
+      <pubDate>Wed, 30 Oct 2019 11:55:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/overview/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>high-availability</title>
+      <link>https://ichbinfrog.github.io/tags/high-availability/</link>
+      <pubDate>Wed, 30 Oct 2019 11:50:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/high-availability/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>persistence</title>
+      <link>https://ichbinfrog.github.io/tags/persistence/</link>
+      <pubDate>Wed, 30 Oct 2019 11:50:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/persistence/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>postgres</title>
+      <link>https://ichbinfrog.github.io/tags/postgres/</link>
+      <pubDate>Wed, 30 Oct 2019 11:50:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/postgres/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rollback</title>
+      <link>https://ichbinfrog.github.io/tags/rollback/</link>
+      <pubDate>Wed, 30 Oct 2019 11:50:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/rollback/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>schema-change</title>
+      <link>https://ichbinfrog.github.io/tags/schema-change/</link>
+      <pubDate>Wed, 30 Oct 2019 11:50:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/schema-change/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>untagged</title>
+      <link>https://ichbinfrog.github.io/tags/untagged/</link>
+      <pubDate>Wed, 30 Oct 2019 11:45:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/untagged/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>EFK</title>
+      <link>https://ichbinfrog.github.io/tags/efk/</link>
+      <pubDate>Wed, 30 Oct 2019 11:35:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/efk/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ELK</title>
+      <link>https://ichbinfrog.github.io/tags/elk/</link>
+      <pubDate>Wed, 30 Oct 2019 11:35:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/elk/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nginx-ingress</title>
+      <link>https://ichbinfrog.github.io/tags/nginx-ingress/</link>
+      <pubDate>Wed, 30 Oct 2019 11:35:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/nginx-ingress/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>stern</title>
+      <link>https://ichbinfrog.github.io/tags/stern/</link>
+      <pubDate>Wed, 30 Oct 2019 11:35:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/stern/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dockerfile</title>
+      <link>https://ichbinfrog.github.io/tags/dockerfile/</link>
+      <pubDate>Wed, 30 Oct 2019 11:30:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/dockerfile/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>jib</title>
+      <link>https://ichbinfrog.github.io/tags/jib/</link>
+      <pubDate>Wed, 30 Oct 2019 11:30:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/jib/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>skaffold</title>
+      <link>https://ichbinfrog.github.io/tags/skaffold/</link>
+      <pubDate>Wed, 30 Oct 2019 11:30:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/skaffold/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>spotbugs</title>
+      <link>https://ichbinfrog.github.io/tags/spotbugs/</link>
+      <pubDate>Wed, 30 Oct 2019 11:30:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/spotbugs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kubernetes</title>
+      <link>https://ichbinfrog.github.io/tags/kubernetes/</link>
+      <pubDate>Wed, 30 Oct 2019 11:25:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/kubernetes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>packer</title>
+      <link>https://ichbinfrog.github.io/tags/packer/</link>
+      <pubDate>Wed, 30 Oct 2019 11:25:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/packer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>terraform</title>
+      <link>https://ichbinfrog.github.io/tags/terraform/</link>
+      <pubDate>Wed, 30 Oct 2019 11:25:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/terraform/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>containers</title>
+      <link>https://ichbinfrog.github.io/tags/containers/</link>
+      <pubDate>Sun, 11 Aug 2019 11:05:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/containers/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>lifecycle</title>
+      <link>https://ichbinfrog.github.io/tags/lifecycle/</link>
+      <pubDate>Sun, 11 Aug 2019 11:05:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/lifecycle/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>docker</title>
+      <link>https://ichbinfrog.github.io/tags/docker/</link>
+      <pubDate>Sun, 11 Aug 2019 11:00:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>prolog</title>
+      <link>https://ichbinfrog.github.io/tags/prolog/</link>
+      <pubDate>Fri, 21 Dec 2018 16:12:56 +0200</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/prolog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sudoku</title>
+      <link>https://ichbinfrog.github.io/tags/sudoku/</link>
+      <pubDate>Fri, 21 Dec 2018 16:12:56 +0200</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/sudoku/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;</title>
+      <link>https://ichbinfrog.github.io/tags/c&#43;&#43;/</link>
+      <pubDate>Fri, 21 Dec 2018 15:37:55 +0200</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/c&#43;&#43;/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cassandra</title>
+      <link>https://ichbinfrog.github.io/tags/cassandra/</link>
+      <pubDate>Fri, 21 Dec 2018 15:37:55 +0200</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/cassandra/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>datawarehouse</title>
+      <link>https://ichbinfrog.github.io/tags/datawarehouse/</link>
+      <pubDate>Fri, 21 Dec 2018 15:37:55 +0200</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/datawarehouse/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>OOP</title>
+      <link>https://ichbinfrog.github.io/tags/oop/</link>
+      <pubDate>Fri, 21 Dec 2018 15:37:55 +0200</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/tags/oop/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

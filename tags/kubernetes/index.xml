@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kubernetes on Hoang Quoc Trung</title>
+    <link>https://ichbinfrog.github.io/tags/kubernetes/</link>
+    <description>Recent content in kubernetes on Hoang Quoc Trung</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Wed, 30 Oct 2019 11:25:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://ichbinfrog.github.io/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Eclipse/steady — Infrastructure provisioning</title>
+      <link>https://ichbinfrog.github.io/projects/eclipse_infrastructure/</link>
+      <pubDate>Wed, 30 Oct 2019 11:25:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/projects/eclipse_infrastructure/</guid>
+      <description>It is important to note here that choices regarding the infrastructure cascade from decisions made in the implementation of the core components and the monitoring stack and not vice versa.
+Kubernetes cluster creation Creating the underlying computing and networking resources for a functional k8s cluster can be done in two distinct ways:
+ Manual:  Create the node pool on which Kubernetes will run Create networking resources to connect the different nodes in the same subnet Setup the k8s prerequisites (disable swap on all machines, install docker) via Ansible then the k8s architecture via Ansible while keeping in mind the differences between the master and worker nodes or with the kubespray tool.</description>
+    </item>
+    
+    <item>
+      <title>Kubernetes — basics</title>
+      <link>https://ichbinfrog.github.io/projects/kubernetes_basic/</link>
+      <pubDate>Sun, 11 Aug 2019 11:05:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/projects/kubernetes_basic/</guid>
+      <description>Kubernetes objects are abstractions that represent the state of the system. These persistent entities describe what containerized applications are running, the resources allocated and available as well as their behaviors (restart policies, fault-tolerance). Unlike normal infrastructure declaration, these objects portray the desired state of the cluster which k8s will try to satisfy. This “record of intent” is declared in a declarative fashion in yaml and interpreted by kubectl, k8s&amp;rsquo;s default CLI.</description>
+    </item>
+    
+    <item>
+      <title>Kubernetes — in depth</title>
+      <link>https://ichbinfrog.github.io/projects/kubernetes_depth/</link>
+      <pubDate>Sun, 11 Aug 2019 11:00:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/projects/kubernetes_depth/</guid>
+      <description>Kubernetes, hereinafter referred to as k8s, is an open-source system for automating deployment, scaling and management of containerized applications. Due to it being a recent technology (released less than five years ago under the Apache License 2.0), this section attempts to summarize both its terminology and its overall orchestration mechanisms.
+ Containers — A new era of deployment The massive adoption of k8s marks the entry into a new era of deployment.</description>
+    </item>
+    
+  </channel>
+</rss>

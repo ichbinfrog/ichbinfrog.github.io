@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ELK on Hoang Quoc Trung</title>
+    <link>https://ichbinfrog.github.io/tags/elk/</link>
+    <description>Recent content in ELK on Hoang Quoc Trung</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Wed, 30 Oct 2019 11:35:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://ichbinfrog.github.io/tags/elk/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Eclipse/steady — Monitoring and logging components</title>
+      <link>https://ichbinfrog.github.io/projects/eclipse_monitoring/</link>
+      <pubDate>Wed, 30 Oct 2019 11:35:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/projects/eclipse_monitoring/</guid>
+      <description>Having a good log and monitoring infrastructure becomes a key feature that allows sysadmins, support teams, and even developers to be more prepared to face these possible operational problems and address problems in the code base more efficiently.
+Scalable application monitoring with Prometheus Metrics, unlike logs, are a measurement at a point in time for the system collected at a fixed-time interval and not collected per event. As such, it is the fundamental building block of application monitoring allowing for an objective overview of the health of the given system.</description>
+    </item>
+    
+  </channel>
+</rss>

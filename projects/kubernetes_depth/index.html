@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="Kubernetes, hereinafter referred to as k8s, is an open-source system for automating deployment, scaling and management of containerized applications. Due to it being a recent technology (released less than five years ago under the Apache License 2.0), this section attempts to summarize both its terminology and its overall orchestration mechanisms.
+ Containers — A new era of deployment The massive adoption of k8s marks the entry into a new era of deployment." />
+<meta name="keywords" content=", kubernetes, docker" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://ichbinfrog.github.io/projects/kubernetes_depth/" />
+<script type="text/javascript" async
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$']],
+            processEscapes: true,
+            processEnvironments: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            TeX: {
+                equationNumbers: { autoNumber: "AMS" },
+                extensions: ["AMSmath.js", "AMSsymbols.js"]
+            }
+        }
+    });
+    MathJax.Hub.Queue(function () {
+        
+        
+        
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+
+    MathJax.Hub.Config({
+        
+        TeX: { equationNumbers: { autoNumber: "AMS" } }
+    });
+</script>
+
+
+    <title>
+        
+            Kubernetes — in depth :: Hoang Quoc Trung 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.min.753fac8f03736f0edc9be411eb20cee875dd7bb8e73c8155fbf6a629c863f4ca.css">
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/post.css">
+    
+
+
+
+
+
+<meta itemprop="name" content="Kubernetes — in depth">
+<meta itemprop="description" content="Kubernetes, hereinafter referred to as k8s, is an open-source system for automating deployment, scaling and management of containerized applications. Due to it being a recent technology (released less than five years ago under the Apache License 2.0), this section attempts to summarize both its terminology and its overall orchestration mechanisms.
+ Containers — A new era of deployment The massive adoption of k8s marks the entry into a new era of deployment.">
+<meta itemprop="datePublished" content="2019-08-11T11:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-08-11T11:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1483">
+<meta itemprop="image" content="https://ichbinfrog.github.io/"/>
+
+
+
+<meta itemprop="keywords" content="kubernetes,docker," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://ichbinfrog.github.io/"/>
+
+<meta name="twitter:title" content="Kubernetes — in depth"/>
+<meta name="twitter:description" content="Kubernetes, hereinafter referred to as k8s, is an open-source system for automating deployment, scaling and management of containerized applications. Due to it being a recent technology (released less than five years ago under the Apache License 2.0), this section attempts to summarize both its terminology and its overall orchestration mechanisms.
+ Containers — A new era of deployment The massive adoption of k8s marks the entry into a new era of deployment."/>
+
+
+
+    <meta property="og:title" content="Kubernetes — in depth" />
+<meta property="og:description" content="Kubernetes, hereinafter referred to as k8s, is an open-source system for automating deployment, scaling and management of containerized applications. Due to it being a recent technology (released less than five years ago under the Apache License 2.0), this section attempts to summarize both its terminology and its overall orchestration mechanisms.
+ Containers — A new era of deployment The massive adoption of k8s marks the entry into a new era of deployment." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ichbinfrog.github.io/projects/kubernetes_depth/" />
+<meta property="og:image" content="https://ichbinfrog.github.io/"/>
+<meta property="article:published_time" content="2019-08-11T11:00:00+00:00" />
+<meta property="article:modified_time" content="2019-08-11T11:00:00+00:00" /><meta property="og:site_name" content="Hoang Quoc Trung" />
+
+
+
+
+
+
+    <meta property="article:published_time" content="2019-08-11 11:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">ichbinfrog</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu" style="border-right:none">
+    <ul class="menu__inner"><li><a href="https://ichbinfrog.github.io/about">About</a></li><li><a href="https://ichbinfrog.github.io/projects">Projects</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title" id="top"><a href="https://ichbinfrog.github.io/projects/kubernetes_depth/">Kubernetes — in depth</a></h2>
+            <aside id="toc"><style>
+.toc {
+    position: fixed;
+    top: 50%;
+    left: 2%;
+    width: 20%;
+    transform: translateY(-50%);
+    border-radius: 5px;
+    padding-bottom: 1rem;
+}
+
+.toc a {
+    text-decoration: none;
+    color: gray;
+}
+
+.toc a:hover {
+    opacity: 0.5;
+}
+
+.toc ul {
+    list-style: ">  ";
+}
+
+.toc-title {
+    text-decoration: underline;
+}
+</style>
+
+<div class="toc">
+    <div class="toc-title">Table of Contents</div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#containers--a-new-era-of-deployment">Containers — A new era of deployment</a></li>
+    <li><a href="#docker-containers--infrastructure-base-building-block">Docker Containers — Infrastructure base building block</a></li>
+    <li><a href="#high-level-architecture">High Level Architecture</a>
+      <ul>
+        <li><a href="#master-node-architecture">Master Node Architecture</a></li>
+        <li><a href="#worker-node-architecture">Worker Node Architecture</a></li>
+      </ul>
+    </li>
+    <li><a href="#base-security-mechanisms">Base security mechanisms</a>
+      <ul>
+        <li><a href="#rbac-and-the-kubernetes-api">RBAC and the Kubernetes API</a></li>
+        <li><a href="#pod-security-policy">Pod Security Policy</a></li>
+      </ul>
+    </li>
+    <li><a href="#appendix">Appendix</a>
+      <ul>
+        <li><a href="#libcontainer-namespaces-and-cgroups">Libcontainer namespaces and cgroups</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    <ul>
+    <li><a href="#top">Top</a></li>
+    <li><a href="#end">End</a></li>
+    </ul>
+</div></aside>
+
+            
+
+            <div class="post-content">
+                <p>Kubernetes, hereinafter referred to as k8s, is an open-source system for automating deployment, scaling and management of containerized applications. Due to it being a recent technology (released less than five years ago under the Apache License 2.0), this section attempts to summarize both its terminology and its overall orchestration mechanisms.</p>
+<hr>
+<h2 id="containers--a-new-era-of-deployment">Containers — A new era of deployment</h2>
+<p>The massive adoption of k8s marks the entry into a new era of deployment. Initially, deployments were applied directly onto physical servers. However, the <strong>traditional deployment</strong> era suffered from performance issues stemming from the inability to define resource boundaries between different applications. The introduction of <strong>virtualization</strong> tackles this issue by allowing multiple Virtual Machines (VM) to run on a single physical server. These VMs provide a level of security through isolation of scalable component as well as reduce the strain on hardware. Nonetheless, each VM is a full machine running its own operating system on top of the virtualized hardware.</p>
+
+<img src="/img/docker_evolution.png"  class="center"  />
+
+
+<h2 id="docker-containers--infrastructure-base-building-block">Docker Containers — Infrastructure base building block</h2>
+<p>At the forefront of this technology is Docker, a platform for developers and sysadmins to develop, deploy, and run applications with containers; a container being a standard unit of software that packages up code and all its dependencies so the application runs quickly and reliably from one computing environment to another.</p>
+
+<img src="/img/docker_oci.png"  class="center"  />
+
+
+<p>In order to instantiate a container, an executable package that includes everything needed for the application (runtime, libraries, code, configuration files) also known as an <strong>image</strong> is required. For example, a client can ask the docker daemon to pull an Ubuntu image from a registry (public or private) which can then be instantiated as containers in the host machine. Nowadays, the docker daemon is broken up into three main components:</p>
+<ul>
+<li><strong>runC</strong> is the lowest level runtime component used to interact with the OCI (Open Container Initiative) interface. This module interacts directly with the kernel in order to create namespaces, cgroups, capabilities, and filesystem access controls. In practice, a container is an environment running in an isolated set of kernel namespaces.</li>
+<li>These container lifecycles are then managed by the <strong>containerd</strong> daemon which also takes care of setting up the networking and image transfer.</li>
+<li>Finally, the <strong>Docker engine</strong> only provides high level CLI for users and downloading images from docker registries.</li>
+</ul>
+<hr>
+<h2 id="high-level-architecture">High Level Architecture</h2>
+
+<img src="/img/k8s_infrastructure.png"  class="center"  />
+
+
+<p>K8s uses these previous building blocks in order to create an orchestration tool for managing microservices or containainerized applications across a distributed cluster of nodes. These node follow by default a client-server architecture in which there is a <strong>master node</strong> acting as the entrypoint for all administrative task and control point for all <strong>worker nodes</strong> in the cluster. Is it important to node that this separation is not exclusive as a master node can also be a worker node.</p>
+<h3 id="master-node-architecture">Master Node Architecture</h3>
+<p>The sole entry point for the system in this setup is through an <strong>API server</strong> hosted by the master node. This server processes REST requests, validates them, and executes the bound business logic. For instance, a request to list all pods in the API whose name is v1 is &lsquo;GET /api/v1/pods&rsquo;.</p>
+<p>This node also hosts some <strong>etcd storage</strong> which are distributed key-value stores storing shared configurations and service discovery which can be queried via REST. The previous example would in reality be routed to the etcd storage because it stores information regarding pods, jobs and their scheduling, etc&hellip;</p>
+<p>As in any distributed system, resources in k8s clusters are scarce and require a <strong>scheduler</strong> which decides where to deploy a component thanks to information gathered regarding available resources on worker nodes. An extra level of control can also be achieved by the <strong>controller-manager</strong> which watches the shared state of the cluster and makes decisions and changes in order to reach the desired state.</p>
+<h3 id="worker-node-architecture">Worker Node Architecture</h3>
+<p>Worker/Slave nodes are where pods are run, so <strong>Docker</strong> is used to provision and start containers here. Since these nodes depends on scheduling by the master node, this communication is guaranteed by <strong>kubelet</strong> which gets the configuration of a pod from the apiserver and ensures that the described containers are up and running and fetches information from the master etcd. Finally the <strong>kube-proxy</strong> service deals with individual host sub-netting and expose services to the external world.</p>
+<hr>
+<h2 id="base-security-mechanisms">Base security mechanisms</h2>
+<h3 id="rbac-and-the-kubernetes-api">RBAC and the Kubernetes API</h3>
+<p>The Kubernetes API represents a fundamental fabric of Kubernetes through which all REST API calls, including object declarations are handled. As such, managing access to this component is primordial in order to maintain a secure Kubernetes cluster. Two categories of API users is distinguishable: human <strong>users</strong> and <strong>service accounts</strong> (used by pods within the cluster). Both of which has to go through three phases in order to gain access to the cluster (Authentication, Authorization, Admission Control).</p>
+<p>In order to access the cluster (either through kubectl, client libraries or REST request), an user has to authenticate using at least one of the allowed methods. First of all, the k8s-api serves on port 443 with a TLS certificate which is required by the user in order to suceed the handshake.</p>
+<ul>
+<li>
+<p><strong>Authentication</strong> - Contrary to other concepts in k8s, users are neither referenced nor stored by the API as an object. Thus, the authentication technically boils down to an HTTP request which is analysed by its auth modules (client certificates, token, etc.) in order to garantee that the requests comes from a specific user. For serviceaccounts, this is done through a <strong>service account token</strong> which can be mounted on the path <code>/var/run/secrets/kubernetes.io/serviceaccount</code> to allow automatic authentication.</p>
+</li>
+<li>
+<p><strong>Authorisation</strong> - Once the first step is complete, the aforementioned request must be authorised by one of the following methods: <strong>Node authorization</strong> (internal authorization that allows for kubelet to query the API), <strong>ABAC</strong>  (authorization based on request attributes) and <strong>RBAC</strong> (authorization based on roles)</p>
+</li>
+</ul>
+<p>The <strong>role based access control</strong> (RBAC) is one of the most granular method of authorization and can be leveraged to allow for pods within the cluster to communicate with the API. Defining this method of access regulation requires:</p>
+<ul>
+<li><strong>Role</strong>: An assignment of a list of interactions (verbs) that can be applied to an array of resources in specific apiGroups. This can be restricted to a namespace or applied cluster wide (<strong>Cluster Role</strong>). For instance, the following yaml declares a role that allows for getting and listing deployments (that are in the apps/v1 API namespace):</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">rules</span>:
+  - <span style="color:#66d9ef">apiGroups</span>: [<span style="color:#e6db74">&#34;apps/v1&#34;</span>]
+    <span style="color:#66d9ef">resources</span>: [<span style="color:#e6db74">&#34;deployments&#34;</span>]
+    <span style="color:#66d9ef">verbs</span>: [<span style="color:#e6db74">&#34;get&#34;</span>, <span style="color:#e6db74">&#34;list&#34;</span>]
+</code></pre></div><ul>
+<li><strong>Service Account</strong> and a <strong>RoleBinding</strong>: the separation of the role, the rolebinding and the service account allows for fine grained access control to the API and easy revocation. Using the RBAC properly therefore allows for programmatically managing the cluster within the cluster itself in a completely secure manner.</li>
+</ul>
+<h3 id="pod-security-policy">Pod Security Policy</h3>
+<p>Fine-grained access control is also implemented on the pod and container level through Pod security policies. This is done through defining a series of conditions which the affected pod must present in order to be accepted to the system. Policy enforcement is therefore done directly at the admission controller (before the creation of the resource) and independently of the container at hand. These policies can be summarized in the following overlying themes:</p>
+<ul>
+<li>
+<p><strong>Privilege</strong> and <strong>Escalation</strong>: policy inherited from the underlying docker component which would grant a container all capabilities that the host possesses and lifts all the limitations enforced by the device cgroup controller (see Appendix <em>lib-container</em>)). As a rule of thumb, no container that requires leverage over the host network stack should be privileged.</p>
+<p>Privilege escalation is by default banned through preventing the setuid binaries from changing the effective UID within the container. This feature is however prone to vulnerabilities as seen in the <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5736%22">CVE-2019-5736</a> through which exploits of the runC library could be used to obtain root execution from a docker container.</p>
+</li>
+<li>
+<p><strong>Volume</strong> and <strong>filesystem</strong>: allows managing access to certain kubernetes volume types, enforcement of file system group as well as restricting access permissions on different paths.</p>
+</li>
+</ul>
+<hr>
+<h2 id="appendix">Appendix</h2>
+<h3 id="libcontainer-namespaces-and-cgroups">Libcontainer namespaces and cgroups</h3>
+<p>Kernel namespaces are fundamental in containers as they allow isolation of:</p>
+<ul>
+<li>Process trees (<strong>PID namespace</strong>) : processes in different namespaces can have the same PID. Thus allowing multiple process trees can coexist in the same system and facilitating container migration (as PIDs within the container are maintained).</li>
+<li>Mounts (<strong>MNT namespace</strong>) : isolates a set of mount points for a process or processes in a given namespace, providing the opportunity for different processes on a system to have different views of the host&rsquo;s filesystem.</li>
+<li>Networks (<strong>Net namespace</strong>) : provide a new network stack (along with a loopback interface, network interfaces, routing tables and iptable rules) for each process within the namespace.</li>
+<li>Users/UIDs (<strong>User namespace</strong>) : isolates security-related identifiers and attributes, in particular, user IDs and group IDs, the root directory, keys, and capabilities</li>
+<li>Hostnames (<strong>UTS namespace</strong>) : isolates hostnames and domain names.</li>
+</ul>
+<p>These namespaces are vital in sectioning off different containers within the same OS. Kernel control grous (<strong>cgroups</strong>) on the other hand, allow accounting and limiting resources used by processes.</p>
+
+            </div>
+        </article>
+        <h2 id="end"></h2>
+        <hr />
+
+        <div class="post-info">
+  				<p>
+  					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://ichbinfrog.github.io/tags/kubernetes">kubernetes</a></span><span class="tag"><a href="https://ichbinfrog.github.io/tags/docker">docker</a></span>
+  				</p>
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+            <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span><a href="https://themes.gohugo.io/hugo-theme-hello-friend-ng/">hello-friend-ng</a> Theme for <a href="http://gohugo.io">Hugo</a> by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.4a69500057d68129e88f497d354afe68422eb56de6d15e45dbe2190858ea5a76bfcb096406f992984b241db45f47388ac57ab0376e3b32125bef7a8a6d0f06c4.js" integrity="sha512-SmlQAFfWgSnoj0l9NUr&#43;aEIutW3m0V5F2&#43;IZCFjqWna/ywlkBvmSmEskHbRfRziKxXqwN247MhJb73qKbQ8GxA=="></script>
+
+
+
+    </body>
+</html>

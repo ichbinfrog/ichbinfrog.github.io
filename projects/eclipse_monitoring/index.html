@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="Having a good log and monitoring infrastructure becomes a key feature that allows sysadmins, support teams, and even developers to be more prepared to face these possible operational problems and address problems in the code base more efficiently.
+Scalable application monitoring with Prometheus Metrics, unlike logs, are a measurement at a point in time for the system collected at a fixed-time interval and not collected per event. As such, it is the fundamental building block of application monitoring allowing for an objective overview of the health of the given system." />
+<meta name="keywords" content=", nginx-ingress, ELK, EFK, stern" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://ichbinfrog.github.io/projects/eclipse_monitoring/" />
+<script type="text/javascript" async
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$']],
+            processEscapes: true,
+            processEnvironments: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            TeX: {
+                equationNumbers: { autoNumber: "AMS" },
+                extensions: ["AMSmath.js", "AMSsymbols.js"]
+            }
+        }
+    });
+    MathJax.Hub.Queue(function () {
+        
+        
+        
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+
+    MathJax.Hub.Config({
+        
+        TeX: { equationNumbers: { autoNumber: "AMS" } }
+    });
+</script>
+
+
+    <title>
+        
+            Eclipse/steady — Monitoring and logging components :: Hoang Quoc Trung 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.min.753fac8f03736f0edc9be411eb20cee875dd7bb8e73c8155fbf6a629c863f4ca.css">
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/post.css">
+    
+
+
+
+
+
+<meta itemprop="name" content="Eclipse/steady — Monitoring and logging components">
+<meta itemprop="description" content="Having a good log and monitoring infrastructure becomes a key feature that allows sysadmins, support teams, and even developers to be more prepared to face these possible operational problems and address problems in the code base more efficiently.
+Scalable application monitoring with Prometheus Metrics, unlike logs, are a measurement at a point in time for the system collected at a fixed-time interval and not collected per event. As such, it is the fundamental building block of application monitoring allowing for an objective overview of the health of the given system.">
+<meta itemprop="datePublished" content="2019-10-30T11:35:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-10-30T11:35:00&#43;00:00" />
+<meta itemprop="wordCount" content="758">
+<meta itemprop="image" content="https://ichbinfrog.github.io/"/>
+
+
+
+<meta itemprop="keywords" content="nginx-ingress,ELK,EFK,stern," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://ichbinfrog.github.io/"/>
+
+<meta name="twitter:title" content="Eclipse/steady — Monitoring and logging components"/>
+<meta name="twitter:description" content="Having a good log and monitoring infrastructure becomes a key feature that allows sysadmins, support teams, and even developers to be more prepared to face these possible operational problems and address problems in the code base more efficiently.
+Scalable application monitoring with Prometheus Metrics, unlike logs, are a measurement at a point in time for the system collected at a fixed-time interval and not collected per event. As such, it is the fundamental building block of application monitoring allowing for an objective overview of the health of the given system."/>
+
+
+
+    <meta property="og:title" content="Eclipse/steady — Monitoring and logging components" />
+<meta property="og:description" content="Having a good log and monitoring infrastructure becomes a key feature that allows sysadmins, support teams, and even developers to be more prepared to face these possible operational problems and address problems in the code base more efficiently.
+Scalable application monitoring with Prometheus Metrics, unlike logs, are a measurement at a point in time for the system collected at a fixed-time interval and not collected per event. As such, it is the fundamental building block of application monitoring allowing for an objective overview of the health of the given system." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ichbinfrog.github.io/projects/eclipse_monitoring/" />
+<meta property="og:image" content="https://ichbinfrog.github.io/"/>
+<meta property="article:published_time" content="2019-10-30T11:35:00+00:00" />
+<meta property="article:modified_time" content="2019-10-30T11:35:00+00:00" /><meta property="og:site_name" content="Hoang Quoc Trung" />
+
+
+
+
+
+
+    <meta property="article:published_time" content="2019-10-30 11:35:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">ichbinfrog</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu" style="border-right:none">
+    <ul class="menu__inner"><li><a href="https://ichbinfrog.github.io/about">About</a></li><li><a href="https://ichbinfrog.github.io/projects">Projects</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title" id="top"><a href="https://ichbinfrog.github.io/projects/eclipse_monitoring/">Eclipse/steady — Monitoring and logging components</a></h2>
+            <aside id="toc"><style>
+.toc {
+    position: fixed;
+    top: 50%;
+    left: 2%;
+    width: 20%;
+    transform: translateY(-50%);
+    border-radius: 5px;
+    padding-bottom: 1rem;
+}
+
+.toc a {
+    text-decoration: none;
+    color: gray;
+}
+
+.toc a:hover {
+    opacity: 0.5;
+}
+
+.toc ul {
+    list-style: ">  ";
+}
+
+.toc-title {
+    text-decoration: underline;
+}
+</style>
+
+<div class="toc">
+    <div class="toc-title">Table of Contents</div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#scalable-application-monitoring-with-prometheus">Scalable application monitoring with Prometheus</a></li>
+    <li><a href="#log-pipeline-implementation">Log pipeline implementation</a></li>
+    <li><a href="#metrics-and-logs-visualization">Metrics and logs visualization</a></li>
+  </ul>
+</nav>
+    <ul>
+    <li><a href="#top">Top</a></li>
+    <li><a href="#end">End</a></li>
+    </ul>
+</div></aside>
+
+            
+
+            <div class="post-content">
+                <p>Having a good log and monitoring infrastructure becomes a key feature that allows sysadmins, support teams, and even developers to be more prepared to face these possible operational problems and address problems in the code base more efficiently.</p>
+<h2 id="scalable-application-monitoring-with-prometheus">Scalable application monitoring with Prometheus</h2>
+<p>Metrics, unlike logs, are a measurement at a point in time for the system collected at a fixed-time interval and not collected per event. As such, it is the fundamental building block of application monitoring allowing for an objective overview of the health of the given system.</p>
+<p><strong>Prometheus</strong> is the metrics and alerting server with the highest amount of adoption and integration for k8s which is going to be used in our case. It relies on a set of exporters (components to export specific metrics) to run on the desired instance and send it back to the server to be aggregated. After a brief discussion about the required metrics, the following exporters are included in the deployment:</p>
+<ul>
+<li><strong>cadvisor</strong>: provides information regarding the resource usage and performance of containers. It should be run as a daemon set on each node as it only fetches data on the node on which it&rsquo;s hosted and extremely lightweight (20MB). A couple major downsides of this component are that it offers an unwanted mandatory UI that consume resources and requires root privilege (reading from /sys/ and /rootfs/) to function.</li>
+<li><strong>kube-state-metrics</strong>: exposes k8s cluster level metrics such as allocatable cpus per node. Only a single replica is required because it communicates with the k8s API.</li>
+<li><strong>postgres-exporter</strong>: publish metrics about the PostgreSQL database (such as replication lag, most used queries, etc&hellip;). This component is integrated as sidecar container to the postgresql database container.</li>
+<li><strong>nginx-ingress-controller</strong>: metrics endpoint already available in the ingress controller deployment which allows for monitoring request latency and HTTP responses.</li>
+</ul>
+<p>It is important to note that the monitoring architecture (see Figure below) has not been altered from the docker-compose based deployment albeit with the addition of cluster metrics.</p>
+
+<img src="/img/vulas_monitoring.png"  class="center"  />
+
+
+<h2 id="log-pipeline-implementation">Log pipeline implementation</h2>
+<p>The traditional solution to this question is the <strong>ELK</strong> stack (Elasticsearch, Logstash, Kibana) which it composed of four components; <strong>Filebeat</strong> which ships logs from the host machine to <strong>Logstash</strong>, which aggregates and filters them before loading them into <strong>Elasticsearch</strong>, a database which can be fed into <strong>Kibana</strong> to create meaningful visualizations and time series analysis.</p>
+<p>Although this solution is conventional for docker-compose based architecture, it can be problematic in the k8s context because of <strong>Size</strong>. Filebeat has to be run as a daemonset and thus a container must be present in all machines of the cluster. The filebeat container has a significant footprint (around 100MB, due to it being in Java and requiring the corresponding JVM) and can in no way be considered lightweight.</p>
+<p>The <strong>EFK</strong> stack is chosen because it mitigates this issue, by replacing both Logstash and Filebeat by Fluentbit, a lightweight (20MB) log shipper written in C that doubles as a filter which creates a pipeline from the host machine directly into Elasticsearch.</p>
+
+<img src="/img/vulas_eflk.png"  class="center"  />
+
+
+<hr>
+<h2 id="metrics-and-logs-visualization">Metrics and logs visualization</h2>
+<p>For visualizing metrics, Grafana is an open source analytics and monitoring solution for every database which is perfectly adapted to creating meaningful dashboards for prometheus metrics. The large community behind the project has done the hard work of creating dashboards for all use cases which can be imported as a JSON. Therefore the work in creating a meaning visualization adapted for our use case is just a matter of importing this file and modifying some metric names which are prone to change over different versions and release of the exporters.</p>
+<p>When it comes to logging, in agreement with the vulnerability-assessment-tool team, a Kibana dashboard is not within the scope of this internship. Nonetheless, live tailing logs is a mandatory requirement. The centralized log infrastructure proposed above is not real time so a workaround has to be devised. Unlike a non cloud deployment, in a k8s environment, a container can be running on a multitude of different nodes and the workload can be divided to different containers. Due to this complexity, there are currently no viable infrastructure based solutions to this demand.</p>
+<p>Shifting the scope of the search to a more contributor/developer side solution yielded <a href="https://github.com/wercker/stern">stern</a>, a CLI tool written in Golang that uses the kubectl CLI and a set of simple arguments to filter out the appropriate logs. As is the case with a lot of libraries, the code design is not thought out for integrating in other Golang projects so we decided to create a Bash wrapper script which fills in the appropriate arguments for the desired containers.</p>
+
+            </div>
+        </article>
+        <h2 id="end"></h2>
+        <hr />
+
+        <div class="post-info">
+  				<p>
+  					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://ichbinfrog.github.io/tags/nginx-ingress">nginx-ingress</a></span><span class="tag"><a href="https://ichbinfrog.github.io/tags/elk">ELK</a></span><span class="tag"><a href="https://ichbinfrog.github.io/tags/efk">EFK</a></span><span class="tag"><a href="https://ichbinfrog.github.io/tags/stern">stern</a></span>
+  				</p>
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+            <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span><a href="https://themes.gohugo.io/hugo-theme-hello-friend-ng/">hello-friend-ng</a> Theme for <a href="http://gohugo.io">Hugo</a> by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.4a69500057d68129e88f497d354afe68422eb56de6d15e45dbe2190858ea5a76bfcb096406f992984b241db45f47388ac57ab0376e3b32125bef7a8a6d0f06c4.js" integrity="sha512-SmlQAFfWgSnoj0l9NUr&#43;aEIutW3m0V5F2&#43;IZCFjqWna/ywlkBvmSmEskHbRfRziKxXqwN247MhJb73qKbQ8GxA=="></script>
+
+
+
+    </body>
+</html>
