@@ -15,7 +15,7 @@ publishDir      = "./public"
   homeSubtitle = "Computer science student (2016-2021) @ UTC (Université de Technologie de Compiègne, France)"
 
   # Set disableReadOtherPosts to true in order to hide the links to other posts.
-  disableReadOtherPosts = true
+  disableReadOtherPosts = false
 
   # Metadata mostly used in document's head
   description = "project page"
@@ -53,10 +53,6 @@ publishDir      = "./public"
     [languages.en.params.logo]
       logoText = "ichbinfrog"
       logoHomeLink = "/"
-    # or
-    #
-    # path = "/img/your-example-logo.svg"
-    # alt = "Your example logo alt text"
 
   # And you can even create generic menu
   [[menu.main]]
