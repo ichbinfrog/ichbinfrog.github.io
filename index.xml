@@ -33,10 +33,10 @@
     
     <item>
       <title>About</title>
-      <link>https://ichbinfrog.github.io/about/</link>
+      <link>https://ichbinfrog.github.io/about/about/</link>
       <pubDate>Tue, 12 May 2020 08:17:41 +0200</pubDate>
       
-      <guid>https://ichbinfrog.github.io/about/</guid>
+      <guid>https://ichbinfrog.github.io/about/about/</guid>
       <description>Fourth year Computer Science student at the Université de Technologie de Compiègne (UTC), looking for a six month internship starting from February 2021 relating to DevOps, Cloud or Site Reliability Engineering.
  Skills  Automation (Ansible, Bash) Containers (Docker, Jib) Kubernetes (Helm, Kustomize) Infrastructure as Code (Terraform, Packer) Cloud Provisioning (AWS, GCP, Azure, Openstack) SQL (Postgres, Mysql, Oracle) NoSQL (Mongo, Neo4J, Elastic, Scylla, Cassandra, Object Oracle) Programming (Golang, C++, C, Python)   Experiences DevOps Intern — SAP Labs France Sophia Antipolis July 2019 - January 2020</description>
     </item>
