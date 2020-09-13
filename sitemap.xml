@@ -23,11 +23,6 @@
   </url>
   
   <url>
-    <loc>https://ichbinfrog.github.io/</loc>
-    <lastmod>2020-06-30T11:55:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://ichbinfrog.github.io/tags/knn/</loc>
     <lastmod>2020-06-30T11:55:00+00:00</lastmod>
   </url>
@@ -64,6 +59,11 @@
   
   <url>
     <loc>https://ichbinfrog.github.io/about/</loc>
+    <lastmod>2020-05-12T08:17:41+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ichbinfrog.github.io/</loc>
     <lastmod>2020-05-12T08:17:41+02:00</lastmod>
   </url>
   
@@ -183,6 +183,11 @@
   </url>
   
   <url>
+    <loc>https://ichbinfrog.github.io/tags/docker/</loc>
+    <lastmod>2019-10-30T11:30:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://ichbinfrog.github.io/tags/dockerfile/</loc>
     <lastmod>2019-10-30T11:30:00+00:00</lastmod>
   </url>
@@ -240,11 +245,6 @@
   <url>
     <loc>https://ichbinfrog.github.io/tags/lifecycle/</loc>
     <lastmod>2019-08-11T11:05:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ichbinfrog.github.io/tags/docker/</loc>
-    <lastmod>2019-08-11T11:00:00+00:00</lastmod>
   </url>
   
   <url>
