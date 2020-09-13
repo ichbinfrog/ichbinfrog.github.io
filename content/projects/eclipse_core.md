@@ -1,7 +1,7 @@
 ---
 title: "Eclipse/steady — Core components"
 date: 2019-10-30T11:45:00+00:00
-draft: fasle
+draft: false
 toc: true
 images:
 tags:
