@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="Ce travail a été fait avec Alix CANDUSSO et Chen GONG dans le cadre de l&amp;rsquo;UV SY09.
+  Issu d&amp;rsquo;une franchise de jeu vidéo japonaise, un pokémon est une créature qui, une fois capturée par un dresseur, peut-être envoyé pour affronter les pokémon d&amp;rsquo;un autre dresseur. Régi par un ensemble de règles bien définies, la complexité des combats qui en dérive et les modèles qui les prédisent constituent l&amp;rsquo;intérêt de cette étude." />
+<meta name="keywords" content=", ml, pokemon, svm, knn, decision tree, random forest, adaboost" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://ichbinfrog.github.io/projects/pokemon/" />
+<script type="text/javascript" async
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$']],
+            processEscapes: true,
+            processEnvironments: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            TeX: {
+                equationNumbers: { autoNumber: "AMS" },
+                extensions: ["AMSmath.js", "AMSsymbols.js"]
+            }
+        }
+    });
+    MathJax.Hub.Queue(function () {
+        
+        
+        
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+
+    MathJax.Hub.Config({
+        
+        TeX: { equationNumbers: { autoNumber: "AMS" } }
+    });
+</script>
+
+
+    <title>
+        
+            [FR] — Pokemon victory prediction :: Hoang Quoc Trung 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.min.753fac8f03736f0edc9be411eb20cee875dd7bb8e73c8155fbf6a629c863f4ca.css">
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/post.css">
+    
+
+
+
+
+
+<meta itemprop="name" content="[FR] — Pokemon victory prediction">
+<meta itemprop="description" content="Ce travail a été fait avec Alix CANDUSSO et Chen GONG dans le cadre de l&rsquo;UV SY09.
+  Issu d&rsquo;une franchise de jeu vidéo japonaise, un pokémon est une créature qui, une fois capturée par un dresseur, peut-être envoyé pour affronter les pokémon d&rsquo;un autre dresseur. Régi par un ensemble de règles bien définies, la complexité des combats qui en dérive et les modèles qui les prédisent constituent l&rsquo;intérêt de cette étude.">
+<meta itemprop="datePublished" content="2020-06-30T11:55:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-06-30T11:55:00&#43;00:00" />
+<meta itemprop="wordCount" content="4110">
+<meta itemprop="image" content="https://ichbinfrog.github.io/"/>
+
+
+
+<meta itemprop="keywords" content="ml,pokemon,svm,knn,decision tree,random forest,adaboost," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://ichbinfrog.github.io/"/>
+
+<meta name="twitter:title" content="[FR] — Pokemon victory prediction"/>
+<meta name="twitter:description" content="Ce travail a été fait avec Alix CANDUSSO et Chen GONG dans le cadre de l&rsquo;UV SY09.
+  Issu d&rsquo;une franchise de jeu vidéo japonaise, un pokémon est une créature qui, une fois capturée par un dresseur, peut-être envoyé pour affronter les pokémon d&rsquo;un autre dresseur. Régi par un ensemble de règles bien définies, la complexité des combats qui en dérive et les modèles qui les prédisent constituent l&rsquo;intérêt de cette étude."/>
+
+
+
+    <meta property="og:title" content="[FR] — Pokemon victory prediction" />
+<meta property="og:description" content="Ce travail a été fait avec Alix CANDUSSO et Chen GONG dans le cadre de l&rsquo;UV SY09.
+  Issu d&rsquo;une franchise de jeu vidéo japonaise, un pokémon est une créature qui, une fois capturée par un dresseur, peut-être envoyé pour affronter les pokémon d&rsquo;un autre dresseur. Régi par un ensemble de règles bien définies, la complexité des combats qui en dérive et les modèles qui les prédisent constituent l&rsquo;intérêt de cette étude." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ichbinfrog.github.io/projects/pokemon/" />
+<meta property="og:image" content="https://ichbinfrog.github.io/"/>
+<meta property="article:published_time" content="2020-06-30T11:55:00+00:00" />
+<meta property="article:modified_time" content="2020-06-30T11:55:00+00:00" /><meta property="og:site_name" content="Hoang Quoc Trung" />
+
+
+
+
+
+
+    <meta property="article:published_time" content="2020-06-30 11:55:00 &#43;0000 &#43;0000" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">ichbinfrog</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu" style="border-right:none">
+    <ul class="menu__inner"><li><a href="https://ichbinfrog.github.io/about">About</a></li><li><a href="https://ichbinfrog.github.io/projects">Projects</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title" id="top"><a href="https://ichbinfrog.github.io/projects/pokemon/">[FR] — Pokemon victory prediction</a></h2>
+            <aside id="toc"><style>
+.toc {
+    position: fixed;
+    top: 50%;
+    left: 2%;
+    width: 20%;
+    transform: translateY(-50%);
+    border-radius: 5px;
+    padding-bottom: 1rem;
+}
+
+.toc a {
+    text-decoration: none;
+    color: gray;
+}
+
+.toc a:hover {
+    opacity: 0.5;
+}
+
+.toc ul {
+    list-style: ">  ";
+}
+
+.toc-title {
+    text-decoration: underline;
+}
+</style>
+
+<div class="toc">
+    <div class="toc-title">Table of Contents</div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#analyse-exploratoire">Analyse exploratoire</a>
+      <ul>
+        <li><a href="#caractéristiques-dun-pokémon">Caractéristiques d&rsquo;un pokémon</a></li>
+        <li><a href="#combats">Combats</a></li>
+        <li><a href="#problématique">Problématique</a></li>
+      </ul>
+    </li>
+    <li><a href="#enrichissement-du-jeu-de-données">Enrichissement du jeu de données</a>
+      <ul>
+        <li><a href="#introduction-dune-hiérarchie">Introduction d&rsquo;une hiérarchie</a></li>
+      </ul>
+    </li>
+    <li><a href="#réduction-des-dimensions">Réduction des dimensions</a>
+      <ul>
+        <li><a href="#analyse-en-composantes-principales">Analyse en composantes principales</a></li>
+        <li><a href="#matrice-de-distance-intermédiaire">Matrice de distance intermédiaire</a></li>
+      </ul>
+    </li>
+    <li><a href="#k-plus-proches-voisins-knn">K Plus Proches Voisins (KNN)</a>
+      <ul>
+        <li><a href="#principe">Principe</a></li>
+        <li><a href="#application">Application</a></li>
+      </ul>
+    </li>
+    <li><a href="#support-vector-machine-svm">Support Vector Machine (SVM)</a>
+      <ul>
+        <li><a href="#principe-1">Principe</a></li>
+        <li><a href="#application-1">Application</a></li>
+      </ul>
+    </li>
+    <li><a href="#arbre-de-décision">Arbre de décision</a>
+      <ul>
+        <li><a href="#principe-2">Principe</a></li>
+        <li><a href="#régularisation">Régularisation</a></li>
+        <li><a href="#application-2">Application</a></li>
+      </ul>
+    </li>
+    <li><a href="#forêt-aléatoire">Forêt aléatoire</a>
+      <ul>
+        <li><a href="#principe-3">Principe</a></li>
+        <li><a href="#application-3">Application</a></li>
+      </ul>
+    </li>
+    <li><a href="#adaptative-boosting">Adaptative Boosting</a>
+      <ul>
+        <li><a href="#principe-4">Principe</a></li>
+        <li><a href="#application-4">Application</a></li>
+      </ul>
+    </li>
+    <li><a href="#conclusion">Conclusion</a>
+      <ul>
+        <li><a href="#évaluation-des-performances">Évaluation des performances</a></li>
+        <li><a href="#conclusions-et-futurs-travaux">Conclusions et futurs travaux</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    <ul>
+    <li><a href="#top">Top</a></li>
+    <li><a href="#end">End</a></li>
+    </ul>
+</div></aside>
+
+            
+
+            <div class="post-content">
+                <blockquote>
+<p>Ce travail a été fait avec Alix CANDUSSO et Chen GONG dans le cadre de l&rsquo;UV SY09.</p>
+</blockquote>
+<blockquote>
+<p>Issu d&rsquo;une franchise de jeu vidéo japonaise, un pokémon est une créature qui, une fois capturée par un dresseur, peut-être envoyé pour affronter les pokémon d&rsquo;un autre dresseur. Régi par un ensemble de règles bien définies, la complexité des combats qui en dérive et les modèles qui les prédisent constituent l&rsquo;intérêt de cette étude.</p>
+</blockquote>
+<h2 id="analyse-exploratoire">Analyse exploratoire</h2>
+<p>Cette collection, provenant de <a href="https://www.kaggle.com/terminus7/pokemon-challenge%22">Kaggle</a>, est constituée de trois jeu de données différents;</p>
+<h3 id="caractéristiques-dun-pokémon">Caractéristiques d&rsquo;un pokémon</h3>
+<p>Ce jeu de données présente les caractéristiques de 800 pokémon extraites directement du code objet du jeu. Chaque pokémon, identifié de manière unique par un nom ou un entier, se caractérise par un booléen qui indique s&rsquo;il est <strong>légendaire</strong> ainsi que par sa <strong>génération</strong> (&ldquo;version&rdquo; à partir de laquelle le pokémon a été ajouté). Un pokémon est aussi caractérisé par ses statistiques;</p>
+<ul>
+<li><strong>speed</strong>: détermine s&rsquo;il prend l&rsquo;initiative lors d&rsquo;un combat</li>
+<li><strong>hp</strong>: nombre de point de dommages qu&rsquo;il peut subir avant d&rsquo;être éliminé</li>
+<li><strong>attack</strong>: puissance de ses attaques physiques</li>
+<li><strong>defense</strong>: résistance aux attaques physiques</li>
+<li><strong>sp. attack</strong>: puissance des attaques &ldquo;magiques&rdquo; (le pokemon ne touche physiquement pas son adversaire mais inflige tout de même des dégâts)</li>
+<li><strong>sp. defense</strong>: résistance aux attaques spéciales</li>
+</ul>
+<p>Normalement, les statistiques d&rsquo;un pokémon sont basées sur des statistiques de base augmentent lorsque le pokémon monte en niveau, mais cette dimension n&rsquo;est pas considérée dans ce jeu de données. De plus, chaque pokémon appartient à un ou deux <strong>types</strong> (e.g. Feu, Eau, Acier, Électricité, Vol&hellip;) qui indique quelles capacités peuvent être apprises et ses forces/faiblesses par rapport à des pokémon d&rsquo;autres types (e.g. les pokemon de type Feu sont plus vulnérables aux attaques de type Eau, mais plus résistants aux attaques de type Plante).</p>
+<h3 id="combats">Combats</h3>
+<p>Ce tableau présente les codes des belligérants de 50001 duels et le vainqueur. Ces triplets synthétiques sont générés par un algorithme qui simplifie certains aspects du jeu notamment les capacités. En réalité, un combat se déroule selon les règles suivantes:</p>
+<ul>
+<li>Le pokémon présent dans la première colonne dispose de l&rsquo;initiative pour le premier tour.</li>
+<li>À chaque tour, chaque pokémon choisit et utilise une de ses quatre capacités (une attaque physique ou spéciale, une attaque de modification de statistiques, etc) jusqu&rsquo;à ce que les points de vie de l&rsquo;un des deux tombe à 0 et la victoire est alors accordée à l&rsquo;autre.</li>
+</ul>
+<p>Afin d&rsquo;alléger la notation, notons dorénavant $\Omega$ (l&rsquo;ensemble des pokémon) et donc $\Omega^2$ (l&rsquo;ensemble des statistiques de deux pokémon qui s&rsquo;affrontent en duel).</p>
+<p>En interpolant à partir des données sur les combats, on peut émettre l&rsquo;hypothèse que le résultat d&rsquo;un combat entre deux pokémons est <strong>déterministe</strong> car:</p>
+<ul>
+<li>Il n&rsquo;y a pas de combats où un pokémon affronte l&rsquo;exact même pokémon. Si ce cas de figure existe, les deux belligérants auraient exactement les mêmes statistiques de combats et le résultat devrait donc être soit décidé de manière aléatoire soit une <em>égalité</em>.</li>
+<li>Il n&rsquo;y a pas deux combats entre $p_1$ et $p_2$ où dans l&rsquo;un $p_1$ attaque en premier et dans l&rsquo;autre il attaque en deuxième.</li>
+<li>Chaque combat a un gagnant unique.</li>
+</ul>
+<p>Il est donc possible de construire un classifieur binaire pour prédire le résultat d&rsquo;un combat où $True$ correspond à la victoire du premier pokémon qui attaque et $False$ sinon. Néanmoins, seulement $14.409%$ des combinaisons de paires possibles de pokémon sont représentées donc notre modèle sera entraîné sur une partie relativement petite de l&rsquo;ensemble $\Omega^2$. Un échantillon de test accompagne aussi la table des combats. Tout de même, celui-ci est inutile pour vérifier la validité du modèle car il ne présente pas le code du vainqueur.</p>
+<h3 id="problématique">Problématique</h3>
+<p>Le but ce cette étude est donc d&rsquo;appliquer un large éventail d&rsquo;algorithmes d&rsquo;apprentissage supervisés et non supervisés afin de construire un modèle, qui, prend en entrée deux pokémon et prédit le gagnant.</p>
+<hr>
+<h2 id="enrichissement-du-jeu-de-données">Enrichissement du jeu de données</h2>
+<h3 id="introduction-dune-hiérarchie">Introduction d&rsquo;une hiérarchie</h3>
+<p>Un pokémon dispose parfois d&rsquo;une chaîne d&rsquo;évolution (e.g. Salamèche $\rightarrow$ Reptincel $\rightarrow$ Dracaufeu), les pokémon en fin de chaîne étant en général plus puissants que ceux en début. Afin de tester si cette catégorisation hiérarchique contribue à la améliorer la classification, nous avons introduit le stage d&rsquo;évolution d&rsquo;un pokemon (0 étant l&rsquo;état en début de chaîne d&rsquo;évolution qui incrémente de 1 jusqu&rsquo;à ce qu&rsquo;on atteint un pokémon en fin de chaîne) grâce à <a href="https://pokeapi.co/">PokeAPI</a>.</p>
+<p><strong>Ajout d&rsquo;une métrique</strong></p>
+<p>Afin de combiner le jeu de données des pokémon et des combats, il est possible de comprimer le tableau de combats en une seule métrique, le taux de victoire avec la formule:</p>
+<p>$$win\_rate(p_i) = \frac{nombre\_de\_victoires(p_i)}{nombre\_de\_combats(p_i)}$$</p>
+<p><p style="text-align:center; font-style: italic; padding-bottom: 15px;">Matrice des corrélations des caractéristiques des pokémon</p>
+
+<img src="/img/pokemon_heatmap.png"  class="center"  />
+
+</p>
+<p>La matrice de corrélation issue du jeu de donnée enrichi démontre une corrélation forte entre la vitesse d&rsquo;un pokémon et son taux de victoire ainsi que le niveau d&rsquo;évolution et la génération. La deuxième relation s&rsquo;explique par l&rsquo;introduction des chaînes d&rsquo;évolutions plus longues au fur et à mesure de la parution de nouveaux jeux Pokémon (e.g. évolutions méga, X ou Y).</p>
+<p>Il est tout de même surprenant que les attributs de défenses (hp, defense, sp. defense) affectent très peu le taux de victoire du pokémon. Au contraire, les attributs offensifs (speed, attack, sp. attack) sont plus fortement corrélés à la probabilité de gagner un duel.</p>
+<p>
+<img src="/img/pokemon_reg.png"  class="center"  />
+
+
+<p style="text-align:center; font-style: italic; padding-bottom: 15px;">Regréssion des attributs les plus fortement corrélés au taux de victoire</p></p>
+<p>De même, le jeu de données des combats peut être enrichi en ajoutant les caractéristiques de chaque participants. Tout de même, le tableau individu-variable de taille importante ($50001$ lignes et $21$ colonnes) qui en résulte ralentit l&rsquo;entraînement des algorithmes et augmente la quantité de ressource consommée. Il sera donc nécessaire de réduire ses dimensions via des algorithmes linéaires (PCA) linéaire ou en agrégeant les attributs en des métriques plus conséquentes.</p>
+<p>Au lieu de considérer les attributs attaque/attaque spéciale et défense/défense spéciale, il est aussi possible d&rsquo;additionner les deux statistiques pour en former une statistique <em>attaque</em> et <em>défense</em> plus générale (ce jeu de donnée s&rsquo;appellera désormais <em>reduced_diff</em>).</p>
+<p><strong>Impact des types</strong></p>
+<p>Afin d&rsquo;étudier l&rsquo;impact des mécanismes de faiblesse par rapport aux types des deux combattants sur l&rsquo;issue du duel, deux attributs ont été ajoutés, le multiplicateur de puissance d&rsquo;attaque de chacun des pokémon. Ces dernières réduisent quatre valeurs qualitatives (catégorie) en deux valeurs quantitatives grâce à la formule:</p>
+<p>$$\tau_{type_1(p_1),type_1(p_2)} \times \tau_{type_1(p_1),type_2(p_2)}$$</p>
+<p>$$\tau_{type_2(p_1),type_1(p_2)} \times \tau_{type_2(p_1),type_2(p_2))}$$</p>
+<p>Avec $\tau$ la matrice des multiplicateurs de la puissance d&rsquo;attaque de la VIIème génération, avec $\tau_{t_1,t_2} \in \mathbb{R}^+$ le multiplicateur d&rsquo;attaquant de type $t_1$ par rapport à un défendant de type $t_2$. Afin d&rsquo;obtenir le multiplicateur dans le sens inverse, il suffit de prendre $mult(p_2, p_1)$.</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">victoire du 1er pokémon</th>
+<th align="center">victoire du 2nd pokémon</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">mult(p1,p2)&gt; mult(p2,p1)</td>
+<td align="center">0.51346</td>
+<td align="center">0.48654</td>
+</tr>
+<tr>
+<td align="center">mult(p1,p2)=mult(p2,p1)</td>
+<td align="center">0.481212</td>
+<td align="center">0.518788</td>
+</tr>
+<tr>
+<td align="center">mult(p1,p2)&lt; mult(p2,p1)</td>
+<td align="center">0.415805</td>
+<td align="center">0.584195</td>
+</tr>
+<tr>
+<td align="center">total</td>
+<td align="center">0.47202</td>
+<td align="center">0.52798</td>
+</tr>
+</tbody>
+</table>
+<p>La matrice de contingence relative entre ses multiplicateurs et l&rsquo;issue du combat, révèle une inclinaison positive vers la victoire du $2^{nd}$ pokémon ainsi qu&rsquo;une absence de corrélation claire entre l&rsquo;avantage que confère le type et la victoire.</p>
+<hr>
+<h2 id="réduction-des-dimensions">Réduction des dimensions</h2>
+<h3 id="analyse-en-composantes-principales">Analyse en composantes principales</h3>
+<p>Pour le jeu de données des combats, la colonne <em>vainqueur</em> pose problème puisqu&rsquo;elle est logiquement fortement corrélée à <em>first_pokemon</em> et <em>second_pokemon</em> et difficilement manipulable. La conversion de l&rsquo;attribut <em>vainqueur</em> en un booléen qui représente si le vainqueur correspond bien au premier pokémon, donne un domaine $\Omega^2 \times {True, False}$ plus facile à manipuler.</p>
+<p>Dès lors, l&rsquo;application d&rsquo;une ACP s&rsquo;avère utile à cause du fléau de la dimension en permettant de projeter l&rsquo;espace précédente dans un espace $\mathbb{R}^n$ avec $n$ le nombre d&rsquo;axes factoriels. Les contributions relatives des axes d&rsquo;une ACP avec l&rsquo;ensemble du tableau révèlent un coude au niveau du deuxième axe factoriel. Néanmoins, même si les premiers et deuxièmes axes expliquent $91.36%$ de l&rsquo;inertie totale, l&rsquo;introduction d&rsquo;un troisième axe donne une structure nettement séparée entre les classes au lieu des classes confondues (axe1-axe3).</p>
+<p>
+<img src="/img/pokemon_battles_pca.png"  class="center"  />
+
+
+<p style="text-align:center; font-style: italic; padding-bottom: 15px;">ACP des combats à trois axes factoriels.</p></p>
+<h3 id="matrice-de-distance-intermédiaire">Matrice de distance intermédiaire</h3>
+<p>Il est possible de réduire l&rsquo;espace sans une ACP en soustrayant les statistiques des combattants. Certaines des différences obtenues corrèlent fortement à l&rsquo;issue du duel. La combinaison de ces différences peut donc révéler une fonction de distance $d:\Omega^2 \mapsto \mathbb{R}$ et une fonction de régression $r: \mathbb{R} \mapsto {True, False}$ qui donne en combinaison la classification voulue : $clf = r \circ d$.</p>
+<p>Tout de même, la table des combats contient des variables qui ne permet pas à l&rsquo;évaluation. Les variables qualitatives comme le type des pokémon sont transformées par la formule des types. Les attributs booléennes peuvent être convertis en $0(False), 1(True)$ puis une soustrait. Néanmoins, puisque cette conversion nuît à l&rsquo;interprétabilité du modèle, les variables booléennes sont alors éliminées.</p>
+
+<img src="/img/pokemon_battles_heatmap.png"  class="center"  />
+
+
+<p>Pour les autres statistiques de combats et les taux de victoires, une différence absolue est utilisée afin de respecter la symétrie de la distance. Il est possible d&rsquo;utiliser la différence exacte de la différence des taux de victoires mais celle-ci nécessite que l&rsquo;ensemble des anciens adversaires soient relativement conséquentes. Or, la matrice des combats est creuse ($14%$ de remplissage).</p>
+<p>$$\frac{|V(p_1) \cap Adv(p_1,p_2)| - |V(p_2)\cap Adv(p_1,p_2)|}{|Adv(p_1,p_2)|}$$</p>
+<p>$$V(p_1) = vaincus, par, p_1$$</p>
+<p>$$Adv(p_1) = adversaires, de, p_1$$</p>
+<p>$$Adv(p_1,p_2) = Adv(p_1) \cap Adv(p_2)$$</p>
+<p>De plus, il est possible de réduire d&rsquo;autant plus la dimension en effectuant une ACP sur ces différences. La méthode du coude révèle que 6 axes factoriels expliquent la majorité de la variance expliquée.</p>
+<hr>
+<h2 id="k-plus-proches-voisins-knn">K Plus Proches Voisins (KNN)</h2>
+<h3 id="principe">Principe</h3>
+<p>L&rsquo;algorithme des KNN est une méthode de classification supervisée qui ne nécessite pas d&rsquo;apprentissage. Lorsque l&rsquo;on souhaite classer une nouvelle donnée, on relève les K plus proches voisins (en termes d&rsquo;attributs) parmi le jeu de données existant et on classe cette nouvelle donnée dans la classe prédominante parmi les K plus proches voisins qui l&rsquo;entourent.</p>
+<h3 id="application">Application</h3>
+<p>En faisant varier le nombre de dimensions de la PCA, on observe que la performance de l&rsquo;algorithme sur le dataset des différences est optimale à 6 axes factoriels. De plus, la réduction de la dimension semble diminuer le nombre de voisins à partir duquel les KNNs convergent vers la qualité de prédiction optimale.</p>
+<p>
+<img src="/img/pokemon_knn_battles_difference_df.png"  class="center"  />
+
+
+<p style="text-align:center; font-style: italic; padding-bottom: 15px;">Validation croisée à 5 coupes des KNN en fonction du nombre K de voisins et de la dimension de l&#39;ACP</p></p>
+<p>Au-delà d&rsquo;un certain seuil de voisins, la croissance en terme de qualité de prédiction est négligeable et ne justifie pas le coût algorithmique supplémentaire. Pour notre jeu de données, ce seuil se trouve aux alentours de 20 voisins et donne un accuracy_score de $91%$. De même, l&rsquo;application sur <em>reduced_diff</em> donne les mêmes observations mais avec une précision légèrement améliorée.</p>
+<p>Par défaut, l&rsquo;implémentation KNN de sklearn utilise une distance euclidienne pour trouver les voisins les plus proches et chaque individu est pondéré de manière uniforme. Le choix de la distance détermine en pratique la forme du volume de dimension $N$ qui délimite les frontières d&rsquo;un point;</p>
+<ul>
+<li><em>euclidien</em> ($\sqrt{\Sigma(x - y)^2}$) : sphère de $N$ dimensions.</li>
+<li><em>manhattan</em> ($\Sigma(|x - y|)$) : cube de $N$ dimensions</li>
+<li><em>chebyshev</em> ($max(|x - y|)$) : cube de $N$ dimensions où la longueur correspond à la distance maximale d&rsquo;un attribut entre deux individus donnés.</li>
+</ul>
+<p>La distance de <em>manhattan</em> aurait donc tendance de considérer plus d&rsquo;individus comme voisins que par rapport aux autres. En appliquant sur le jeu de données, on observe que l&rsquo;utilisation de cette manhattan donne le meilleur estimateur parmi les autres distances. Une piste d&rsquo;amélioration serait alors d&rsquo;étudier l&rsquo;effet des distances qui engendrent des volumes plus important (par exemple les distances de <em>minkowski</em> avec $p \in ]0,1[$).</p>
+<p>
+<img src="/img/pokemon_knn_dist.png"  class="center"  />
+
+
+<p style="text-align:center; font-style: italic; padding-bottom: 15px;">Qualité du modèle KNN selon la distance et la pondération des individus après validation croisée à 5 coupes</p></p>
+<p>De même, la qualité du modèle issu de la distance de manhattan suggère qu&rsquo;il n&rsquo;est pas sur-apprenti (l&rsquo;inclusion de plus de points l&rsquo;améliore). On peut donc renforcer l&rsquo;effet de la distance dans l&rsquo;algorithme en donnant chaque individu un poids qui correspond à l&rsquo;inverse de sa distance à l&rsquo;élément à classifier (option <em>distance</em> sur sklearn). Cette modification améliore un tout petit peu la qualité et confirme l&rsquo;hypothèse précédente.</p>
+<hr>
+<h2 id="support-vector-machine-svm">Support Vector Machine (SVM)</h2>
+<h3 id="principe-1">Principe</h3>
+<p>Les machines à vecteurs de support (Support Vector Machine) ont pour but de séparer les données en classes à l’aide d’une frontière aussi simple que possible, de telle façon que la distance entre les différents groupes de données et la frontière qui les sépare soit maximale. Cette distance est aussi appelée <strong>marge</strong> et les données les plus proches de la frontière sont appelées les <strong>vecteurs de support</strong>.</p>
+<p>
+<img src="/img/pokemon_svm.png"  class="center"  />
+
+
+<p style="text-align:center; font-style: italic; padding-bottom: 15px;">Illustration d&#39;un SVM avec la frontière (droite noire), les vecteurs de support (points entourés) et les marge (droites bleue et rouge)</p></p>
+<p>Pour un problème de classification binaire, la frontière de décision est un hyperplan défini par;
+$$h(x)=w^{T}x+b = 0$$</p>
+<p>$x$ les données d&rsquo;entrée de dimension $N$, $w$ le vecteur des poids et $b$ la distance entre l&rsquo;hyperplan et l&rsquo;origine. Trouver l&rsquo;hyperplan de marge maximale revient donc à:</p>
+<p>$$\frac  {1}{2}||w||^{2}, \quad \quad l_{k}(w^{T}x_{k}+w_{0})\geq 1$$</p>
+<p>avec ${\displaystyle l_{k}}$ le label du vecteur $x_k$, ${\displaystyle l_{k}} \subset {\displaystyle {-1,1}}$.  Ceci peut se résoudre par la méthode classique des multiplicateurs de Lagrange, avec le lagrangien:</p>
+<p>$$L(w,b,\alpha)=\frac {1}{2}||w||^{2}-\sum_{k=1}^{p}\alpha_{k}(l_{k}(w^{T}x_{k}+b)-1)$$</p>
+<p>Le lagrangien doit être minimisé par rapport à w et b, et maximisé par rapport à $\alpha$. Après avoir résolu $\alpha$, on trouve w et b pour obtenir le modèle:</p>
+<p>$$h(x)=\sum_{k=1}^{p}\alpha_{k}^{*}l_{k}(x\cdot x_{k})+b$$</p>
+<p>Pour les problèmes séparables non linéaires dans l&rsquo;espace d&rsquo;origine, l&rsquo;échantillon peut être mappé de l&rsquo;espace d&rsquo;origine vers un espace d&rsquo;entités de dimension supérieure, de sorte que l&rsquo;échantillon est séparable linéairement dans cet espace d&rsquo;entités grâce à une fonction de noyau (<strong>kernel</strong>).</p>
+<h3 id="application-1">Application</h3>
+<p>La clé de l&rsquo;application d&rsquo;une SVM réside dans la sélection des fonctions du noyau. Les fonctions de noyau doivent correspondre à un produit scalaire et les plus couramment utilisées comprennent:
+\begin{itemize}</p>
+<ul>
+<li>
+<p><strong>noyau linéaire</strong> : sans changement d&rsquo;espace, on se ramène à une classification linéaire.</p>
+</li>
+<li>
+<p><strong>noyau polynomial</strong> :
+$K(u,v) = (coef0 + \langle u, v\rangle)^d$ avec $d$ le degré du polynôme; un degré de $1$ revient à faire un noyau linéaire et à des degrés trop grand, le modèle risque de sur-apprendre.</p>
+</li>
+<li>
+<p><strong>fonction de base radiale</strong> :
+$K(u,v) = exp(-\gamma \times\Vert u, v\Vert)$. Cette fonction donne en générale des bons résultats pour des séparations non linéaires.</p>
+</li>
+<li>
+<p><strong>noyau sigmoïde</strong>:
+$K(u,v) = tanh(\gamma \times\Vert u, v\Vert + coef0)$</p>
+</li>
+</ul>
+<p>La Figure suivante permet de visualiser la différence des marges et de la frontière entre les noyaux. Tout de même, il n&rsquo;est pas possible de visualiser les données à dimension $&gt; 2$ et donc d&rsquo;estimer quel kernel est le mieux adapté.</p>
+<p>
+<img src="/img/pokemon_svm_kernel.png"  class="center"  />
+
+
+<p style="text-align:center; font-style: italic; padding-bottom: 15px;">Comparaison de la frontière des différentes kernel sur une PCA à deux dimensions des différences des pokémons</p></p>
+<p>En testant tout les kernels de base dans la librairie de sklearn, l&rsquo;utilisation d&rsquo;un kernel RBF donne en moyenne un meilleur estimateur ainsi que le temps d&rsquo;entraînement le plus rapide pour notre jeu de données.</p>
+<table>
+<thead>
+<tr>
+<th align="center">kernel</th>
+<th align="center">accuracy score moyenne (cv 5)</th>
+<th align="center">temps d’entraînement moyen (en s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">linear</td>
+<td align="center">0.899007</td>
+<td align="center">3981</td>
+</tr>
+<tr>
+<td align="center">poly</td>
+<td align="center">0.864955</td>
+<td align="center">20.998</td>
+</tr>
+<tr>
+<td align="center">sigmoid</td>
+<td align="center">0.7146</td>
+<td align="center">27.892</td>
+</tr>
+<tr>
+<td align="center">rbf</td>
+<td align="center">0.9273</td>
+<td align="center">11.822</td>
+</tr>
+</tbody>
+</table>
+<p>Le kernel RBF peut être régularisé grâce à deux paramètres; $C$ et $\gamma$. Où $C$ est le coefficient de pénalité, qui correspond à la tolérance aux erreurs; un $C$ grand pousse le modèle à apprendre parfaitement tandis qu&rsquo;un $C$ petit cherche à lisser la frontière de décision. Le gamma lui, détermine l&rsquo;importance de chaque individus d&rsquo;entraînement; plus le $\gamma$ est petit, plus les vecteurs de support sont nombreux, ce qui réduit la vitesse d&rsquo;entraînement et de prédiction.</p>
+<p>En faisant une recherche aléatoire sur les deux espaces, on observe qu&rsquo;un coefficient de pénalité faible et un gamma faible améliore le résultat.</p>
+<hr>
+<h2 id="arbre-de-décision">Arbre de décision</h2>
+<h3 id="principe-2">Principe</h3>
+<p>Ce modèle cherche à construire une partition de l&rsquo;espace $\Omega^2$ dans laquelle l&rsquo;issue des combats dans chaque sous-ensemble est homogène grâce à un arbre binaire.</p>
+<p>A partir de la racine qui représente l&rsquo;ensemble de départ, 0 à 2 noeuds sont ajoutés. Chaque noeud représente une <em>division</em>, c&rsquo;est-à-dire une condition sur un attribut ou une combinaison linéaire d&rsquo;attributs coupant l&rsquo;ensemble en deux sous-ensemble. Cette procédure est répétée pour chaque sous-ensemble récursivement jusqu&rsquo;à l&rsquo;obtention des partitions homogènes au sens de la variable à prédire. Afin d&rsquo;avoir une séparation optimale à chaque étape, l&rsquo;algorithme cherche la division qui optimise le critère d&rsquo;<em>impureté</em> par une recherche à <em>force brute</em> (itération sur l&rsquo;ensemble des seuils possibles).</p>
+<h3 id="régularisation">Régularisation</h3>
+<p>La capacité de généralisation d&rsquo;un arbre par rapport à son ensemble d&rsquo;apprentissage dépend fortement de sa profondeur. La définition d&rsquo;une <strong>profondeur maximale</strong> ou d&rsquo;un nombre de noeuds maximal permettent de limiter la croissance manuellement à condition qu&rsquo;une division de l&rsquo;espace soit trouvée lors des visualisations. Sinon, un \textbf{seuil minimal de décroissance d&rsquo;un critère} entre chaque développement de l&rsquo;arbre peut être utilisé pour limiter la croissance en complexité sans perdre la précision du modèle.</p>
+<h3 id="application-2">Application</h3>
+<p>L&rsquo;analyse de l&rsquo;impact du paramètre de croissance minimale d&rsquo;impureté sur la qualité du modèle de prédiction de la victoire à partir des différences montre qu&rsquo;une croissance trop ralenti ($c_{min}&gt;0.4$) entraîne un sous-apprentissage et une croissance non contrôlée un sur-apprentissage.</p>
+<p>De plus, l&rsquo;optimum global obtenu à $c_{min} = 0.15$ est commun entre les deux critères de pureté et produit deux arbres équivalents de profondeur 2. La bonne qualité de la prédiction ($94.5%$ de bonne prédiction à l&rsquo;issu d&rsquo;une validation croisée à 5 coupes) s&rsquo;accompagne aussi de l&rsquo;interprétabilité car le modèle revient à deux conditions sur la différence de vitesse et d&rsquo;attaque entre les deux pokémon.</p>
+<p>
+<img src="/img/pokemon_tree_differences_entropy.png"  class="center"  />
+
+
+<p style="text-align:center; font-style: italic; padding-bottom: 15px;">Arbres de décision de la différences des statistiques des combats et matrice de confusion sur l&#39;échantillon de test de 12466 individus</p></p>
+<p>La matrice de confusion révèle tout de même qu&rsquo;une grande partie des erreurs de classification commises s&rsquo;explique par une sur-estimation de la capacité du premier pokémon. Ceci peut provenir d&rsquo;un léger biais pour la perte du premier pokémon que nous allons tenter de prendre en compte dans la partie Forêt Aléatoire.</p>
+<p>De plus, l&rsquo;arbre de décision produit un estimateur de variance élevée; les séparations sont optimisées localement et souvent sous-optimales, et donc chaque changement léger dans les données produit des arbres complètement différent.</p>
+<h2 id="forêt-aléatoire">Forêt aléatoire</h2>
+<h3 id="principe-3">Principe</h3>
+<p>La forêt aléatoire permet de régler le problème de la variance des arbres de décision en regroupant plusieurs arbres en un modèle plus complexe.</p>
+<p>L&rsquo;algorithme consiste d&rsquo;abord à créer $N$ réplications des données initiales $D$ par tirages avec remise, nommés les échantillons de bootstrap $D^*_b$. On entraîne alors les arbres de décisions $A_b$ avec les données d&rsquo;entraînements $D^*_b$ par un algorithme CART légèrement modifié; le découpage choisi correspond à la séparation qui optimise le critère d&rsquo;impureté sur un ensemble d&rsquo;attributs tiré aléatoirement parmi les attributs. Finalement, le classement d&rsquo;un individu se fait par vote majoritaire des arbres.</p>
+<p>En moyennant les prédictions d&rsquo;un groupe d&rsquo;arbre, on réduit la variance des arbres individuelles et en construisant des arbres sur des échantillons différentes et des attributs différents, on diminue le biais du modèle.</p>
+<h3 id="application-3">Application</h3>
+<p>La régularisation d&rsquo;une forêt est similaire à celle d&rsquo;un arbre mise à part le paramètre du nombre d&rsquo;arbres qui constituent la forêt. De plus, afin de réduire l&rsquo;effet du biais négative des données, on peut attribuer d&rsquo;un poids à chaque classe pondère la proportion des classes dans le calcul des critères d&rsquo;impureté:</p>
+<p>$$C_l(p) = p_l^{-}(1 - p_l^{-}) + p_l^{+}(1 - p_l^{+})$$</p>
+<p>$$avec\ p_l^{-} = \frac{n_l^{-} \times w^{-}}{n_l}$$</p>
+<p>Avec $C$ le critère d&rsquo;impureté, $p^{+}<em>l$ les proportions à un noeud $l$ des différentes classes pour les individus de l&rsquo;arbre inférieur au seuil et $\omega</em>{+}$ le poids associé à la classe Victoire du premier pokémon. Dans ce problème binaire, en augmentant le poids d&rsquo;une modalité, on augmente son influence sur la croissance de l&rsquo;arbre et on réduit en même temps la modalité inverse.</p>
+<p>En associant un poids plus important à la défaite, la qualité des prédictions des arbres binaires et des forêts aléatoires s&rsquo;améliorent de manière négligeable. La fluctuation de la qualité des prédictions par rapport aux poids des classes pour l&rsquo;arbre de décision peut s&rsquo;expliquer par la variance importante du modèle et ne peut donc pas être prise en compte. Même en utilisant l&rsquo;option <em>balanced</em> pour les poids des classes sur sklearn et en augmentant le nombre de plis de la validation, aucune différence statistique pertinente est observable. L&rsquo;observation que nous avons fait au niveau du biais des données n&rsquo;affecte donc pas le classifieur.</p>
+<p>
+<img src="/img/pokemon_balance_difference.png"  class="center"  />
+
+
+<p style="text-align:center; font-style: italic; padding-bottom: 15px;">Qualité du modèle de prédiction des taux de victoire par rapport aux poids attribués à chaque classe (sans optimisation d&#39;autres hyper-paramètres)</p></p>
+<hr>
+<h2 id="adaptative-boosting">Adaptative Boosting</h2>
+<h3 id="principe-4">Principe</h3>
+<p>Le boosting est une méthode qui consiste à construire séquentiellement une suite de modèles simples pour constituer un modèle plus puissant.</p>
+<p>Pour un problème de classification binaire d&rsquo;une variable $y$, l&rsquo;algorithme Adaboost considère que les individus sont tous initialement uniformément pondérés. A l&rsquo;itération $i$, un nouveau modèle $M^i$ est construit avec le modèle de base sur l&rsquo;échantillon d&rsquo;entraînement avec le poids courant des individus. Son taux d&rsquo;erreur $\varepsilon^i$ de classification est alors calculé puis le poids $\alpha^i$
+ainsi que la pondération des individus $\omega_j$ qui sera ensuite normalisée. L&rsquo;algorithme converge lorsque le nombre de modèles est satisfait ou lorsque l&rsquo;erreur est plus petite qu&rsquo;un seuil donné.</p>
+<p>$$\varepsilon^i = \frac{\sum_{j=1}^n\omega_j\unicode{x1D7D9}(y_j \neq M^i(j))}{\sum_{j=1}^n\omega_j}$$</p>
+<p>$$\alpha^i = log\left(\frac{1 - \varepsilon^i}{\varepsilon^i}\right)$$</p>
+<p>$$\omega_j^{i+1} = \omega_j^{i} \times exp(\alpha^i \times \unicode{x1D7D9}(y_j \neq M^i(j)))$$</p>
+<p>La mise à jour de la pondération des individus attribue un poids plus important aux individus mal classifiés, ce qui incite le modèle de boosting sur les itérations suivantes à corriger les zones problématiques en terme de classification. Cet avantage est à double tranchant puisqu&rsquo;il rend le modèle plus sensible aux données bruitées ainsi qu&rsquo;à une mauvaise classification.</p>
+<p>En générale, Adaboost fonctionne mieux avec des modèles de base simples avec des puissances de prédiction faible comme les arbres de décision.</p>
+<h3 id="application-4">Application</h3>
+<p>L&rsquo;application d&rsquo;Adaboost sur l&rsquo;arbre de décision donne un résultat similaire à un arbre simple. Ce s&rsquo;explique par la complexité de l&rsquo;arbre optimal initial (de profondeur 5) ainsi que la présence des résultats inattendus de certains combats (victoire d&rsquo;un pokémon défavorisé à l&rsquo;égard des statistiques de combats) auxquelles le modèle est plus sensible.</p>
+<p>
+<img src="/img/pokemon_pdp_difference.jpg"  class="center"  />
+
+
+<p style="text-align:center; font-style: italic; padding-bottom: 15px;">Graphique de dépendance partielle des variables les plus importantes du modèle Adaboost de prédiction des combats</p></p>
+<p>Le graphique de dépendance (représentation qui montre l&rsquo;influence d&rsquo;une ou de plusieurs variables marginales sur la prédiction. Pour un problème de classification binaire, toute zone de probabilité $&gt;0.5$ correspond à un $True$.) montre une rupture des frontières de décision claire qui se produit au niveau de <em>diff_speed</em> $= 0$. La dépendance partielle de la différence de vitesse va contre l&rsquo;intuition que la différence de vitesse influence linéairement la probabilité de victoire du pokémon avantagé.</p>
+<p>La forme inattendue ($1/x$) que prend la dépendance partielle des différence de vitesse peut s&rsquo;expliquer par la dominance des différences des taux de victoires dans le modèle. L&rsquo;inclusion de cette variable bruitée affaiblit fortement le modèle. Sa suppression engendre alors une amélioration visible du taux de prédiction correcte de $0.909$ à $0.940$ et une correction de l&rsquo;évolution de la dépendance partielle.</p>
+<hr>
+<h2 id="conclusion">Conclusion</h2>
+<h3 id="évaluation-des-performances">Évaluation des performances</h3>
+<p>Afin de comparer les performances entre différentes familles d&rsquo;algorithmes, la procédure commune suivante a été suivie:</p>
+<ul>
+<li>Le jeu de données est divisé en un échantillon d&rsquo;entraînement et de test ($33%$ des données) grâce à GridSearchCV.</li>
+<li>L&rsquo;estimateur de performance choisie est l&rsquo;accuracy_score qui calcule la correspondance exacte de la prédiction et de la classe réelle par la formule:
+$$\texttt{accuracy}(y, \hat{y}) = \frac{1}{n_\text{samples}} \sum_{i=0}^{n_\text{samples}-1} \unicode{x1D7D9}(\hat{y}_i = y_i)$$
+Cet indicateur correspond bien à notre cas d&rsquo;usage puisqu&rsquo;il s&rsquo;agit d&rsquo;un problème de classification binaire où le résultat d&rsquo;un combat est déterministe.</li>
+<li>Le critère de qualité est alors calculé par validation croisée à cinq coupes afin de réduire le biais et optimisé sur l&rsquo;espace d&rsquo;hyper-paramètre correspondant.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">Modèles</th>
+<th align="center">Accuracy score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">KNN</td>
+<td align="center">0.92</td>
+</tr>
+<tr>
+<td align="center">SVM</td>
+<td align="center">0.9273</td>
+</tr>
+<tr>
+<td align="center">Arbre de décision</td>
+<td align="center">0.945</td>
+</tr>
+<tr>
+<td align="center">Forêt aléatoire</td>
+<td align="center">0.949</td>
+</tr>
+<tr>
+<td align="center">AdaBoost d’arbre</td>
+<td align="center">0.940</td>
+</tr>
+</tbody>
+</table>
+<p>Même avec une évaluation pessimiste de la qualité, les modèles construits peuvent tous répondre adéquatement à notre problématique.</p>
+<p>Afin de minimiser le temps d&rsquo;entraînement, d&rsquo;optimiser la qualité du modèle et de maintenir l&rsquo;interprétabilité, l&rsquo;arbre de décision correspond au choix optimal pour notre jeu de données synthétiques. On peut alors émettre l&rsquo;hypothèse suivante sur la génération des données : la victoire est générée selon deux conditions sur la différence de vitesse et d&rsquo;attaque entre les deux pokémons puis du bruit aléatoire introduit pour complexifier la classification.</p>
+<h3 id="conclusions-et-futurs-travaux">Conclusions et futurs travaux</h3>
+<p>Ce projet nous a permis d&rsquo;appliquer et de comprendre les algorithmes de classification vus en cours sur un jeu de données &ldquo;réelles&rdquo; et d&rsquo;explorer d&rsquo;autres modèles comme les SVM ou l&rsquo;Adaboost. Il nous a aussi fait comprendre l&rsquo;importance de l&rsquo;analyse préliminaire et du nettoyage dans la construction d&rsquo;un modèle d&rsquo;apprentissage automatique.</p>
+<p>Pour aller plus loin, on peut étudier d&rsquo;autres algorithmes comme la régression logistique ou les analyses discriminantes. De plus, on peut identifier et étudier les zones problématiques pour chaque classifieur et déterminer si certains attributs suivent une distribution particulière dans ces zones. Puis dans un deuxième temps, scinder le jeu de données en partie problématique et non problématique puis appliquer des modèles différentes à chaque partie. Enfin, afin d&rsquo;obtenir un jeu de données plus représentatif du jeu Pokémon, peut-être que récupérer les résultats de combats réellement joués par des joueurs serait pertinent. Des applications comme &ldquo;Pokémon Showdown&rdquo; le permettent.</p>
+
+            </div>
+        </article>
+        <h2 id="end"></h2>
+        <hr />
+
+        <div class="post-info">
+  				<p>
+  					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://ichbinfrog.github.io/tags/ml">ml</a></span><span class="tag"><a href="https://ichbinfrog.github.io/tags/pokemon">pokemon</a></span><span class="tag"><a href="https://ichbinfrog.github.io/tags/svm">svm</a></span><span class="tag"><a href="https://ichbinfrog.github.io/tags/knn">knn</a></span><span class="tag"><a href="https://ichbinfrog.github.io/tags/decision-tree">decision tree</a></span><span class="tag"><a href="https://ichbinfrog.github.io/tags/random-forest">random forest</a></span><span class="tag"><a href="https://ichbinfrog.github.io/tags/adaboost">adaboost</a></span>
+  				</p>
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+            <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span><a href="https://themes.gohugo.io/hugo-theme-hello-friend-ng/">hello-friend-ng</a> Theme for <a href="http://gohugo.io">Hugo</a> by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.4a69500057d68129e88f497d354afe68422eb56de6d15e45dbe2190858ea5a76bfcb096406f992984b241db45f47388ac57ab0376e3b32125bef7a8a6d0f06c4.js" integrity="sha512-SmlQAFfWgSnoj0l9NUr&#43;aEIutW3m0V5F2&#43;IZCFjqWna/ywlkBvmSmEskHbRfRziKxXqwN247MhJb73qKbQ8GxA=="></script>
+
+
+
+    </body>
+</html>

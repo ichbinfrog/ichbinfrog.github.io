@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="Securing a deployment in a k8s environment cannot be restricted solely to k8s and has to extend to multiple context; starting from the application itself, to the container wrapping it, to the pod abstraction said container, to the communication between said pod and even up to the orchestration software configuration behind it.
+Application tightening Applying static and dynamic code analysis tool before releases is a mandatory stage in securing the application." />
+<meta name="keywords" content=", jib, spotbugs, skaffold, dockerfile" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://ichbinfrog.github.io/projects/eclipse_security/" />
+<script type="text/javascript" async
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$']],
+            processEscapes: true,
+            processEnvironments: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            TeX: {
+                equationNumbers: { autoNumber: "AMS" },
+                extensions: ["AMSmath.js", "AMSsymbols.js"]
+            }
+        }
+    });
+    MathJax.Hub.Queue(function () {
+        
+        
+        
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+
+    MathJax.Hub.Config({
+        
+        TeX: { equationNumbers: { autoNumber: "AMS" } }
+    });
+</script>
+
+
+    <title>
+        
+            Eclipse/steady — Security and delivery considerations :: Hoang Quoc Trung 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.min.753fac8f03736f0edc9be411eb20cee875dd7bb8e73c8155fbf6a629c863f4ca.css">
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/post.css">
+    
+
+
+
+
+
+<meta itemprop="name" content="Eclipse/steady — Security and delivery considerations">
+<meta itemprop="description" content="Securing a deployment in a k8s environment cannot be restricted solely to k8s and has to extend to multiple context; starting from the application itself, to the container wrapping it, to the pod abstraction said container, to the communication between said pod and even up to the orchestration software configuration behind it.
+Application tightening Applying static and dynamic code analysis tool before releases is a mandatory stage in securing the application.">
+<meta itemprop="datePublished" content="2019-10-30T11:30:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-10-30T11:30:00&#43;00:00" />
+<meta itemprop="wordCount" content="1452">
+<meta itemprop="image" content="https://ichbinfrog.github.io/"/>
+
+
+
+<meta itemprop="keywords" content="jib,spotbugs,skaffold,dockerfile," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://ichbinfrog.github.io/"/>
+
+<meta name="twitter:title" content="Eclipse/steady — Security and delivery considerations"/>
+<meta name="twitter:description" content="Securing a deployment in a k8s environment cannot be restricted solely to k8s and has to extend to multiple context; starting from the application itself, to the container wrapping it, to the pod abstraction said container, to the communication between said pod and even up to the orchestration software configuration behind it.
+Application tightening Applying static and dynamic code analysis tool before releases is a mandatory stage in securing the application."/>
+
+
+
+    <meta property="og:title" content="Eclipse/steady — Security and delivery considerations" />
+<meta property="og:description" content="Securing a deployment in a k8s environment cannot be restricted solely to k8s and has to extend to multiple context; starting from the application itself, to the container wrapping it, to the pod abstraction said container, to the communication between said pod and even up to the orchestration software configuration behind it.
+Application tightening Applying static and dynamic code analysis tool before releases is a mandatory stage in securing the application." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ichbinfrog.github.io/projects/eclipse_security/" />
+<meta property="og:image" content="https://ichbinfrog.github.io/"/>
+<meta property="article:published_time" content="2019-10-30T11:30:00+00:00" />
+<meta property="article:modified_time" content="2019-10-30T11:30:00+00:00" /><meta property="og:site_name" content="Hoang Quoc Trung" />
+
+
+
+
+
+
+    <meta property="article:published_time" content="2019-10-30 11:30:00 &#43;0000 &#43;0000" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">ichbinfrog</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu" style="border-right:none">
+    <ul class="menu__inner"><li><a href="https://ichbinfrog.github.io/about">About</a></li><li><a href="https://ichbinfrog.github.io/projects">Projects</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title" id="top"><a href="https://ichbinfrog.github.io/projects/eclipse_security/">Eclipse/steady — Security and delivery considerations</a></h2>
+            <aside id="toc"><style>
+.toc {
+    position: fixed;
+    top: 50%;
+    left: 2%;
+    width: 20%;
+    transform: translateY(-50%);
+    border-radius: 5px;
+    padding-bottom: 1rem;
+}
+
+.toc a {
+    text-decoration: none;
+    color: gray;
+}
+
+.toc a:hover {
+    opacity: 0.5;
+}
+
+.toc ul {
+    list-style: ">  ";
+}
+
+.toc-title {
+    text-decoration: underline;
+}
+</style>
+
+<div class="toc">
+    <div class="toc-title">Table of Contents</div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#application-tightening">Application tightening</a></li>
+    <li><a href="#container-securing-and-delivery">Container securing and delivery</a>
+      <ul>
+        <li><a href="#reducing-the-docker-image-surface">Reducing the Docker image surface</a></li>
+        <li><a href="#least-privileged-users">Least privileged users</a></li>
+        <li><a href="#jib--a-dual-purpose-solution">Jib — A dual purpose solution</a></li>
+        <li><a href="#skaffold--continuous-delivery-for-kubernetes">Skaffold — Continuous delivery for Kubernetes</a></li>
+      </ul>
+    </li>
+    <li><a href="#pod-hardening">Pod hardening</a>
+      <ul>
+        <li><a href="#enforcing-uid-and-gid">Enforcing UID and GID</a></li>
+        <li><a href="#granular-capabilities-attribution">Granular capabilities attribution</a></li>
+      </ul>
+    </li>
+    <li><a href="#secret-administration">Secret administration</a>
+      <ul>
+        <li><a href="#native-secret-storage">Native secret storage</a></li>
+        <li><a href="#hashicorp-vault">Hashicorp Vault</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    <ul>
+    <li><a href="#top">Top</a></li>
+    <li><a href="#end">End</a></li>
+    </ul>
+</div></aside>
+
+            
+
+            <div class="post-content">
+                <p>Securing a deployment in a k8s environment cannot be restricted solely to k8s and has to extend to multiple context; starting from the application itself, to the container wrapping it, to the pod abstraction said container, to the communication between said pod and even up to the orchestration software configuration behind it.</p>
+<h2 id="application-tightening">Application tightening</h2>
+<p>Applying static and dynamic code analysis tool before releases is a mandatory stage in securing the application. A static code analysis tool examines the software code (as source code, intermediate code, or executable) without executing it with specific inputs.</p>
+<p>For static analysis, <strong>Spotbugs</strong> is used in order to find bug patterns in the Java code base. Possible bugs found are categorized in a couple of categories:</p>
+<ul>
+<li><code>BAD_PRACTICE</code> and <code>STYLE</code>: Violations of recommended and essential coding practice and anomalous coding styles. These issues do not affect security but should be addressed nonetheless in order to maintain the code base&rsquo;s ease of contribution.</li>
+<li><code>CORRECTNESS</code>: Apparent coding mistake resulting in code that was probably not what the developer intended. This category must be examined case by case in order to determine the mitigation required.</li>
+<li><code>MALICIOUS_CODE</code> and <code>SECURITY</code>: Code vulnerable to attacks and addressing these possible vulnerabilities should be of the highest priority.</li>
+<li><code>PERFORMANCE</code> and <code>MT_CORRECTNESS</code>: Inefficient code or flawed implementation of threads, locks and volatiles.</li>
+</ul>
+
+<img src="/img/vulas_spotbugs.png"  class="center"  />
+
+
+<p>In order to properly enforce the mitigation of issues found by Spotbugs, a step is added to the pre-existing Travis pipeline that runs the Spotbugs goal and fails if any bugs in the <code>MALICIOUS_CODE</code>, <code>SECURITY</code>, <code>MT_CORRECTNESS</code> categories are discovered.</p>
+<hr>
+<h2 id="container-securing-and-delivery">Container securing and delivery</h2>
+<p>In both production and development environments, the applications are containerized and a couple of major security considerations are to be put into effect.</p>
+<h3 id="reducing-the-docker-image-surface">Reducing the Docker image surface</h3>
+<p>It is recommended to use minimal base images such as <strong>alpine</strong> based images over debian based ones. Alpine images are smaller in footprint than traditional GNU/Linux distributions (requiring no more than 8MB for a minimal installation) and offers thinned out and split binary packages which gives better control over the environment installed. This reduction in size and the amount of general system libraries come with a reduction in possible exploit of vulnerabilities in said libraries. At the same time all binaries are compiled as <strong>Position Independant Executables</strong> (ensuring that the body of machine code function properly no matter its absolute address in the primary memory) with stack smash protection (which in turn limits possible damage afflicted by buffer overflow attacks).</p>
+<h3 id="least-privileged-users">Least privileged users</h3>
+<p>Docker containers that do not specify its USER defaults to executing the container using the root user. When that namespace is then mapped to the root user in the running container, it means that the container potentially has root access on the Docker host which put the host machine at risk of privilege escalation attacks.</p>
+<h3 id="jib--a-dual-purpose-solution">Jib — A dual purpose solution</h3>
+<p>Jib is an open-source software published by Google that that builds optimized Docker for Java applications based on <strong>distroless</strong> containers.</p>
+<p>Distroless containers, unlike Alpine or other small footprint base images have fundamentally different philosophies and approaches to building containers: whereas the former attempts to trim down a distribution to the limit at which it is sufficient for the app to run, distroless attempts to build the container from the standpoint of what the application needs. From this thought process, the distroless images are bootstrapped by selectively extracting debs (Debian package). For compatibility, apk was not chosen, thus substituting musl (alpine&rsquo;s C standard library of OS&rsquo;s based on the Linux kernel) with glibc (GNU Project&rsquo;s implementation of the C standard library). Distroless containers therefore only contain the application and its runtime dependencies, without any package managers or shells (reducing even further the surface of potential attacks at the cost of harder debugging).</p>
+<p>Jib builds itself on the foundations of the distroless base image to build Java applications. Unlike traditional build systems in which a Java application is built as a single image layer with the application JAR, Jib separates the Java application into multiple layers for more granular incremental builds. This increases the speed of image builds drastically, by only changing the layers that have changed to the registry. It also abstracts the packaging process itself as it runs as part of the Maven build without requiring a Dockerfile or a running Docker daemon.</p>
+
+<img src="/img/vulas_jib.png"  class="center"  />
+
+
+<p>Thee simplification of the deployment process along with the added benefits of a secure container makes it a viable replacement to using docker images in our use case.</p>
+<p>Performance wise, the exploded tar springboot containers built by jib also create observable speedups when it comes to startup time on all spring version to its fat jar counterpart  (see <a href="https://github.com/dsyer/spring-boot-startup-bench">Spring benchmark</a>). This performance gain comes at the cost of slightly bigger footprint than alpine based images of around 20-30MB in average.</p>
+<h3 id="skaffold--continuous-delivery-for-kubernetes">Skaffold — Continuous delivery for Kubernetes</h3>
+<p>The previous deployment process using Jib would only update the images published to the registry whilst not triggering any changes in any deployment. Combining the Jib build methods with the Skaffold tool will facilitate the continuous delivery of code changes to the k8s deployment itself.</p>
+
+<img src="/img/vulas_skaffold.png"  class="center"  />
+
+
+<p>Integrating skaffold into the Travis pipeline would allow a hands free rolling update on all containers whose code is affected by the change. However, despite its integration testing functionality based on <strong>container-structure-test</strong>, this tool is not mature enough to be applied in a stable production environment and should be delegated to the development environment to provide a direct source code to deployment solution.</p>
+<hr>
+<h2 id="pod-hardening">Pod hardening</h2>
+<p>Pod security contexts are particularly tricky to implement but allow for enforcing privilege and access control settings for a Pod or Container.</p>
+<h3 id="enforcing-uid-and-gid">Enforcing UID and GID</h3>
+<p>By default, the group and user run in a pod/container will be root(0). Due to security concerns and possible privilege escalations, specifying a different UID and GID constitutes good practice. The nobody user (65534) is the &ldquo;go to&rdquo; UID for this task, who in Unix systems has the lowest privileges possible. However, this practice is questionable due to file permission issues as this user is meant for files that must not be accessible by anybody. Keeping a common easy to remember and non conflicting id (over 10000), we can pick 12000 as an UID and GID for all containers.</p>
+<h3 id="granular-capabilities-attribution">Granular capabilities attribution</h3>
+<p>In order to respect the principle of least privilege, a pod should must be able to access only the information and resources that are necessary for its legitimate purpose. <strong>Linux capabilities</strong> offer a mechanism through which to satisfy this principle by dividing the privileges traditionally associated with superuser into distinct units. For example, granting a pod the <code>CAP_CHOWN</code> allows the process to make arbitrary changes to file UIDs and GIDs. It is impossible to create a set of rules for all container use cases but through trial and error, we have managed to establish a minimal set of capabilities required for a container:</p>
+<ul>
+<li><code>CAP_NET_ADMIN</code>: allows for performing network-related operations (for instance modify routing tables and binding sockets).</li>
+<li><code>CAP_DAC_OVERRIDE</code>: allows for bypassing read, write and execution permission checks (useful for containers that require disk operations).</li>
+</ul>
+<p>It is important to note that the granularity provided by Linux capabilities is often too large (capabilities are either not sufficient for execution or as permissive as root). AppArmor or SELinux is more adapted for fine-grain pod security context hardening.</p>
+<hr>
+<h2 id="secret-administration">Secret administration</h2>
+<p>Solutions for storing and injecting credentials and sensitive information were then examined in order to properly secure the database access.</p>
+<h3 id="native-secret-storage">Native secret storage</h3>
+<p>k8s secrets are objects that store a key value map with the value being base64 encoded and not encrypted. Therefore, committing these values to the source control (in our case git) is not recommended. However, in our case, the potential damages can be nullified because the operational git repository is hosted in the private Github Enterprise at the expense of extra effort required to maintain both an open-source repository and a private one.</p>
+<p>Credentials can also be obfuscated completely from declarations by using Kustomize&rsquo;s secret generators or ignoring production values.yaml files if Helm is used. These &ldquo;hacks&rdquo; does not address the issue of having plain text credentials in the repository.</p>
+<h3 id="hashicorp-vault">Hashicorp Vault</h3>
+<p>Vault is meant to address the complexities of secret management by centralizing management and access enforcement to secrets and systems based on trusted sources of application and user identity. In the context of k8s, it allows for a pod to use given service account token to dynamically fetch the appropriate secret. These dynamic secrets encrypted both during storage in the Vault database and during transit. Although, the shift to an Identity based access to dynamic encrypted secrets would be perfect from the security point of view. The overhead cost of the Vault deployment cannot be justified in our use case despite the advantages.</p>
+
+            </div>
+        </article>
+        <h2 id="end"></h2>
+        <hr />
+
+        <div class="post-info">
+  				<p>
+  					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://ichbinfrog.github.io/tags/jib">jib</a></span><span class="tag"><a href="https://ichbinfrog.github.io/tags/spotbugs">spotbugs</a></span><span class="tag"><a href="https://ichbinfrog.github.io/tags/skaffold">skaffold</a></span><span class="tag"><a href="https://ichbinfrog.github.io/tags/dockerfile">dockerfile</a></span>
+  				</p>
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+            <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span><a href="https://themes.gohugo.io/hugo-theme-hello-friend-ng/">hello-friend-ng</a> Theme for <a href="http://gohugo.io">Hugo</a> by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.4a69500057d68129e88f497d354afe68422eb56de6d15e45dbe2190858ea5a76bfcb096406f992984b241db45f47388ac57ab0376e3b32125bef7a8a6d0f06c4.js" integrity="sha512-SmlQAFfWgSnoj0l9NUr&#43;aEIutW3m0V5F2&#43;IZCFjqWna/ywlkBvmSmEskHbRfRziKxXqwN247MhJb73qKbQ8GxA=="></script>
+
+
+
+    </body>
+</html>

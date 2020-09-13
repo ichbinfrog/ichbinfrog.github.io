@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>overview on Hoang Quoc Trung</title>
+    <link>https://ichbinfrog.github.io/tags/overview/</link>
+    <description>Recent content in overview on Hoang Quoc Trung</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Wed, 30 Oct 2019 11:55:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://ichbinfrog.github.io/tags/overview/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Eclipse/steady — Cloud integration</title>
+      <link>https://ichbinfrog.github.io/projects/eclipse/</link>
+      <pubDate>Wed, 30 Oct 2019 11:55:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/projects/eclipse/</guid>
+      <description>Over the past decade, the inclusion of open-source libraries has become a staple of the software industry. The RedHat report on the state of enterprise open source[7] reveals that out of 950 IT leaders worldwide, around 68% of companies are increasing their use of open source components, adopting it in all its domain of activities (from big data to security). However the report also shares the fact that one of the major barriers to adoption of open source comes from the security concerns related to said libraries.</description>
+    </item>
+    
+  </channel>
+</rss>

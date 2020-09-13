@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cassandra on Hoang Quoc Trung</title>
+    <link>https://ichbinfrog.github.io/tags/cassandra/</link>
+    <description>Recent content in cassandra on Hoang Quoc Trung</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Fri, 21 Dec 2018 15:37:55 +0200</lastBuildDate>
+    
+	<atom:link href="https://ichbinfrog.github.io/tags/cassandra/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>[ FR ] — METAR data analysis &amp; warehousing with Cassandra</title>
+      <link>https://ichbinfrog.github.io/projects/metar/</link>
+      <pubDate>Fri, 21 Dec 2018 15:37:55 +0200</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/projects/metar/</guid>
+      <description>Dans le cadre de ce projet, nous avons construit un stockage orienté colonne destiné à répondre à un ensemble de question sur des données METAR (c&amp;rsquo;est-à-dire des données météorologiques pour l&amp;rsquo;aviation). D&amp;rsquo;une manière plus concrète, notre jeu de données est restreint dans l&amp;rsquo;espace (exclusivement en Finlande) et dans le temps (entre le 1er Janvier 2004 au 1er Janvier 2014). Puisque dans ce cas, les trois questions ne peuvent pas être répondus par une modélisation commune, nous allons traiter dans ce rapport selon l&amp;rsquo;ordre des questions.</description>
+    </item>
+    
+  </channel>
+</rss>

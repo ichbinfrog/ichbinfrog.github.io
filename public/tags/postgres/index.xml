@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>postgres on Hoang Quoc Trung</title>
+    <link>https://ichbinfrog.github.io/tags/postgres/</link>
+    <description>Recent content in postgres on Hoang Quoc Trung</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Wed, 30 Oct 2019 11:50:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://ichbinfrog.github.io/tags/postgres/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Eclipse/steady — Database management</title>
+      <link>https://ichbinfrog.github.io/projects/eclipse_database/</link>
+      <pubDate>Wed, 30 Oct 2019 11:50:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/projects/eclipse_database/</guid>
+      <description>The vulnerability database is at the heart of the tool, storing construct changes, CVE information, vulnerable constructs discovered in scanned applications, etc&amp;hellip; This database requires that a couple properties be respected:
+ Persistence: data stored in the database should not be deleted by external processes or objects until the user deletes it. It should withstand outages (maintenance operation, schema change, node failure, disk failure, etc&amp;hellip;). Coherence: any given database transaction must change affected data only in permitted ways and any transaction started in the future necessarily sees the effects of other transactions committed in the past.</description>
+    </item>
+    
+  </channel>
+</rss>
