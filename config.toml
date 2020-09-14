@@ -24,9 +24,6 @@ publishDir      = "./public"
   images = [""]
   customCSS = ["/css/post.css"]
 
-  # Directory name of your blog content (default is `content/posts`)
-  contentTypeName = "content/projects"
-
   # Default theme "light" or "dark"
   defaultTheme = "light"
 
@@ -38,11 +35,11 @@ publishDir      = "./public"
     name = "linkedin"
     url  = "https://www.linkedin.com/in/ichbinfrog/"
 
-[taxonomies]
-    category = "projects"
+  [taxonomies]
     tag      = "tags"
+    category = "categories"
     series   = "series"
-
+    
 [languages]
   [languages.en]
     title = "Hoang Quoc Trung"
