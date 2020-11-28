@@ -3,7 +3,17 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://ichbinfrog.github.io/projects/ndn/</loc>
+    <loc>https://ichbinfrog.github.io/pdf/ml.pdf</loc>
+    <lastmod>2020-11-28T18:16:46+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ichbinfrog.github.io/projects/</loc>
+    <lastmod>2020-11-28T18:16:46+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ichbinfrog.github.io/pdf/ndn.pdf</loc>
     <lastmod>2020-06-30T11:55:00+00:00</lastmod>
   </url>
   
@@ -34,11 +44,6 @@
   
   <url>
     <loc>https://ichbinfrog.github.io/tags/pokemon/</loc>
-    <lastmod>2020-06-30T11:55:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ichbinfrog.github.io/projects/</loc>
     <lastmod>2020-06-30T11:55:00+00:00</lastmod>
   </url>
   
