@@ -7,3 +7,4 @@ toc: true
 images:
 tags:
 ---
+{{< pdf src="/pdf/ndn.pdf" >}}
