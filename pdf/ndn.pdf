@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="">
-<meta name="description" content="" />
+<meta name="description" content="  " />
 <meta name="keywords" content="" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="" />
@@ -67,7 +67,7 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLor
 
 
 <meta itemprop="name" content="[FR] — Caching architecture for Information Centric Networks">
-<meta itemprop="description" content="">
+<meta itemprop="description" content="  ">
 <meta itemprop="datePublished" content="2020-06-30T11:55:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-06-30T11:55:00&#43;00:00" />
 <meta itemprop="wordCount" content="0">
@@ -80,12 +80,12 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLor
 <meta name="twitter:image" content="https://ichbinfrog.github.io/"/>
 
 <meta name="twitter:title" content="[FR] — Caching architecture for Information Centric Networks"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:description" content="  "/>
 
 
 
     <meta property="og:title" content="[FR] — Caching architecture for Information Centric Networks" />
-<meta property="og:description" content="" />
+<meta property="og:description" content="  " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ichbinfrog.github.io/pdf/ndn.pdf" />
 <meta property="og:image" content="https://ichbinfrog.github.io/"/>
@@ -205,6 +205,19 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLor
 
             <div class="post-content">
                 
+<iframe 
+    src="/pdf/ndn.pdf" 
+    type="application/pdf" 
+    width="100%"
+    height="2000px"
+    frameborder="0"
+    marginwidth="0"
+    marginheight="0"
+    scrolling="no"
+    allowfullscreen="true">
+</iframe>    
+
+
             </div>
         </article>
         <h2 id="end"></h2>
