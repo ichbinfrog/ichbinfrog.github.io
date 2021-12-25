@@ -24,17 +24,17 @@ Les attributs $\{timestamp, longitude, latitude, altitude\}$ permettent de défi
 
 Afin de pouvoir identifier un **point donné de l'espace**, nous pouvons utilisé le tripplet $(long, lat, alt)$. Néanmoins, cette méthode est très restrictive notamment si on veut appliquer cette requête sur une zone dans l'espace. Nous avons donc choisi d'utiliser le **geohash**. Ce dernier est une fonction de hashage qui subdivise la surface terrestre selon une grille hiérarchique. D'une manière plus concrète, soit $G \subset \mathbb{R}^{2}$ l'ensemble des coordonnées géographiques et $W_p$ l'ensemble des chaînes alphabétiques de longueur $p$ (qui correspond à la précision du geohash), on a:
 
-$geohash :\quad G \rightarrow W_p$ 
+$$geohash :\quad G \rightarrow W_p$$
 
-$(lat,lon) \mapsto geohash(lat, lon)\ avec\ len(geohash)=p$
+$$(lat,lon) \mapsto geohash(lat, lon)\ avec\ len(geohash)=p$$
 
 Néanmoins, mettre l'ensemble du geohash en clé de partitionnement va nous aboutir au même problème d'avoir des partitions trop fines. Puisqu'il s'agit d'un hash hiérarchique, le geohash permet de s'assurer que deux hash commençant par la même lettre sont dans le même pavé, ce qui garantit la cohérence des données vis-à-vis du partitionnement. On peut donc séparer le hash en deux, une partie allant dans la clé de partitionnement (qu'on note $geohash_{key}$), l'autre dans la surclef ($geohash_{part}$). Grâce à l'algorithme de preuve (Voir helper.py), on a déduit qu'avec notre jeu de données, la conception optimale sera : 
 
-$ geohash :\quad G \rightarrow W_p$
+$$geohash :\quad G \rightarrow W_p$$
 
-$ \quad (lat,lon) \mapsto geohash(lat, lon) = geohash_{key} + geohash_{hash}$
+$$\quad (lat,lon) \mapsto geohash(lat, lon) = geohash_{key} + geohash_{hash}$$
 
-$ avec\ len(geohash_{key})=2\ et\ len(geohash_{part})=p -2$
+$$avec\ len(geohash_{key})=2\ et\ len(geohash_{part})=p -2$$
 
 En ce qui concerne l'**historique**, nous avons choisi de clusteriser selon l'année afin de faciliter la lecture tout en permettant à un partitionnement capable d'évoluer au cours du temps. De plus, étant donné qu'il s'agit d'un historique (c'est-à-dire qu'on cherche toutes les informations depuis une date précise jusqu'à la date actuelle), on peut implémenter des clés de tris du type $mois, jour, heure, seconde$. Néanmoins, cette implémentation pose problème avec l'historique puisque ce dernier nécessite une suite d'opérateurs de comparaison $>$ (interdite par scylla). On a donc concaténé ces valeurs dans un entier $timestamp_{rest}$ qui permettrait cette comparaison. 
 

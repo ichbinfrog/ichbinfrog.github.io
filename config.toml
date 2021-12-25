@@ -13,7 +13,7 @@ publishDir      = "./public"
   
   paginate = 10
   # Subtitle for home
-  homeSubtitle = "Computer science student (2016-2021) @ UTC (Université de Technologie de Compiègne, France)"
+  homeSubtitle = "Site Reliability Engineer"
 
   # Set disableReadOtherPosts to true in order to hide the links to other posts.
   disableReadOtherPosts = true
@@ -55,10 +55,10 @@ publishDir      = "./public"
   # And you can even create generic menu
   [[menu.main]]
     identifier = "blog"
-    name       = "Projects"
+    name       = "University Projects"
     url        = "/projects"
 
   [[menu.main]]
-    identifier = "about"
-    name       = "About"
-    url        = "/about"
+    identifier = "internships"
+    name       = "Internships"
+    url        = "/internships"
