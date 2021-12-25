@@ -14,10 +14,10 @@
     
     <item>
       <title>Eclipse/steady — Infrastructure provisioning</title>
-      <link>https://ichbinfrog.github.io/projects/eclipse_infrastructure/</link>
+      <link>https://ichbinfrog.github.io/internships/eclipse_infrastructure/</link>
       <pubDate>Wed, 30 Oct 2019 11:25:00 +0000</pubDate>
       
-      <guid>https://ichbinfrog.github.io/projects/eclipse_infrastructure/</guid>
+      <guid>https://ichbinfrog.github.io/internships/eclipse_infrastructure/</guid>
       <description>It is important to note here that choices regarding the infrastructure cascade from decisions made in the implementation of the core components and the monitoring stack and not vice versa.
 Kubernetes cluster creation Creating the underlying computing and networking resources for a functional k8s cluster can be done in two distinct ways:
  Manual:  Create the node pool on which Kubernetes will run Create networking resources to connect the different nodes in the same subnet Setup the k8s prerequisites (disable swap on all machines, install docker) via Ansible then the k8s architecture via Ansible while keeping in mind the differences between the master and worker nodes or with the kubespray tool.</description>

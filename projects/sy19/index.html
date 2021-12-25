@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="Classification Analyse exploratoire L’objectif de ce travail est de proposer le meilleur classifieur possible à partir de 500 observations, capable de distinguer trois classes (noté 1, 2 et 3) de proportion initiale inégale ($π_1 = 0.18, π_2 = 0.442, π_3 = 0.378$). Comme le jeu de données est synthétique, il est impossible d’attribuer une signification à chaque variable. Tout de même, les variables se distinguent clairement en trois groupes:
+X1 à X20, suivant une distribution bimodale continue d’espérance E[X] = 5 et de variance relativement faible:" />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://ichbinfrog.github.io/projects/sy19/" />
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$']],
+            processEscapes: true,
+            processEnvironments: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            TeX: {
+                equationNumbers: { autoNumber: "AMS" },
+                extensions: ["AMSmath.js", "AMSsymbols.js"]
+            }
+        }
+    });
+    MathJax.Hub.Queue(function () {
+        
+        
+        
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+
+    MathJax.Hub.Config({
+        
+        TeX: { equationNumbers: { autoNumber: "AMS" } }
+    });
+</script>
+
+
+    <title>
+        
+            [FR] — Etude d&#39;un dataset aléatoire :: Hoang Quoc Trung 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.min.cbd9ce6c3a26d6c4a5eb4b8834c18d83518654bd8bac1fc8160486f336181c9a.css">
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/post.css">
+    
+
+
+
+
+
+<meta itemprop="name" content="[FR] — Etude d&#39;un dataset aléatoire">
+<meta itemprop="description" content="Classification Analyse exploratoire L’objectif de ce travail est de proposer le meilleur classifieur possible à partir de 500 observations, capable de distinguer trois classes (noté 1, 2 et 3) de proportion initiale inégale ($π_1 = 0.18, π_2 = 0.442, π_3 = 0.378$). Comme le jeu de données est synthétique, il est impossible d’attribuer une signification à chaque variable. Tout de même, les variables se distinguent clairement en trois groupes:
+X1 à X20, suivant une distribution bimodale continue d’espérance E[X] = 5 et de variance relativement faible:">
+<meta itemprop="datePublished" content="2020-11-28T18:16:46&#43;01:00" />
+<meta itemprop="dateModified" content="2020-11-28T18:16:46&#43;01:00" />
+<meta itemprop="wordCount" content="2248">
+<meta itemprop="image" content="https://ichbinfrog.github.io/"/>
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://ichbinfrog.github.io/"/>
+
+<meta name="twitter:title" content="[FR] — Etude d&#39;un dataset aléatoire"/>
+<meta name="twitter:description" content="Classification Analyse exploratoire L’objectif de ce travail est de proposer le meilleur classifieur possible à partir de 500 observations, capable de distinguer trois classes (noté 1, 2 et 3) de proportion initiale inégale ($π_1 = 0.18, π_2 = 0.442, π_3 = 0.378$). Comme le jeu de données est synthétique, il est impossible d’attribuer une signification à chaque variable. Tout de même, les variables se distinguent clairement en trois groupes:
+X1 à X20, suivant une distribution bimodale continue d’espérance E[X] = 5 et de variance relativement faible:"/>
+
+
+
+    <meta property="og:title" content="[FR] — Etude d&#39;un dataset aléatoire" />
+<meta property="og:description" content="Classification Analyse exploratoire L’objectif de ce travail est de proposer le meilleur classifieur possible à partir de 500 observations, capable de distinguer trois classes (noté 1, 2 et 3) de proportion initiale inégale ($π_1 = 0.18, π_2 = 0.442, π_3 = 0.378$). Comme le jeu de données est synthétique, il est impossible d’attribuer une signification à chaque variable. Tout de même, les variables se distinguent clairement en trois groupes:
+X1 à X20, suivant une distribution bimodale continue d’espérance E[X] = 5 et de variance relativement faible:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ichbinfrog.github.io/projects/sy19/" />
+<meta property="og:image" content="https://ichbinfrog.github.io/"/>
+<meta property="article:published_time" content="2020-11-28T18:16:46+01:00" />
+<meta property="article:modified_time" content="2020-11-28T18:16:46+01:00" /><meta property="og:site_name" content="Hoang Quoc Trung" />
+
+
+
+
+
+
+    <meta property="article:published_time" content="2020-11-28 18:16:46 &#43;0100 &#43;0100" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">ichbinfrog</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://ichbinfrog.github.io/internships">Internships</a></li><li><a href="https://ichbinfrog.github.io/projects">University Projects</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title" id="top"><a href="https://ichbinfrog.github.io/projects/sy19/">[FR] — Etude d&rsquo;un dataset aléatoire</a></h2>
+            <aside id="toc"><style>
+.toc {
+    position: fixed;
+    top: 50%;
+    left: 2%;
+    width: 20%;
+    transform: translateY(-50%);
+    border-radius: 5px;
+    padding-bottom: 1rem;
+}
+
+.toc a {
+    text-decoration: none;
+    color: gray;
+}
+
+.toc a:hover {
+    opacity: 0.5;
+}
+
+.toc ul {
+    list-style: ">  ";
+}
+
+.toc-title {
+    text-decoration: underline;
+}
+</style>
+
+<div class="toc">
+    <div class="toc-title">Table of Contents</div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#analyse-exploratoire">Analyse exploratoire</a></li>
+    <li><a href="#feature-selection">Feature selection</a></li>
+    <li><a href="#knn">KNN</a></li>
+    <li><a href="#analyse-discriminante">Analyse discriminante</a>
+      <ul>
+        <li><a href="#régularisation">Régularisation</a></li>
+        <li><a href="#stepwise-selection">Stepwise selection</a></li>
+      </ul>
+    </li>
+    <li><a href="#régression-logistique">Régression Logistique</a></li>
+    <li><a href="#arbres-et-forêts-aléatoires">Arbres et forêts aléatoires</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#feature-selection-1">Feature selection</a></li>
+    <li><a href="#knn-1">KNN</a></li>
+    <li><a href="#modèles-linéaires">Modèles linéaires</a>
+      <ul>
+        <li><a href="#subset-selection">Subset selection</a></li>
+        <li><a href="#régularisation-1">Régularisation</a></li>
+        <li><a href="#splines-et-gam">Splines et GAM</a></li>
+      </ul>
+    </li>
+    <li><a href="#conclusion-1">Conclusion</a></li>
+  </ul>
+</nav>
+    <ul>
+    <li><a href="#top">Top</a></li>
+    <li><a href="#end">End</a></li>
+    </ul>
+</div></aside>
+
+            
+
+            <div class="post-content">
+                <h1 id="classification">Classification</h1>
+<h2 id="analyse-exploratoire">Analyse exploratoire</h2>
+<p>L’objectif de ce travail est de proposer le meilleur classifieur possible à partir de 500 observations, capable
+de distinguer trois classes (noté 1, 2 et 3) de proportion initiale inégale ($π_1 = 0.18, π_2 = 0.442, π_3 = 0.378$).
+Comme le jeu de données est synthétique, il est impossible d’attribuer une signification à chaque variable.
+Tout de même, les variables se distinguent clairement en trois groupes:</p>
+<p>X1 à X20, suivant une distribution bimodale continue d’espérance E[X] = 5 et de variance relativement
+faible:</p>
+<ul>
+<li>X21 à X45, suivant une loi normale continue d’espérance E[X] = 0 et de variance elevée</li>
+<li>X46 à X50, avec une distribution discrète positive centrée aux alentours de E[X] = 3.7</li>
+</ul>
+
+<img src="/img/sy19_prelim.png"  class="center"  />
+
+
+<h2 id="feature-selection">Feature selection</h2>
+<p>Puisque nous avons une quantité importante de variable par rapport aux nombres d’observations (1/10),
+il serait judicieux d’appliquer des méthodes de réduction de dimensions si possible.Comme l’analyse en
+composantes principales ne fonctionne qu’avec les données quantitatives, nous posons l’hypothèse que les
+variables X45 − X50 sont quantitatives.
+Suite à cette analyse, nous observons qu’il faut garder 40 variables afin de préserver 90% de la variance
+expliquée. Il y a donc peu d’intérêt d’appliquer cette réduction.</p>
+<h2 id="knn">KNN</h2>
+<p>L’algorithme des KNN consiste à affecter à un individu la classe dominante dans son voisinnage. En
+supprimant les variables qualitatives (X46 à X50), une LOOCV permet de montrer que le nombre de voisin
+optimal est k = 15 avec un taux d’erreur de classification à 0.572. Ce taux d’erreur élevé peut s’expliquer par
+plusieurs facteurs:</p>
+<ul>
+<li>dans l’espace de départ les centres d’inertie des classes sont proches les unes des autres</li>
+<li>la proportion inégale des classes pousse le classifieur à toujours choisir la classe 2</li>
+<li>la distance euclidienne utilisée par défaut est très sensible à un nombre élevé de prédicteurs</li>
+</ul>
+<p>Les techniques d’analyses discriminantes vues en cours peuvent être facilement étendues à des problèmes
+de classification multi-classe car l’appartenance à une classe revient à trouver la probabilité à posteriori
+maximale pour l’individu donné.</p>
+<h2 id="analyse-discriminante">Analyse discriminante</h2>
+<p>Puisque les frontières construites par la LDA sont linéaires et que dans l’espace de départ, il n’y a pas
+d’hyperplans discriminants apparents, la qualité du classifieur qui en résulte est médiocre avec un taux
+d’erreur de classification de 0.42.</p>
+<p>De plus, un test de Barlett sur le jeu de données permet de rejetter l’hypothèse nulle d’homoscédasticité
+entre les différentes classes à un niveau de confiance à $2.2e^{−16}$. Nous pouvons donc tenter d’éliminer cette
+hypothèse en utilisant l’analyse discriminante quadratique (QDA). Avec une validation croisée à 10 plis, nous
+obtenons les taux d’erreur de classification suivant:</p>
+
+<img src="/img/sy19_lda.png"  class="center"  />
+
+
+<p>La variance élevée observée d’un modèle QDA par rapport à un modèle LDA peut s’expliquer par le fait qu’il
+doit estimer plus de paramètres sur un échantillon de taille relativement faible. De plus, la QDA fait moins
+d’erreur de classification pour les individus de classe 3 et légèrement plus d’erreur pour les individus de classe
+1, ce qui donne en générale un meilleur modèle sachant que $π_3 &gt; π_1$.</p>
+<p>Les modèles étudiées ci-dessus doivent estimer un nombre de paramètres proportionnel aux nombres de
+variables et de classes. Or, dans notre cas, avec 50 variables et 3 classes, la QDA doit estimer 3977 paramètres
+et la LDA 1427, ce qui va faire exploser la variance des modèles obtenus.</p>
+<p>Pour palier à ce problème, en supposant l’indépendance des prédicteurs conditionnellement à leurs classes, on
+peut construire un classifieur bayésien naïf avec moins de paramètres à estimer et donc plus adapté à notre
+nombre de variables. Malgré sa simplicité, le bayésien naïf offre une meilleure performance générale que la
+LDA et un meilleure classification de la classe 1 que la QDA.</p>
+<h3 id="régularisation">Régularisation</h3>
+<p>L’analyse discriminante régularisée (RDA) permet de trouver un compromis entre le biais élevé des LDA et
+la variance élevée des QDA. Au lieu d’estimer une matrice de variance commune (\hat{\Sigma}) comme dans la LDA ou
+des matrices de variance ($\hat{\Sigma}_k$) pour chaque classe, elle construit une matrice de covariance régularisée de la
+forme: $\hat{\Sigma}_k(\lambda) = (1 − \lambda)\hat{\Sigma}_k + \lambda\hat{\Sigma}$. Lorsque $\lambda \rightarrow 0$, le classifieur se rapproche d’une QDA et lorsque $\lambda \rightarrow 1$, le
+modèle tends vers une LDA.</p>
+
+<img src="/img/sy19_rda.png"  class="center"  />
+
+
+<p>En faisant une recherche systèmatique dans l’espace des \lambda, on peut conclure qu’un coefficient de régularisation
+$\lambda \in [0.50, 0.55]$ donne le modèle optimal qui favorise légèrement l’homoscédasticité des variances.
+L’analyse RDA admet aussi un coefficient $\gamma$ qui permet de régulariser $\hat{\Sigma}$ selon la formule $(1 − \gamma)\hat{\Sigma} + \gamma\sigma^2
+I_p$.</p>
+<p>La fonction <code>rda</code> dans la librairie <code>klaR</code> qui permet d’optimiser les deux paramètres n’est pas stable pour les
+jeu de données de petite taille. Nous pouvons lancer plusieurs itérations et identifier les zones optimales
+où se trouvent le plus fréquemment les solutions et où le taux d’erreur de classification est le plus faible.
+Nous trouvons donc que les couples de paramètres optimales sont comprises entre $\lambda \in [0.04, 0.05]$ (ce qui
+correspond à une QDA) et $\gamma \in [0.50, 0.055]$.</p>
+
+<img src="/img/sy19_qda.png"  class="center"  />
+
+
+<h3 id="stepwise-selection">Stepwise selection</h3>
+<p>La fonction <code>stepclass</code> de la librairie <code>klaR</code> adapte la stepwise selection à la classification et donne directement
+le sous-ensemble de prédicteur optimal qui garantit le taux d’erreur de classification issu d’une validation
+croisée le plus faible. Nous observons donc que cette sélection des variables échange la performance moyenne
+du classifieur pour réduire la variance du modèle</p>
+<h2 id="régression-logistique">Régression Logistique</h2>
+<p>Contrairement à l’analyse discriminante linéaire, la régression logistique est un modèle plus robuste qui ne
+présume pas que les prédicteurs suivent une distribution gaussienne multidimensionnelle et fonctionne avec
+les variables qualitatives. Tout de même, en appliquant une régression multinomiale sur l’ensemble du jeu de
+données, le taux moyen d’erreur de classification issue d’une validation croisée à 10-plis est aux alentours de
+0.45 et dépasse celui obtenu avec une LDA.</p>
+<p>Pour améliorer cette performance, il serait judicieux d’éliminer les prédicteurs “redondants” qui sont trop
+fortement correlés entre eux puis les prédicteurs à effet négligeable sur le modèle. La matrice de correlation
+des données, elle, révèle aucune correlation forte entre les prédicteurs donc il faut remettre en question la
+significativité des variables. Les méthodes de régularisation qui suppriment les coefficients négligeables tel
+que le lasso ou qui les pénalisent tel que l’elastic net peuvent résoudre ce problème</p>
+
+<img src="/img/sy19_logreg.png"  class="center"  />
+
+
+<p>Avant d’appliquer la régularisation, les variables quantitatives sont centrées et réduites afin d’augmenter la
+stabilité des estimations des coefficients et donc du modèle puis rattachées aux variables qualitatives. Nous
+observons alors que la régularisation réduit de manière non négligeable le taux d’erreur de classification de la
+régression logistique.</p>
+<p>En prenant la valeur de lambda la plus régularisée selon la règle du 1-se, les coefficients $\beta$ obtenus entre le
+lasso et l’elasticnet sont proches et révèlent l’importance des variables qualitatives dans la classification des
+individus 1 et 2.</p>
+
+<img src="/img/sy19_lasso.png"  class="center"  />
+
+
+<h2 id="arbres-et-forêts-aléatoires">Arbres et forêts aléatoires</h2>
+<p>En régularisant l’arbre de décision par post-élagage, nous obtenons une erreur de validation croisée optimale
+pour un arbre de profondeur 5 de 0.46. Avec la forêt aléatoire, nous obtenons un modèle de variance plus
+faible mais fortement biaisé (la forêt décide rarement pour la classe 1) avec une erreur OOB de 0.394. Même
+après avoir augmenté le poids de cette classe dans l’apprentissage, ce problème n’est pas résolu.</p>
+<h2 id="conclusion">Conclusion</h2>
+<table>
+<thead>
+<tr>
+<th align="center">Modèle</th>
+<th align="center">Taux d’erreur de classification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">KNN</td>
+<td align="center">0.572</td>
+</tr>
+<tr>
+<td align="center">LDA</td>
+<td align="center">0.616</td>
+</tr>
+<tr>
+<td align="center">LDA subset</td>
+<td align="center">0.375</td>
+</tr>
+<tr>
+<td align="center">QDA</td>
+<td align="center">0.321</td>
+</tr>
+<tr>
+<td align="center">QDA subset</td>
+<td align="center">0.314</td>
+</tr>
+<tr>
+<td align="center">RDA</td>
+<td align="center">0.303</td>
+</tr>
+<tr>
+<td align="center">RDA subset</td>
+<td align="center">0.303</td>
+</tr>
+<tr>
+<td align="center">Logit</td>
+<td align="center">0.450</td>
+</tr>
+<tr>
+<td align="center">Logit Ridge</td>
+<td align="center">0.386</td>
+</tr>
+<tr>
+<td align="center">Logit Elasticnet</td>
+<td align="center">0.376</td>
+</tr>
+<tr>
+<td align="center">Logit Lasso</td>
+<td align="center">0.376</td>
+</tr>
+<tr>
+<td align="center">Random Forest</td>
+<td align="center">0.394</td>
+</tr>
+</tbody>
+</table>
+<p>Le modèle RDA est donc optimal pour classifier ce jeu de données. Dans nos futurs travaux, il serait
+intéressant d’adresser le déséquilibre des classes (avec du under-sampling ou du SMOTE) et de tester d’autre
+méthodes supervisées (SVM ou SGD).</p>
+<hr>
+<h1 id="régression">Régression</h1>
+<p>L’objectif de ce travail est de proposer la meilleure régression sur la variable y (E[y] = 161.65) à partir d’un
+échantillon de 500 réalisations de 100 variables. Similairement au problème de classification, aucune une
+signification peut être attribuer à chaque variable. Tout de même, contrairement aux données de classification,
+l’ensemble des variables sont quantitatives continues d’espérance communes proches de E[X] = 5 qui est
+constitué de deux groupes:</p>
+<ul>
+<li>un groupe majoritaire suivant une distribution bimodale continue</li>
+<li>une minorité (dont notamment X50, X65) qui suit peut-être une distribution multimodale (k = 3)</li>
+</ul>
+<p>Quant aux réalisations de la variable à prédire, elle, suit clairement une loi normale avec $\hat{\mu} = 161.65$ et
+$\hat{\sigma} = 82.67529$.</p>
+
+<img src="/img/sy19_prelim_reg.png"  class="center"  />
+
+
+<h2 id="feature-selection-1">Feature selection</h2>
+<p>Pour ce jeu de données, le problème du rapport entre le nombre de prédicteurs et le nombre d’indivdus est
+encore plus prononcé (1/5). D’où la nécessité de réduire si possible la dimension par PCA. Tout de même,
+afin de maintenir 90 de la variance expliquée cumulée, 80 axes doivent être maintenus et la méthode du coude
+ne révèle pas non plus un nombre de composantes principales optimal.</p>
+
+<img src="/img/sy19_pca.png"  class="center"  />
+
+
+<h2 id="knn-1">KNN</h2>
+<p>L’algorithme des knn se fonde sur un vote majoritaire des individus dans le nuage. Cette proximité se définit
+par une distance (euclidienne par défaut dans l’implémentation dans la librairie <code>MASS</code>) commun par rapport à</p>
+<p>tous les dimensions. Or, dans un jeu de données non standardisés, les échelles entre les dimensions peuvent
+différer. D’où, la nécessité de normaliser (centrage et réduction) au préalable les données.
+Avec ce prétraitement sur l’ensemble des prédicteurs (y exclu), l’erreur quadratique moyenne du modèle avec
+le nombre de voisins optimal obtenue par validation croisée imbriquée améliore de manière négligeable de
+5099.594 à 5082.458. Malgré cette performance médiocre, ceci confirme l’observation que les données initiales
+sont relativement “homogènes” (moyenne et écart-type similaire).</p>
+<h2 id="modèles-linéaires">Modèles linéaires</h2>
+<p>De première vue, il est très probable que y soit une combinaison linéaire des différents prédicteurs et donc
+qu’un modèle linéaire sera optimal pour notre problématique.</p>
+<p>Dans un premier temps, nous avons estimé le vecteur des coefficients $\hat{\beta}$ de la régression par la méthode des
+moindres carrés sur 75 des observations. Le modèle qui en résulte est bien significatif car nous obtenons une
+pvalue &lt; $2.2e^{−16}$ pour l’hypothèse de nullité de l’ensemble des paramètres.</p>
+
+<img src="/img/sy19_qqplot.png"  class="center"  />
+
+
+<p>De plus, nous constatons que les résidus ne semble pas suivre une structure particulière et que les résidus
+standardisés épousent bien le qqplot d’une loi normale. Ceci confirme l’hypothèse de normalité des résidus et
+nous pouvons donc tenter de faire une validation croisée pour estimer la performance du LSE sur nos données.
+Nous obtenons donc une bonne erreur quadratique moyenne de 260.1426 pour un modèle relativement simple.</p>
+<h3 id="subset-selection">Subset selection</h3>
+<p>A partir du modèle précédent, une question peut se poser: est-ce qu’il y a certaines variables non significatives
+ou qui nuisent à la régression? En étudiant l’évolution du coefficient de corrélation $R^2$ en fonction du nombre
+de prédicteurs pris en compte, la méthode du subset selection permet de montrer que pour maintenir un
+modèle de performance similaire, il suffit de maintenir 80 variables.</p>
+
+<img src="/img/sy19_mse.png"  class="center"  />
+
+
+<p>L’usage de cette méthode permet de réduire la variance du modèle obtenu ainsi que la moyenne des erreurs
+quadratiques observées à 235.1.</p>
+<h3 id="régularisation-1">Régularisation</h3>
+<p>Similairement à la régression logistique dans la classification, il est possible de régulariser la régression linéaire
+en pénalisant les coefficients par la méthode Ridge ou le Lasso. En faisant une validation croisée imbriquée
+pour optimiser les valeurs de $\lambda$, nous obtenons cette comparaison de la qualité des différentes méthodes de
+régularisation.</p>
+
+<img src="/img/sy19_ridge.png"  class="center"  />
+
+
+<p>Nous observons donc que parmi les régularisations, le Ridge et le modèle de compromis (Elastic Net) dépassent
+clairement le lasso en terme de performance. Ceci suggère que le nombre de variables important dans la
+prédiction de y est important et la suppression de ces variables par lasso n’est pas nécessaire. De plus, nous
+observons que la standardisation (centrage et réduction) des données activée par défaut dans la fonction
+glmnet affaiblit le lasso puisqu’elle accélère peut-être trop fortement la contraction des coefficients.</p>
+<h3 id="splines-et-gam">Splines et GAM</h3>
+<p>Il est possible que la variable à prédire résulte d’une combinaison non linéaire des prédicteurs. Comme nous
+avons un jeu de données de dimension &gt; 2, deux modèles multidimensionnels ont été abordés en cours:</p>
+<ul>
+<li>Les splines multidimensionnels qui combinent les différentes fonctions de transformation par produit.
+Avec 100 prédicteurs, il est impossible d’appliquer ce modèle sans sélection préalable à cause du nombre
+de paramètres à estimer.</li>
+<li>Les modèles additifs généralisés (GAM) qui cherchent 100 fonctions transformant chacun une variable
+au lieu d’une fonction à 100 dimensions.</li>
+</ul>
+<p>En appliquant le gam avec un type de spline unique sur l’ensemble des prédicteurs sans standardisation, nous
+obtenons les erreur quadratique suivante à l’issu d’une validation croisée à 10 plis:</p>
+
+<img src="/img/sy19_gam.png"  class="center"  />
+
+
+<p>La forme des b-splines cubiques (<code>gam bs(df=3)</code>) et des splines naturels (<code>gam ns(df=3)</code>) sont très similaires
+mis à part au niveau des frontières de l’espace de y. Comme le gam est additif, ces similarités s’aggrègent
+dans le modèle final et explique la proximité entre les erreurs.</p>
+
+<img src="/img/sy19_spline.png"  class="center"  />
+
+
+<p>Quant aux smoothing splines avec un degré de liberté de 2, nous obtenons un modèle de performance
+relativement proche au subset. En examinant de près ce modèle, nous observons que seulement 68 variables
+sont significatives (à l’issu d’une analyse de variance paramétrique) et qu’il n’y aucune transformation de la
+prédiction (fonction de lien: <code>identity</code>).</p>
+<h2 id="conclusion-1">Conclusion</h2>
+<table>
+<thead>
+<tr>
+<th align="center">Modèle</th>
+<th align="center">MSE moyenne</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">KNN</td>
+<td align="center">5082.458</td>
+</tr>
+<tr>
+<td align="center">Linear Regression (LR)</td>
+<td align="center">260.1426</td>
+</tr>
+<tr>
+<td align="center">LR subset selection</td>
+<td align="center">235.1</td>
+</tr>
+<tr>
+<td align="center">Ridge regression</td>
+<td align="center">259.8</td>
+</tr>
+<tr>
+<td align="center">Elasticnet regularisation</td>
+<td align="center">249.9</td>
+</tr>
+<tr>
+<td align="center">Lasso regularisation (without standardisation)</td>
+<td align="center">317.5</td>
+</tr>
+<tr>
+<td align="center">GAM (b-spline,df=3)</td>
+<td align="center">429.3</td>
+</tr>
+<tr>
+<td align="center">GAM (natural spline, df=2)</td>
+<td align="center">294.8</td>
+</tr>
+<tr>
+<td align="center">GAM (smoothing spline, df=2)</td>
+<td align="center">233.2</td>
+</tr>
+</tbody>
+</table>
+<p>Le GAM constitué uniquement de smoothing spline sur l’ensemble des prédicteurs non standardisés est donc
+optimal pour notre jeu de données car il donne l’erreur quadratique moyenne minimal ainsi qu’une variance
+relativement faible.</p>
+<p>Dans nos futurs travaux, il serait intéressant d’effectuer une sélection préalable des variables avant le
+GAM et tester d’autre modèles comme les machines à vecteurs de support (SVM) ou même les splines
+multidimensionnels (après une réduction de dimension par manifold learning).</p>
+
+            </div>
+        </article>
+        <h2 id="end"></h2>
+        <hr />
+
+        <div class="post-info">
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2021</span>
+            
+            <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span><a href="https://themes.gohugo.io/hugo-theme-hello-friend-ng/">hello-friend-ng</a> Theme for <a href="http://gohugo.io">Hugo</a> by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>

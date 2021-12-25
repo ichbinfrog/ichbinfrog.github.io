@@ -14,10 +14,10 @@
     
     <item>
       <title>Kubernetes — basics</title>
-      <link>https://ichbinfrog.github.io/projects/kubernetes_basic/</link>
+      <link>https://ichbinfrog.github.io/internships/kubernetes_basic/</link>
       <pubDate>Sun, 11 Aug 2019 11:05:00 +0000</pubDate>
       
-      <guid>https://ichbinfrog.github.io/projects/kubernetes_basic/</guid>
+      <guid>https://ichbinfrog.github.io/internships/kubernetes_basic/</guid>
       <description>Kubernetes objects are abstractions that represent the state of the system. These persistent entities describe what containerized applications are running, the resources allocated and available as well as their behaviors (restart policies, fault-tolerance). Unlike normal infrastructure declaration, these objects portray the desired state of the cluster which k8s will try to satisfy. This “record of intent” is declared in a declarative fashion in yaml and interpreted by kubectl, k8s&amp;rsquo;s default CLI.</description>
     </item>
     

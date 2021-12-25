@@ -14,10 +14,10 @@
     
     <item>
       <title>Kubernetes — in depth</title>
-      <link>https://ichbinfrog.github.io/projects/kubernetes_depth/</link>
+      <link>https://ichbinfrog.github.io/internships/kubernetes_depth/</link>
       <pubDate>Sun, 11 Aug 2019 11:00:00 +0000</pubDate>
       
-      <guid>https://ichbinfrog.github.io/projects/kubernetes_depth/</guid>
+      <guid>https://ichbinfrog.github.io/internships/kubernetes_depth/</guid>
       <description>Kubernetes, hereinafter referred to as k8s, is an open-source system for automating deployment, scaling and management of containerized applications. Due to it being a recent technology (released less than five years ago under the Apache License 2.0), this section attempts to summarize both its terminology and its overall orchestration mechanisms.
  Containers — A new era of deployment The massive adoption of k8s marks the entry into a new era of deployment.</description>
     </item>

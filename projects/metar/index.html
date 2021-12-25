@@ -11,7 +11,7 @@
 <meta name="theme-color" content="" />
 <link rel="canonical" href="https://ichbinfrog.github.io/projects/metar/" />
 <script type="text/javascript" async
-src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
     MathJax.Hub.Config({
         tex2jax: {
             inlineMath: [['$', '$'], ['\\(', '\\)']],
@@ -70,7 +70,7 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLor
 <meta itemprop="description" content="Dans le cadre de ce projet, nous avons construit un stockage orienté colonne destiné à répondre à un ensemble de question sur des données METAR (c&rsquo;est-à-dire des données météorologiques pour l&rsquo;aviation). D&rsquo;une manière plus concrète, notre jeu de données est restreint dans l&rsquo;espace (exclusivement en Finlande) et dans le temps (entre le 1er Janvier 2004 au 1er Janvier 2014). Puisque dans ce cas, les trois questions ne peuvent pas être répondus par une modélisation commune, nous allons traiter dans ce rapport selon l&rsquo;ordre des questions.">
 <meta itemprop="datePublished" content="2018-12-21T15:37:55&#43;02:00" />
 <meta itemprop="dateModified" content="2018-12-21T15:37:55&#43;02:00" />
-<meta itemprop="wordCount" content="1785">
+<meta itemprop="wordCount" content="1782">
 <meta itemprop="image" content="https://ichbinfrog.github.io/"/>
 
 
@@ -130,7 +130,7 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLor
         <span class="header__right">
             
                 <nav class="menu">
-    <ul class="menu__inner"><li><a href="https://ichbinfrog.github.io/about">About</a></li><li><a href="https://ichbinfrog.github.io/projects">Projects</a></li>
+    <ul class="menu__inner"><li><a href="https://ichbinfrog.github.io/internships">Internships</a></li><li><a href="https://ichbinfrog.github.io/projects">University Projects</a></li>
     </ul>
 </nav>
 
@@ -226,12 +226,12 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLor
 
 
 <p>Afin de pouvoir identifier un <strong>point donné de l&rsquo;espace</strong>, nous pouvons utilisé le tripplet $(long, lat, alt)$. Néanmoins, cette méthode est très restrictive notamment si on veut appliquer cette requête sur une zone dans l&rsquo;espace. Nous avons donc choisi d&rsquo;utiliser le <strong>geohash</strong>. Ce dernier est une fonction de hashage qui subdivise la surface terrestre selon une grille hiérarchique. D&rsquo;une manière plus concrète, soit $G \subset \mathbb{R}^{2}$ l&rsquo;ensemble des coordonnées géographiques et $W_p$ l&rsquo;ensemble des chaînes alphabétiques de longueur $p$ (qui correspond à la précision du geohash), on a:</p>
-<p>$geohash :\quad G \rightarrow W_p$</p>
-<p>$(lat,lon) \mapsto geohash(lat, lon)\ avec\ len(geohash)=p$</p>
+<p>$$geohash :\quad G \rightarrow W_p$$</p>
+<p>$$(lat,lon) \mapsto geohash(lat, lon)\ avec\ len(geohash)=p$$</p>
 <p>Néanmoins, mettre l&rsquo;ensemble du geohash en clé de partitionnement va nous aboutir au même problème d&rsquo;avoir des partitions trop fines. Puisqu&rsquo;il s&rsquo;agit d&rsquo;un hash hiérarchique, le geohash permet de s&rsquo;assurer que deux hash commençant par la même lettre sont dans le même pavé, ce qui garantit la cohérence des données vis-à-vis du partitionnement. On peut donc séparer le hash en deux, une partie allant dans la clé de partitionnement (qu&rsquo;on note $geohash_{key}$), l&rsquo;autre dans la surclef ($geohash_{part}$). Grâce à l&rsquo;algorithme de preuve (Voir helper.py), on a déduit qu&rsquo;avec notre jeu de données, la conception optimale sera :</p>
-<p>$ geohash :\quad G \rightarrow W_p$</p>
-<p>$ \quad (lat,lon) \mapsto geohash(lat, lon) = geohash_{key} + geohash_{hash}$</p>
-<p>$ avec\ len(geohash_{key})=2\ et\ len(geohash_{part})=p -2$</p>
+<p>$$geohash :\quad G \rightarrow W_p$$</p>
+<p>$$\quad (lat,lon) \mapsto geohash(lat, lon) = geohash_{key} + geohash_{hash}$$</p>
+<p>$$avec\ len(geohash_{key})=2\ et\ len(geohash_{part})=p -2$$</p>
 <p>En ce qui concerne l&rsquo;<strong>historique</strong>, nous avons choisi de clusteriser selon l&rsquo;année afin de faciliter la lecture tout en permettant à un partitionnement capable d&rsquo;évoluer au cours du temps. De plus, étant donné qu&rsquo;il s&rsquo;agit d&rsquo;un historique (c&rsquo;est-à-dire qu&rsquo;on cherche toutes les informations depuis une date précise jusqu&rsquo;à la date actuelle), on peut implémenter des clés de tris du type $mois, jour, heure, seconde$. Néanmoins, cette implémentation pose problème avec l&rsquo;historique puisque ce dernier nécessite une suite d&rsquo;opérateurs de comparaison $&gt;$ (interdite par scylla). On a donc concaténé ces valeurs dans un entier $timestamp_{rest}$ qui permettrait cette comparaison.</p>
 <p>De plus, afin de pouvoir construire des courbes d&rsquo;évolution capable de démontrer la <strong>saisonnalité</strong>, nous avons implémenté des courbes d&rsquo;évolution des variables quantitatives (par exemple la température ressentie). Finalement, nous avons la conception qui suit;</p>
 
@@ -482,7 +482,7 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLor
                 <footer class="footer">
     <div class="footer__inner">
         <div class="footer__content">
-            <span>&copy; 2020</span>
+            <span>&copy; 2021</span>
             
             <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
         </div>

@@ -13,21 +13,22 @@
     
     
     <item>
-      <title>[FR] — Projet machine learning SY19</title>
-      <link>https://ichbinfrog.github.io/pdf/ml.pdf</link>
+      <title>[FR] — Etude d&#39;un dataset aléatoire</title>
+      <link>https://ichbinfrog.github.io/projects/sy19/</link>
       <pubDate>Sat, 28 Nov 2020 18:16:46 +0100</pubDate>
       
-      <guid>https://ichbinfrog.github.io/pdf/ml.pdf</guid>
-      <description>  </description>
+      <guid>https://ichbinfrog.github.io/projects/sy19/</guid>
+      <description>Classification Analyse exploratoire L’objectif de ce travail est de proposer le meilleur classifieur possible à partir de 500 observations, capable de distinguer trois classes (noté 1, 2 et 3) de proportion initiale inégale ($π_1 = 0.18, π_2 = 0.442, π_3 = 0.378$). Comme le jeu de données est synthétique, il est impossible d’attribuer une signification à chaque variable. Tout de même, les variables se distinguent clairement en trois groupes:
+X1 à X20, suivant une distribution bimodale continue d’espérance E[X] = 5 et de variance relativement faible:</description>
     </item>
     
     <item>
       <title>[FR] — Caching architecture for Information Centric Networks</title>
-      <link>https://ichbinfrog.github.io/pdf/ndn.pdf</link>
+      <link>https://ichbinfrog.github.io/projects/ndn/</link>
       <pubDate>Tue, 30 Jun 2020 11:55:00 +0000</pubDate>
       
-      <guid>https://ichbinfrog.github.io/pdf/ndn.pdf</guid>
-      <description>  </description>
+      <guid>https://ichbinfrog.github.io/projects/ndn/</guid>
+      <description>Download pdf</description>
     </item>
     
     <item>
@@ -38,95 +39,6 @@
       <guid>https://ichbinfrog.github.io/projects/pokemon/</guid>
       <description>Ce travail a été fait avec Alix CANDUSSO et Chen GONG dans le cadre de l&amp;rsquo;UV SY09.
   Issu d&amp;rsquo;une franchise de jeu vidéo japonaise, un pokémon est une créature qui, une fois capturée par un dresseur, peut-être envoyé pour affronter les pokémon d&amp;rsquo;un autre dresseur. Régi par un ensemble de règles bien définies, la complexité des combats qui en dérive et les modèles qui les prédisent constituent l&amp;rsquo;intérêt de cette étude.</description>
-    </item>
-    
-    <item>
-      <title>Cloud Provider benchmark</title>
-      <link>https://ichbinfrog.github.io/projects/cloud_bench/</link>
-      <pubDate>Sun, 15 Dec 2019 12:50:00 +0000</pubDate>
-      
-      <guid>https://ichbinfrog.github.io/projects/cloud_bench/</guid>
-      <description>This benchmark is done in order to help in the process of deciding which public provider to migrate to. Three public cloud offers are studied (GCP (Google Cloud Platform), AWS (Amazon Web Service) and Microsoft Azure) in comparison to the private solution.
-Computing offer comparison It is important to note that all the aforementioned providers have support for Linux as well as Windows VMs. Although terminologies vary widely between providers (machine type for GCP, instance for AWS, VM for Azure), they all provide a couple of essential categories of common machine families.</description>
-    </item>
-    
-    <item>
-      <title>Eclipse/steady — Cloud integration</title>
-      <link>https://ichbinfrog.github.io/projects/eclipse/</link>
-      <pubDate>Wed, 30 Oct 2019 11:55:00 +0000</pubDate>
-      
-      <guid>https://ichbinfrog.github.io/projects/eclipse/</guid>
-      <description>Over the past decade, the inclusion of open-source libraries has become a staple of the software industry. The RedHat report on the state of enterprise open source[7] reveals that out of 950 IT leaders worldwide, around 68% of companies are increasing their use of open source components, adopting it in all its domain of activities (from big data to security). However the report also shares the fact that one of the major barriers to adoption of open source comes from the security concerns related to said libraries.</description>
-    </item>
-    
-    <item>
-      <title>Eclipse/steady — Database management</title>
-      <link>https://ichbinfrog.github.io/projects/eclipse_database/</link>
-      <pubDate>Wed, 30 Oct 2019 11:50:00 +0000</pubDate>
-      
-      <guid>https://ichbinfrog.github.io/projects/eclipse_database/</guid>
-      <description>The vulnerability database is at the heart of the tool, storing construct changes, CVE information, vulnerable constructs discovered in scanned applications, etc&amp;hellip; This database requires that a couple properties be respected:
- Persistence: data stored in the database should not be deleted by external processes or objects until the user deletes it. It should withstand outages (maintenance operation, schema change, node failure, disk failure, etc&amp;hellip;). Coherence: any given database transaction must change affected data only in permitted ways and any transaction started in the future necessarily sees the effects of other transactions committed in the past.</description>
-    </item>
-    
-    <item>
-      <title>Eclipse/steady — Core components</title>
-      <link>https://ichbinfrog.github.io/projects/eclipse_core/</link>
-      <pubDate>Wed, 30 Oct 2019 11:45:00 +0000</pubDate>
-      
-      <guid>https://ichbinfrog.github.io/projects/eclipse_core/</guid>
-      <description>Due to the sheer amount of components that constitute the core architecture of the tool, this section will go over the overarching themes and decisions that led to the creation of the vulnerability-assessment-tool-core helm chart.
-Resource allocation Defining resource demands for each container is mandatory in order to maintain a secure k8s deployment. The range defined on CPU and memory usage being a soft enforcement, once the limit is reached, the container is throttled and not killed, thus, ensuring both the vertical scalability of the pod and slight buffers against DDOS attacks.</description>
-    </item>
-    
-    <item>
-      <title>Eclipse/steady — Monitoring and logging components</title>
-      <link>https://ichbinfrog.github.io/projects/eclipse_monitoring/</link>
-      <pubDate>Wed, 30 Oct 2019 11:35:00 +0000</pubDate>
-      
-      <guid>https://ichbinfrog.github.io/projects/eclipse_monitoring/</guid>
-      <description>Having a good log and monitoring infrastructure becomes a key feature that allows sysadmins, support teams, and even developers to be more prepared to face these possible operational problems and address problems in the code base more efficiently.
-Scalable application monitoring with Prometheus Metrics, unlike logs, are a measurement at a point in time for the system collected at a fixed-time interval and not collected per event. As such, it is the fundamental building block of application monitoring allowing for an objective overview of the health of the given system.</description>
-    </item>
-    
-    <item>
-      <title>Eclipse/steady — Security and delivery considerations</title>
-      <link>https://ichbinfrog.github.io/projects/eclipse_security/</link>
-      <pubDate>Wed, 30 Oct 2019 11:30:00 +0000</pubDate>
-      
-      <guid>https://ichbinfrog.github.io/projects/eclipse_security/</guid>
-      <description>Securing a deployment in a k8s environment cannot be restricted solely to k8s and has to extend to multiple context; starting from the application itself, to the container wrapping it, to the pod abstraction said container, to the communication between said pod and even up to the orchestration software configuration behind it.
-Application tightening Applying static and dynamic code analysis tool before releases is a mandatory stage in securing the application.</description>
-    </item>
-    
-    <item>
-      <title>Eclipse/steady — Infrastructure provisioning</title>
-      <link>https://ichbinfrog.github.io/projects/eclipse_infrastructure/</link>
-      <pubDate>Wed, 30 Oct 2019 11:25:00 +0000</pubDate>
-      
-      <guid>https://ichbinfrog.github.io/projects/eclipse_infrastructure/</guid>
-      <description>It is important to note here that choices regarding the infrastructure cascade from decisions made in the implementation of the core components and the monitoring stack and not vice versa.
-Kubernetes cluster creation Creating the underlying computing and networking resources for a functional k8s cluster can be done in two distinct ways:
- Manual:  Create the node pool on which Kubernetes will run Create networking resources to connect the different nodes in the same subnet Setup the k8s prerequisites (disable swap on all machines, install docker) via Ansible then the k8s architecture via Ansible while keeping in mind the differences between the master and worker nodes or with the kubespray tool.</description>
-    </item>
-    
-    <item>
-      <title>Kubernetes — basics</title>
-      <link>https://ichbinfrog.github.io/projects/kubernetes_basic/</link>
-      <pubDate>Sun, 11 Aug 2019 11:05:00 +0000</pubDate>
-      
-      <guid>https://ichbinfrog.github.io/projects/kubernetes_basic/</guid>
-      <description>Kubernetes objects are abstractions that represent the state of the system. These persistent entities describe what containerized applications are running, the resources allocated and available as well as their behaviors (restart policies, fault-tolerance). Unlike normal infrastructure declaration, these objects portray the desired state of the cluster which k8s will try to satisfy. This “record of intent” is declared in a declarative fashion in yaml and interpreted by kubectl, k8s&amp;rsquo;s default CLI.</description>
-    </item>
-    
-    <item>
-      <title>Kubernetes — in depth</title>
-      <link>https://ichbinfrog.github.io/projects/kubernetes_depth/</link>
-      <pubDate>Sun, 11 Aug 2019 11:00:00 +0000</pubDate>
-      
-      <guid>https://ichbinfrog.github.io/projects/kubernetes_depth/</guid>
-      <description>Kubernetes, hereinafter referred to as k8s, is an open-source system for automating deployment, scaling and management of containerized applications. Due to it being a recent technology (released less than five years ago under the Apache License 2.0), this section attempts to summarize both its terminology and its overall orchestration mechanisms.
- Containers — A new era of deployment The massive adoption of k8s marks the entry into a new era of deployment.</description>
     </item>
     
     <item>

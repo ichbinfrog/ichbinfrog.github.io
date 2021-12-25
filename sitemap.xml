@@ -3,7 +3,12 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://ichbinfrog.github.io/pdf/ml.pdf</loc>
+    <loc>https://ichbinfrog.github.io/projects/sy19/</loc>
+    <lastmod>2020-11-28T18:16:46+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ichbinfrog.github.io/</loc>
     <lastmod>2020-11-28T18:16:46+01:00</lastmod>
   </url>
   
@@ -13,7 +18,7 @@
   </url>
   
   <url>
-    <loc>https://ichbinfrog.github.io/pdf/ndn.pdf</loc>
+    <loc>https://ichbinfrog.github.io/projects/ndn/</loc>
     <lastmod>2020-06-30T11:55:00+00:00</lastmod>
   </url>
   
@@ -63,16 +68,6 @@
   </url>
   
   <url>
-    <loc>https://ichbinfrog.github.io/about/</loc>
-    <lastmod>2020-05-12T08:17:41+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ichbinfrog.github.io/</loc>
-    <lastmod>2020-05-12T08:17:41+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://ichbinfrog.github.io/tags/automation/</loc>
     <lastmod>2019-12-15T12:50:00+00:00</lastmod>
   </url>
@@ -88,7 +83,7 @@
   </url>
   
   <url>
-    <loc>https://ichbinfrog.github.io/projects/cloud_bench/</loc>
+    <loc>https://ichbinfrog.github.io/internships/cloud_bench/</loc>
     <lastmod>2019-12-15T12:50:00+00:00</lastmod>
   </url>
   
@@ -103,6 +98,11 @@
   </url>
   
   <url>
+    <loc>https://ichbinfrog.github.io/internships/</loc>
+    <lastmod>2019-12-15T12:50:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://ichbinfrog.github.io/tags/networking/</loc>
     <lastmod>2019-12-15T12:50:00+00:00</lastmod>
   </url>
@@ -113,7 +113,7 @@
   </url>
   
   <url>
-    <loc>https://ichbinfrog.github.io/projects/eclipse/</loc>
+    <loc>https://ichbinfrog.github.io/internships/eclipse/</loc>
     <lastmod>2019-10-30T11:55:00+00:00</lastmod>
   </url>
   
@@ -123,7 +123,7 @@
   </url>
   
   <url>
-    <loc>https://ichbinfrog.github.io/projects/eclipse_database/</loc>
+    <loc>https://ichbinfrog.github.io/internships/eclipse_database/</loc>
     <lastmod>2019-10-30T11:50:00+00:00</lastmod>
   </url>
   
@@ -153,7 +153,7 @@
   </url>
   
   <url>
-    <loc>https://ichbinfrog.github.io/projects/eclipse_core/</loc>
+    <loc>https://ichbinfrog.github.io/internships/eclipse_core/</loc>
     <lastmod>2019-10-30T11:45:00+00:00</lastmod>
   </url>
   
@@ -163,7 +163,7 @@
   </url>
   
   <url>
-    <loc>https://ichbinfrog.github.io/projects/eclipse_monitoring/</loc>
+    <loc>https://ichbinfrog.github.io/internships/eclipse_monitoring/</loc>
     <lastmod>2019-10-30T11:35:00+00:00</lastmod>
   </url>
   
@@ -198,7 +198,7 @@
   </url>
   
   <url>
-    <loc>https://ichbinfrog.github.io/projects/eclipse_security/</loc>
+    <loc>https://ichbinfrog.github.io/internships/eclipse_security/</loc>
     <lastmod>2019-10-30T11:30:00+00:00</lastmod>
   </url>
   
@@ -218,7 +218,7 @@
   </url>
   
   <url>
-    <loc>https://ichbinfrog.github.io/projects/eclipse_infrastructure/</loc>
+    <loc>https://ichbinfrog.github.io/internships/eclipse_infrastructure/</loc>
     <lastmod>2019-10-30T11:25:00+00:00</lastmod>
   </url>
   
@@ -243,7 +243,7 @@
   </url>
   
   <url>
-    <loc>https://ichbinfrog.github.io/projects/kubernetes_basic/</loc>
+    <loc>https://ichbinfrog.github.io/internships/kubernetes_basic/</loc>
     <lastmod>2019-08-11T11:05:00+00:00</lastmod>
   </url>
   
@@ -253,7 +253,7 @@
   </url>
   
   <url>
-    <loc>https://ichbinfrog.github.io/projects/kubernetes_depth/</loc>
+    <loc>https://ichbinfrog.github.io/internships/kubernetes_depth/</loc>
     <lastmod>2019-08-11T11:00:00+00:00</lastmod>
   </url>
   

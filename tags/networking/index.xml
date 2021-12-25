@@ -14,10 +14,10 @@
     
     <item>
       <title>Cloud Provider benchmark</title>
-      <link>https://ichbinfrog.github.io/projects/cloud_bench/</link>
+      <link>https://ichbinfrog.github.io/internships/cloud_bench/</link>
       <pubDate>Sun, 15 Dec 2019 12:50:00 +0000</pubDate>
       
-      <guid>https://ichbinfrog.github.io/projects/cloud_bench/</guid>
+      <guid>https://ichbinfrog.github.io/internships/cloud_bench/</guid>
       <description>This benchmark is done in order to help in the process of deciding which public provider to migrate to. Three public cloud offers are studied (GCP (Google Cloud Platform), AWS (Amazon Web Service) and Microsoft Azure) in comparison to the private solution.
 Computing offer comparison It is important to note that all the aforementioned providers have support for Linux as well as Windows VMs. Although terminologies vary widely between providers (machine type for GCP, instance for AWS, VM for Azure), they all provide a couple of essential categories of common machine families.</description>
     </item>

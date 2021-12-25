@@ -14,10 +14,10 @@
     
     <item>
       <title>Eclipse/steady — Database management</title>
-      <link>https://ichbinfrog.github.io/projects/eclipse_database/</link>
+      <link>https://ichbinfrog.github.io/internships/eclipse_database/</link>
       <pubDate>Wed, 30 Oct 2019 11:50:00 +0000</pubDate>
       
-      <guid>https://ichbinfrog.github.io/projects/eclipse_database/</guid>
+      <guid>https://ichbinfrog.github.io/internships/eclipse_database/</guid>
       <description>The vulnerability database is at the heart of the tool, storing construct changes, CVE information, vulnerable constructs discovered in scanned applications, etc&amp;hellip; This database requires that a couple properties be respected:
  Persistence: data stored in the database should not be deleted by external processes or objects until the user deletes it. It should withstand outages (maintenance operation, schema change, node failure, disk failure, etc&amp;hellip;). Coherence: any given database transaction must change affected data only in permitted ways and any transaction started in the future necessarily sees the effects of other transactions committed in the past.</description>
     </item>

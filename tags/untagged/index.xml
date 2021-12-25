@@ -14,10 +14,10 @@
     
     <item>
       <title>Eclipse/steady — Core components</title>
-      <link>https://ichbinfrog.github.io/projects/eclipse_core/</link>
+      <link>https://ichbinfrog.github.io/internships/eclipse_core/</link>
       <pubDate>Wed, 30 Oct 2019 11:45:00 +0000</pubDate>
       
-      <guid>https://ichbinfrog.github.io/projects/eclipse_core/</guid>
+      <guid>https://ichbinfrog.github.io/internships/eclipse_core/</guid>
       <description>Due to the sheer amount of components that constitute the core architecture of the tool, this section will go over the overarching themes and decisions that led to the creation of the vulnerability-assessment-tool-core helm chart.
 Resource allocation Defining resource demands for each container is mandatory in order to maintain a secure k8s deployment. The range defined on CPU and memory usage being a soft enforcement, once the limit is reached, the container is throttled and not killed, thus, ensuring both the vertical scalability of the pod and slight buffers against DDOS attacks.</description>
     </item>

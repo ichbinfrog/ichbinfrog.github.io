@@ -14,10 +14,10 @@
     
     <item>
       <title>Eclipse/steady — Security and delivery considerations</title>
-      <link>https://ichbinfrog.github.io/projects/eclipse_security/</link>
+      <link>https://ichbinfrog.github.io/internships/eclipse_security/</link>
       <pubDate>Wed, 30 Oct 2019 11:30:00 +0000</pubDate>
       
-      <guid>https://ichbinfrog.github.io/projects/eclipse_security/</guid>
+      <guid>https://ichbinfrog.github.io/internships/eclipse_security/</guid>
       <description>Securing a deployment in a k8s environment cannot be restricted solely to k8s and has to extend to multiple context; starting from the application itself, to the container wrapping it, to the pod abstraction said container, to the communication between said pod and even up to the orchestration software configuration behind it.
 Application tightening Applying static and dynamic code analysis tool before releases is a mandatory stage in securing the application.</description>
     </item>
