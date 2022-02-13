@@ -1,5 +1,5 @@
 ---
-title: "[ FR ] — METAR data analysis & warehousing with Cassandra"
+title: "🇫🇷 METAR data analysis & warehousing with Cassandra"
 date: 2018-12-21T15:37:55+02:00
 draft: false
 toc: true

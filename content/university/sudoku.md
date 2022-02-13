@@ -1,5 +1,5 @@
 ---
-title: "[ FR ] — Prolog sudoku solver"
+title: "🇫🇷 Prolog sudoku solver"
 date: 2018-12-21T16:12:56+02:00
 draft: false
 toc: true

@@ -1,5 +1,5 @@
 ---
-title: "[ FR ] — Trading simulator conception"
+title: "🇫🇷 Trading simulator conception"
 date: 2018-12-21T15:37:55+02:00
 draft: false
 toc: true
