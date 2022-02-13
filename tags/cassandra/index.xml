@@ -13,11 +13,11 @@
     
     
     <item>
-      <title>[ FR ] — METAR data analysis &amp; warehousing with Cassandra</title>
-      <link>https://ichbinfrog.github.io/projects/metar/</link>
+      <title>🇫🇷 METAR data analysis &amp; warehousing with Cassandra</title>
+      <link>https://ichbinfrog.github.io/university/metar/</link>
       <pubDate>Fri, 21 Dec 2018 15:37:55 +0200</pubDate>
       
-      <guid>https://ichbinfrog.github.io/projects/metar/</guid>
+      <guid>https://ichbinfrog.github.io/university/metar/</guid>
       <description>Dans le cadre de ce projet, nous avons construit un stockage orienté colonne destiné à répondre à un ensemble de question sur des données METAR (c&amp;rsquo;est-à-dire des données météorologiques pour l&amp;rsquo;aviation). D&amp;rsquo;une manière plus concrète, notre jeu de données est restreint dans l&amp;rsquo;espace (exclusivement en Finlande) et dans le temps (entre le 1er Janvier 2004 au 1er Janvier 2014). Puisque dans ce cas, les trois questions ne peuvent pas être répondus par une modélisation commune, nous allons traiter dans ce rapport selon l&amp;rsquo;ordre des questions.</description>
     </item>
     

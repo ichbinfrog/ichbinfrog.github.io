@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="Out of pure nostalgia, I decided to setup an overengineered and cost-efficient minecraft server on GCP with the help of @Naramsim. The IaC code here can be found in this repo and this &amp;lsquo;blog&amp;rsquo; will detail some of the technical reasonings behind some opinionated choices.
+Setting up CICD pipelines In terraform CICD pipelines, a google service account is often granted high privileges (with a lot lot of Admin roles) to terraform the infrastructure on the behest of the owner." />
+<meta name="keywords" content=", terraform, minecraft, github-actions, gcp" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://ichbinfrog.github.io/projects/gcp_minecraft/" />
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$']],
+            processEscapes: true,
+            processEnvironments: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            TeX: {
+                equationNumbers: { autoNumber: "AMS" },
+                extensions: ["AMSmath.js", "AMSsymbols.js"]
+            }
+        }
+    });
+    MathJax.Hub.Queue(function () {
+        
+        
+        
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+
+    MathJax.Hub.Config({
+        
+        TeX: { equationNumbers: { autoNumber: "AMS" } }
+    });
+</script>
+
+
+    <title>
+        
+            Low-cost terraformed minecraft server on GCP :: Hoang Quoc Trung 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.min.cbd9ce6c3a26d6c4a5eb4b8834c18d83518654bd8bac1fc8160486f336181c9a.css">
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/post.css">
+    
+
+
+
+
+
+<meta itemprop="name" content="Low-cost terraformed minecraft server on GCP">
+<meta itemprop="description" content="Out of pure nostalgia, I decided to setup an overengineered and cost-efficient minecraft server on GCP with the help of @Naramsim. The IaC code here can be found in this repo and this &lsquo;blog&rsquo; will detail some of the technical reasonings behind some opinionated choices.
+Setting up CICD pipelines In terraform CICD pipelines, a google service account is often granted high privileges (with a lot lot of Admin roles) to terraform the infrastructure on the behest of the owner.">
+<meta itemprop="datePublished" content="2019-12-15T12:50:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-12-15T12:50:00&#43;00:00" />
+<meta itemprop="wordCount" content="1059">
+<meta itemprop="image" content="https://ichbinfrog.github.io/"/>
+
+
+
+<meta itemprop="keywords" content="terraform,minecraft,github-actions,gcp," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://ichbinfrog.github.io/"/>
+
+<meta name="twitter:title" content="Low-cost terraformed minecraft server on GCP"/>
+<meta name="twitter:description" content="Out of pure nostalgia, I decided to setup an overengineered and cost-efficient minecraft server on GCP with the help of @Naramsim. The IaC code here can be found in this repo and this &lsquo;blog&rsquo; will detail some of the technical reasonings behind some opinionated choices.
+Setting up CICD pipelines In terraform CICD pipelines, a google service account is often granted high privileges (with a lot lot of Admin roles) to terraform the infrastructure on the behest of the owner."/>
+
+
+
+    <meta property="og:title" content="Low-cost terraformed minecraft server on GCP" />
+<meta property="og:description" content="Out of pure nostalgia, I decided to setup an overengineered and cost-efficient minecraft server on GCP with the help of @Naramsim. The IaC code here can be found in this repo and this &lsquo;blog&rsquo; will detail some of the technical reasonings behind some opinionated choices.
+Setting up CICD pipelines In terraform CICD pipelines, a google service account is often granted high privileges (with a lot lot of Admin roles) to terraform the infrastructure on the behest of the owner." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ichbinfrog.github.io/projects/gcp_minecraft/" />
+<meta property="og:image" content="https://ichbinfrog.github.io/"/>
+<meta property="article:published_time" content="2019-12-15T12:50:00+00:00" />
+<meta property="article:modified_time" content="2019-12-15T12:50:00+00:00" /><meta property="og:site_name" content="Hoang Quoc Trung" />
+
+
+
+
+
+
+    <meta property="article:published_time" content="2019-12-15 12:50:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">ichbinfrog</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://ichbinfrog.github.io/projects">0_projects</a></li><li><a href="https://ichbinfrog.github.io/internships">1_internships</a></li><li><a href="https://ichbinfrog.github.io/university">2_uni_works</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title" id="top"><a href="https://ichbinfrog.github.io/projects/gcp_minecraft/">Low-cost terraformed minecraft server on GCP</a></h2>
+            <aside id="toc"><style>
+.toc {
+    position: fixed;
+    top: 50%;
+    left: 2%;
+    width: 20%;
+    transform: translateY(-50%);
+    border-radius: 5px;
+    padding-bottom: 1rem;
+}
+
+.toc a {
+    text-decoration: none;
+    color: gray;
+}
+
+.toc a:hover {
+    opacity: 0.5;
+}
+
+.toc ul {
+    list-style: ">  ";
+}
+
+.toc-title {
+    text-decoration: underline;
+}
+</style>
+
+<div class="toc">
+    <div class="toc-title">Table of Contents</div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#setting-up-cicd-pipelines">Setting up CICD pipelines</a>
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#bootstrapping">Bootstrapping</a></li>
+        <li><a href="#github-actions-workflow">Github Actions Workflow</a></li>
+      </ul>
+    </li>
+    <li><a href="#core-architecture">Core architecture</a>
+      <ul>
+        <li><a href="#overview-1">Overview</a></li>
+        <li><a href="#potential-improvements">Potential improvements</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    <ul>
+    <li><a href="#top">Top</a></li>
+    <li><a href="#end">End</a></li>
+    </ul>
+</div></aside>
+
+            
+
+            <div class="post-content">
+                <p>Out of pure nostalgia, I decided to setup an overengineered and cost-efficient minecraft server on GCP with the help of <a href="https://github.com/Naramsim">@Naramsim</a>. The IaC code here can be found in <a href="https://github.com/ichbinfrog/minecraft-public">this repo</a> and this &lsquo;blog&rsquo; will detail some of the technical reasonings behind some opinionated choices.</p>
+<h2 id="setting-up-cicd-pipelines">Setting up CICD pipelines</h2>
+<p>In terraform CICD pipelines, a google service account is often granted high privileges (with a lot lot of Admin roles) to terraform the infrastructure on the behest of the owner. Thus, external CICD systems (and to a certain extent even GCP offerings) have to get access to this service account one way or another:</p>
+<ul>
+<li>
+<p>In the traditional way, a service account key could be exported and then stored in the external system&rsquo;s secret manager (e.g. <a href="https://docs.github.com/en/actions/security-guides/encrypted-secrets">Github secrets</a>, <a href="https://circleci.com/docs/2.0/contexts/">CircleCI Contexts</a>, &hellip;). Management of these exported keys is however quite complexe and prone to errors; requiring leak detection, a rotation mecanism and a myriad of tools that are outside the scope of this mini project.</p>
+</li>
+<li>
+<p>One can also create <a href="https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners">Self hosted Runners</a> that would reside in a GCE instance group and could thus use IAM permissions out of the box. The cost factor inhibits this choice.</p>
+</li>
+<li>
+<p>Finally, <a href="https://cloud.google.com/iam/docs/configuring-workload-identity-federation">Workload Identity Federation</a> can be setup between Github and GCP to allow <a href="https://cloud.google.com/blog/products/identity-security/enabling-keyless-authentication-from-github-actions">keyless authentication</a>. This effectively allows external resources (Github Actions in this case) to create and use short lived tokens to impersonate the service account. Since impersonation can be easily audited and the &lsquo;privilege escalation&rsquo; required is restricted in duration, this option is chosen to alleviate maintenance and security burdens of the all-mighty terraform service account.</p>
+</li>
+</ul>
+<h3 id="overview">Overview</h3>
+
+<img src="/img/minecraft_pipeline.png"  class="center"  />
+
+
+<h3 id="bootstrapping">Bootstrapping</h3>
+<p>As per usual, setting up a terraform pipeline requires some manual steps also done with terraform. The <code>bootstrap/</code> module should therefore be run manually, in order to setup prerequisites:</p>
+<ul>
+<li>The GCP project that hosts all resources</li>
+<li>The terraform service account, omnipotent within that project</li>
+<li>The <a href="https://www.terraform.io/language/settings/backends/gcs">GCS state bucket</a> which is the source a chicken and egg problem, where we want terraform to store the state in the bucket but the bucket itself must be created by terraform. This is solved by running the <code>terraform apply</code> locally and then migrating the state to the newly created bucket with <code>terraform init -migrate-state</code>.</li>
+<li>Workload Identity Federation that would allow Github Actions to impersonate said GCP service account.</li>
+</ul>
+<p><em>Takeaways</em>: A good pointer to whether or not a resource should be in the bootstrap module is if it&rsquo;s mandatory for the CICD pipelines.</p>
+<h3 id="github-actions-workflow">Github Actions Workflow</h3>
+<p>The workflow is standard for terraform repos, where the terraform state is in sync with the HEAD of the master branch. All PRs to master will only show the diff between the desired infra and the current one.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">on</span>:
+  <span style="color:#66d9ef">push</span>:
+    <span style="color:#66d9ef">branches</span>:
+    - master
+  <span style="color:#66d9ef">pull_request</span>:
+    <span style="color:#66d9ef">branches</span>:
+      - master
+</code></pre></div><p>Then using the <a href="https://github.com/google-github-actions/auth">google-auth</a> action, the Github Actions runner impersonates the terraform service account with <a href="https://github.blog/changelog/2021-10-27-github-actions-secure-cloud-deployments-with-openid-connect/">OICD tokens</a>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">jobs</span>:
+  <span style="color:#66d9ef">terraform</span>:
+    <span style="color:#66d9ef">runs-on</span>: ubuntu-latest
+
+    <span style="color:#66d9ef">permissions</span>:
+      <span style="color:#66d9ef">contents</span>: read
+      <span style="color:#66d9ef">id-token</span>: write
+      <span style="color:#66d9ef">issues</span>: write
+      <span style="color:#75715e"># for writing the plan output in the PR comments</span>
+      <span style="color:#75715e"># or better yet, infra-cost reports</span>
+      <span style="color:#66d9ef">pull-requests</span>: write 
+       
+    <span style="color:#66d9ef">steps</span>:
+    - <span style="color:#66d9ef">uses</span>: actions/checkout@v2
+    - <span style="color:#66d9ef">id</span>: auth
+      <span style="color:#66d9ef">name</span>: Authenticate to Google Cloud
+      <span style="color:#66d9ef">uses</span>: google-github-actions/auth@v0
+      <span style="color:#66d9ef">with</span>:
+        <span style="color:#66d9ef">workload_identity_provider</span>: projects/{{ project-numeric-id }}/locations/global/workloadIdentityPools/{{ pool-name }}/providers/{{ provider-name }}
+        <span style="color:#66d9ef">service_account</span>: github-terraform-pipeline@{{ project-name }}.iam.gserviceaccount.com
+        <span style="color:#66d9ef">create_credentials_file</span>: <span style="color:#66d9ef">true</span>
+</code></pre></div><p>Finally, with the <a href="https://github.com/hashicorp/setup-terraform">hashicorp/setup-terraform</a> action, we do the usual <code>init &gt; plan &gt; apply</code> workflow with apply only running in master.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">    - <span style="color:#66d9ef">uses</span>: hashicorp/setup-terraform@v1
+    - <span style="color:#66d9ef">id</span>: init
+      <span style="color:#66d9ef">name</span>: Terraform init
+      <span style="color:#66d9ef">run</span>: <span style="color:#e6db74">|
+</span><span style="color:#e6db74">        terraform init</span>
+    - <span style="color:#66d9ef">id</span>: plan
+      <span style="color:#66d9ef">name</span>: Terraform plan
+      <span style="color:#66d9ef">run</span>: <span style="color:#e6db74">|
+</span><span style="color:#e6db74">        terraform plan -no-color</span>
+        
+    - <span style="color:#66d9ef">id</span>: apply
+      <span style="color:#66d9ef">name</span>: Terraform apply
+      <span style="color:#66d9ef">if</span>: ${{ github.ref == <span style="color:#e6db74">&#39;refs/heads/master&#39;</span> }}
+      <span style="color:#66d9ef">run</span>: <span style="color:#e6db74">|
+</span><span style="color:#e6db74">        terraform apply -auto-approve</span>
+</code></pre></div><p><em>Takeaways</em>: It&rsquo;s quite easy to overengineer the pipelines so be mindful of only adding the features that are trully required (e.g. having the terraform plan output in the PR is nice and all, but the logs also show the plan quite clearly)</p>
+<hr>
+<h2 id="core-architecture">Core architecture</h2>
+<p>Once the pipelines are setup, iterating on the &lsquo;core&rsquo; of the project will be much faster. Want a new feature? Open a PR, verify the plan, merge it and it&rsquo;s deployed.</p>
+<h3 id="overview-1">Overview</h3>
+
+<img src="/img/minecraft_core.png"  class="center"  />
+
+
+<p>A couple resource groups are created by the repo:</p>
+<ul>
+<li>
+<p>A <strong>preemptible</strong> GCE VM with Container Optimized OS on which the <a href="https://github.com/itzg/docker-minecraft-server">itzg/docker-minecraft-server</a> image is run. Preemptible VMs are at the heart of the cost optimization, coming with a 60-91% discount compared to standard ones but the instance will be live for 24h at max. One may also be asking why run it inside a docker container and the answer is lazyness and also the fact that the only persistence required by the workload is the server data (e.g. maps, users, &hellip;) which is garanteed by the persistent disk.</p>
+</li>
+<li>
+<p>A static IP adress from which the users can connect to the server. This is the main cost contributor to the project.</p>
+</li>
+<li>
+<p>A persistent disk in which the minecraft data will be stored (with daily snapshot)</p>
+</li>
+<li>
+<p>A compute network and a single subnet in a specific region to which firewall rules are added which only allow the minecraft client ports (from any range) and SSH connections from the IAP source ranges</p>
+</li>
+<li>
+<p>A bugdet monitor with the appropriate notification channel to avoid losing track of the server costs.</p>
+</li>
+<li>
+<p>IAM permissions that allows a subset of users to start and stop the VMs. This is a workaround for preemptible VMs as game servers, if some friends want to start playing and the server is shutdown, they can start it themselves with the garantee that even if they forget to shutdown after their session, the cost incurred would be &lt; 24h of compute engine time.</p>
+</li>
+</ul>
+<h3 id="potential-improvements">Potential improvements</h3>
+<ul>
+<li>
+<p>A <a href="https://cloud.google.com/logging/docs/logs-based-metrics">Log based metric</a> that parses the minecraft server logs to find the amount of active users should be created which will alert admins when there&rsquo;s no one online for a 30min interval prompting them to turn of the instance.</p>
+</li>
+<li>
+<p>A cloud function for turning the instance on and off can be developped and triggered when the above alert is triggered to automated the turning off of VMs.</p>
+</li>
+<li>
+<p>A Cloud DNS entry can be added to redirect to the external IP, avoiding the hassle of remembering the IP at the cost of a domain name.</p>
+</li>
+<li>
+<p>There&rsquo;s an issue with the size of the VMs, wherein, for too small configurations, the cloud-init mount for the persistent disk is not fast enough, leading to the docker container with the server starting before the data disk is mounted. A restart of the VM usually fixes this issue.</p>
+</li>
+</ul>
+
+            </div>
+        </article>
+        <h2 id="end"></h2>
+        <hr />
+
+        <div class="post-info">
+  				<p>
+  					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://ichbinfrog.github.io/tags/terraform">terraform</a></span><span class="tag"><a href="https://ichbinfrog.github.io/tags/minecraft">minecraft</a></span><span class="tag"><a href="https://ichbinfrog.github.io/tags/github-actions">github-actions</a></span><span class="tag"><a href="https://ichbinfrog.github.io/tags/gcp">gcp</a></span>
+  				</p>
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2022</span>
+            
+            <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span><a href="https://themes.gohugo.io/hugo-theme-hello-friend-ng/">hello-friend-ng</a> Theme for <a href="http://gohugo.io">Hugo</a> by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>

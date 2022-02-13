@@ -23,6 +23,16 @@ Computing offer comparison It is important to note that all the aforementioned p
     </item>
     
     <item>
+      <title>Low-cost terraformed minecraft server on GCP</title>
+      <link>https://ichbinfrog.github.io/projects/gcp_minecraft/</link>
+      <pubDate>Sun, 15 Dec 2019 12:50:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/projects/gcp_minecraft/</guid>
+      <description>Out of pure nostalgia, I decided to setup an overengineered and cost-efficient minecraft server on GCP with the help of @Naramsim. The IaC code here can be found in this repo and this &amp;lsquo;blog&amp;rsquo; will detail some of the technical reasonings behind some opinionated choices.
+Setting up CICD pipelines In terraform CICD pipelines, a google service account is often granted high privileges (with a lot lot of Admin roles) to terraform the infrastructure on the behest of the owner.</description>
+    </item>
+    
+    <item>
       <title>Eclipse/steady — Infrastructure provisioning</title>
       <link>https://ichbinfrog.github.io/internships/eclipse_infrastructure/</link>
       <pubDate>Wed, 30 Oct 2019 11:25:00 +0000</pubDate>

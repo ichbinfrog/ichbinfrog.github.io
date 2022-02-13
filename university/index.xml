@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Universities on Hoang Quoc Trung</title>
+    <link>https://ichbinfrog.github.io/university/</link>
+    <description>Recent content in Universities on Hoang Quoc Trung</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Sat, 28 Nov 2020 18:16:46 +0100</lastBuildDate>
+    
+	<atom:link href="https://ichbinfrog.github.io/university/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>🇫🇷 Etude d&#39;un dataset aléatoire</title>
+      <link>https://ichbinfrog.github.io/university/sy19/</link>
+      <pubDate>Sat, 28 Nov 2020 18:16:46 +0100</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/university/sy19/</guid>
+      <description>Classification Analyse exploratoire L’objectif de ce travail est de proposer le meilleur classifieur possible à partir de 500 observations, capable de distinguer trois classes (noté 1, 2 et 3) de proportion initiale inégale ($π_1 = 0.18, π_2 = 0.442, π_3 = 0.378$). Comme le jeu de données est synthétique, il est impossible d’attribuer une signification à chaque variable. Tout de même, les variables se distinguent clairement en trois groupes:
+X1 à X20, suivant une distribution bimodale continue d’espérance E[X] = 5 et de variance relativement faible:</description>
+    </item>
+    
+    <item>
+      <title>🇫🇷 Caching architecture for Information Centric Networks</title>
+      <link>https://ichbinfrog.github.io/university/ndn/</link>
+      <pubDate>Tue, 30 Jun 2020 11:55:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/university/ndn/</guid>
+      <description>Download pdf</description>
+    </item>
+    
+    <item>
+      <title>🇫🇷 Pokemon victory prediction</title>
+      <link>https://ichbinfrog.github.io/university/pokemon/</link>
+      <pubDate>Tue, 30 Jun 2020 11:55:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/university/pokemon/</guid>
+      <description>Ce travail a été fait avec Alix CANDUSSO et Chen GONG dans le cadre de l&amp;rsquo;UV SY09.
+  Issu d&amp;rsquo;une franchise de jeu vidéo japonaise, un pokémon est une créature qui, une fois capturée par un dresseur, peut-être envoyé pour affronter les pokémon d&amp;rsquo;un autre dresseur. Régi par un ensemble de règles bien définies, la complexité des combats qui en dérive et les modèles qui les prédisent constituent l&amp;rsquo;intérêt de cette étude.</description>
+    </item>
+    
+    <item>
+      <title>🇫🇷 Prolog sudoku solver</title>
+      <link>https://ichbinfrog.github.io/university/sudoku/</link>
+      <pubDate>Fri, 21 Dec 2018 16:12:56 +0200</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/university/sudoku/</guid>
+      <description>Ce travail a été fait avec Marc DAMIE dans le cadre de l&amp;rsquo;UV IA02
+ Représentation d&amp;rsquo;une grille Nous avons décidé de représenter une grille comme étant une &amp;ldquo;matrice&amp;rdquo;, c&amp;rsquo;est-à-dire une liste avec neuf listes imbriquées avec neuf éléments dans chaque liste. Pour la représentation d&amp;rsquo;une cellule vide, nous avons décidé d&amp;rsquo;utiliser une variable anonyme _ , la variable anonyme, elle, peut s&amp;rsquo;unifier avec tout caractère et donc avec 0 (propriété que l&amp;rsquo;on utilisera pour le programme qui suit).</description>
+    </item>
+    
+    <item>
+      <title>🇫🇷 METAR data analysis &amp; warehousing with Cassandra</title>
+      <link>https://ichbinfrog.github.io/university/metar/</link>
+      <pubDate>Fri, 21 Dec 2018 15:37:55 +0200</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/university/metar/</guid>
+      <description>Dans le cadre de ce projet, nous avons construit un stockage orienté colonne destiné à répondre à un ensemble de question sur des données METAR (c&amp;rsquo;est-à-dire des données météorologiques pour l&amp;rsquo;aviation). D&amp;rsquo;une manière plus concrète, notre jeu de données est restreint dans l&amp;rsquo;espace (exclusivement en Finlande) et dans le temps (entre le 1er Janvier 2004 au 1er Janvier 2014). Puisque dans ce cas, les trois questions ne peuvent pas être répondus par une modélisation commune, nous allons traiter dans ce rapport selon l&amp;rsquo;ordre des questions.</description>
+    </item>
+    
+    <item>
+      <title>🇫🇷 Trading simulator conception</title>
+      <link>https://ichbinfrog.github.io/university/tradingsim/</link>
+      <pubDate>Fri, 21 Dec 2018 15:37:55 +0200</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/university/tradingsim/</guid>
+      <description>Ce travail a été fait avec Gaëtan BLOND, Alix CANDUSSO, Marc DAMIE dans le cadre de l&amp;rsquo;UV LO21.
+ Tout l&amp;rsquo;enjeu de ce document sera de présenter les choix effectués en appuyant toujours sur ce qui rend nos choix péreins dans le sens où ils produiront un code maintenable, modulaire et simple à faire évoluer.
+Nous ne rentrons que rarement dans des détails techniques et seulement si le côté technique traduit un choix d&amp;rsquo;implémentation significatif.</description>
+    </item>
+    
+  </channel>
+</rss>

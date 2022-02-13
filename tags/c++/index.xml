@@ -13,11 +13,11 @@
     
     
     <item>
-      <title>[ FR ] — Trading simulator conception</title>
-      <link>https://ichbinfrog.github.io/projects/tradingsim/</link>
+      <title>🇫🇷 Trading simulator conception</title>
+      <link>https://ichbinfrog.github.io/university/tradingsim/</link>
       <pubDate>Fri, 21 Dec 2018 15:37:55 +0200</pubDate>
       
-      <guid>https://ichbinfrog.github.io/projects/tradingsim/</guid>
+      <guid>https://ichbinfrog.github.io/university/tradingsim/</guid>
       <description>Ce travail a été fait avec Gaëtan BLOND, Alix CANDUSSO, Marc DAMIE dans le cadre de l&amp;rsquo;UV LO21.
  Tout l&amp;rsquo;enjeu de ce document sera de présenter les choix effectués en appuyant toujours sur ce qui rend nos choix péreins dans le sens où ils produiront un code maintenable, modulaire et simple à faire évoluer.
 Nous ne rentrons que rarement dans des détails techniques et seulement si le côté technique traduit un choix d&amp;rsquo;implémentation significatif.</description>

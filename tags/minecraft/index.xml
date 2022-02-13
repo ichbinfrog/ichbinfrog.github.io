@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>minecraft on Hoang Quoc Trung</title>
+    <link>https://ichbinfrog.github.io/tags/minecraft/</link>
+    <description>Recent content in minecraft on Hoang Quoc Trung</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Sun, 15 Dec 2019 12:50:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://ichbinfrog.github.io/tags/minecraft/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Low-cost terraformed minecraft server on GCP</title>
+      <link>https://ichbinfrog.github.io/projects/gcp_minecraft/</link>
+      <pubDate>Sun, 15 Dec 2019 12:50:00 +0000</pubDate>
+      
+      <guid>https://ichbinfrog.github.io/projects/gcp_minecraft/</guid>
+      <description>Out of pure nostalgia, I decided to setup an overengineered and cost-efficient minecraft server on GCP with the help of @Naramsim. The IaC code here can be found in this repo and this &amp;lsquo;blog&amp;rsquo; will detail some of the technical reasonings behind some opinionated choices.
+Setting up CICD pipelines In terraform CICD pipelines, a google service account is often granted high privileges (with a lot lot of Admin roles) to terraform the infrastructure on the behest of the owner.</description>
+    </item>
+    
+  </channel>
+</rss>

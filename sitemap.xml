@@ -3,28 +3,18 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://ichbinfrog.github.io/projects/sy19/</loc>
-    <lastmod>2020-11-28T18:16:46+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://ichbinfrog.github.io/</loc>
     <lastmod>2020-11-28T18:16:46+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ichbinfrog.github.io/projects/</loc>
+    <loc>https://ichbinfrog.github.io/university/</loc>
     <lastmod>2020-11-28T18:16:46+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ichbinfrog.github.io/projects/ndn/</loc>
-    <lastmod>2020-06-30T11:55:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ichbinfrog.github.io/projects/pokemon/</loc>
-    <lastmod>2020-06-30T11:55:00+00:00</lastmod>
+    <loc>https://ichbinfrog.github.io/university/sy19/</loc>
+    <lastmod>2020-11-28T18:16:46+01:00</lastmod>
   </url>
   
   <url>
@@ -68,6 +58,16 @@
   </url>
   
   <url>
+    <loc>https://ichbinfrog.github.io/university/ndn/</loc>
+    <lastmod>2020-06-30T11:55:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ichbinfrog.github.io/university/pokemon/</loc>
+    <lastmod>2020-06-30T11:55:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://ichbinfrog.github.io/tags/automation/</loc>
     <lastmod>2019-12-15T12:50:00+00:00</lastmod>
   </url>
@@ -98,7 +98,22 @@
   </url>
   
   <url>
+    <loc>https://ichbinfrog.github.io/tags/github-actions/</loc>
+    <lastmod>2019-12-15T12:50:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://ichbinfrog.github.io/internships/</loc>
+    <lastmod>2019-12-15T12:50:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ichbinfrog.github.io/projects/gcp_minecraft/</loc>
+    <lastmod>2019-12-15T12:50:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ichbinfrog.github.io/tags/minecraft/</loc>
     <lastmod>2019-12-15T12:50:00+00:00</lastmod>
   </url>
   
@@ -109,6 +124,16 @@
   
   <url>
     <loc>https://ichbinfrog.github.io/tags/perfkitbenchmarker/</loc>
+    <lastmod>2019-12-15T12:50:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ichbinfrog.github.io/projects/</loc>
+    <lastmod>2019-12-15T12:50:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ichbinfrog.github.io/tags/terraform/</loc>
     <lastmod>2019-12-15T12:50:00+00:00</lastmod>
   </url>
   
@@ -233,11 +258,6 @@
   </url>
   
   <url>
-    <loc>https://ichbinfrog.github.io/tags/terraform/</loc>
-    <lastmod>2019-10-30T11:25:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://ichbinfrog.github.io/tags/containers/</loc>
     <lastmod>2019-08-11T11:05:00+00:00</lastmod>
   </url>
@@ -258,11 +278,6 @@
   </url>
   
   <url>
-    <loc>https://ichbinfrog.github.io/projects/sudoku/</loc>
-    <lastmod>2018-12-21T16:12:56+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://ichbinfrog.github.io/tags/prolog/</loc>
     <lastmod>2018-12-21T16:12:56+02:00</lastmod>
   </url>
@@ -273,13 +288,8 @@
   </url>
   
   <url>
-    <loc>https://ichbinfrog.github.io/projects/metar/</loc>
-    <lastmod>2018-12-21T15:37:55+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ichbinfrog.github.io/projects/tradingsim/</loc>
-    <lastmod>2018-12-21T15:37:55+02:00</lastmod>
+    <loc>https://ichbinfrog.github.io/university/sudoku/</loc>
+    <lastmod>2018-12-21T16:12:56+02:00</lastmod>
   </url>
   
   <url>
@@ -299,6 +309,16 @@
   
   <url>
     <loc>https://ichbinfrog.github.io/tags/oop/</loc>
+    <lastmod>2018-12-21T15:37:55+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ichbinfrog.github.io/university/metar/</loc>
+    <lastmod>2018-12-21T15:37:55+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ichbinfrog.github.io/university/tradingsim/</loc>
     <lastmod>2018-12-21T15:37:55+02:00</lastmod>
   </url>
   
